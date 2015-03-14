@@ -14,11 +14,16 @@
 class Operate {
 
 public:
-    int Sum(int operand1, int operand2);
-    int Sub(int operand1, int operand2);
-    int Product(int operand1, int operand2);
-    int Divide(int operand1, int operand2);
-    int Modulus(int operand1, int operand2);
+    Operate();
+    ~Operate();
+public:
+    static int Sum(int operand1, int operand2);
+    static int Sub(int operand1, int operand2);
+    static int Mul(int operand1, int operand2);
+    static int Div(int operand1, int operand2);
+    static int Mod(int operand1, int operand2);
+    static void Move(int* reg, int value);                  //overide
+    static void Move(int* reg1, int* reg2);                 //overide
     
 };
 
