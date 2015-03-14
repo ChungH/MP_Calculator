@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>42E7EA08-DA98-4E94-9CAB-0DE58902FA07</string>
+	<key>IDESourceControlProjectName</key>
+	<string>processor_calculator</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3D43BB238D683704A5499D8F4CD0CF43B4690354</key>
+		<string>https://github.com/ChungH/MP_Calculator.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>processor_calculator/processor_calculator.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3D43BB238D683704A5499D8F4CD0CF43B4690354</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ChungH/MP_Calculator.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>3D43BB238D683704A5499D8F4CD0CF43B4690354</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3D43BB238D683704A5499D8F4CD0CF43B4690354</string>
+			<key>IDESourceControlWCCName</key>
+			<string>calculator</string>
+		</dict>
+	</array>
+</dict>
+</plist>

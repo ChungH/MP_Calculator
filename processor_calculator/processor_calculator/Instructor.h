@@ -9,6 +9,10 @@
 #ifndef __processor_calculator__Instructor__
 #define __processor_calculator__Instructor__
 
-#include <stdio.h>
+#include <iostream>
+
+class Instructor{
+    
+};
 
 #endif /* defined(__processor_calculator__Instructor__) */
