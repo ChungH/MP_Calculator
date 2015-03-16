@@ -14,6 +14,18 @@
 
 class FileIO {
 private:
+    FILE*   _inputFP;
+    FILE*   _outputFP;
+    
+public:
+    FileIO();
+    
+public:
+    Queue*  ReadInstruction();
+    void    SaveResult(int regNumber, int result, char operate,
+                       int operand1, int operand2);
+    void    SaveResult(int regNumber, int result);
+    
     
 };
 

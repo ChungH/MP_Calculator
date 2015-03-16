@@ -10,9 +10,10 @@
 
 class Node
 {
-private:
+public:
     void*   _data;
     Node*   _next;
+    
 public:
     Node();
     void    SaveData(char* inputString);

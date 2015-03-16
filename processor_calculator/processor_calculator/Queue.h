@@ -19,9 +19,10 @@ private:
     
 public:
     Queue*  CreateQueue();
-    void    Enqueue(Queue* queue, void* data);
+    void    Enqueue(Queue* queue, Node* node);
     void*   Dequeue(Queue* queue);
     void    DestroyQueue(Queue* queue);
+    bool    isEmpty();
 
 };
 

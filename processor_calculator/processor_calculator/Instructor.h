@@ -30,6 +30,7 @@ enum OperateCode {
 class Instructor{
 
 private:
+    char    _operator;
     int     _opCode;
     int     _regNumber1;
     int     _regNumber2;
@@ -53,9 +54,11 @@ private:
     void    InterpretOperand(char* inst_reg);
     void    Calculate(int* reg_var);
     void    GetOperand(char** inst_reg,char* operand);
+    void    SaveResult(int* reg_var,FileIO* fileManager);
     
 public:
-    bool    ExcuteInstruction(char* inst_reg,int* reg_var);
+    bool    ExcuteInstruction(char* inst_reg,int* reg_var,
+                              FileIO* fileManager);
     
 };
 

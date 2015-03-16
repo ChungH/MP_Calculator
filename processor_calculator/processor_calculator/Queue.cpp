@@ -19,9 +19,7 @@ Queue* Queue::CreateQueue(){
     return queue;
 }
 
-void Queue::Enqueue(Queue* queue, void* data){
-    Node* node = new Node;
-    node->SaveData((char*)data);
+void Queue::Enqueue(Queue* queue, Node* node){
     node->SetNext(NULL);
     if (queue->_front == NULL) {
         queue->_front = queue->_rear = node;
@@ -53,7 +51,12 @@ void Queue::DestroyQueue(Queue* queue){
     delete (queue);
 }
 
+bool Queue::isEmpty(){
+    if(_front == NULL)
+        return true;
 
+    return false;
+}
 
 
 
