@@ -16,28 +16,28 @@ Operate::~Operate(){
     
 }
 
-int Operate::Sum(int operand1, int operand2){
+int Operate::Sum(const int operand1,const int operand2){
     return operand1+operand2;
 }
 
-int Operate::Sub(int operand1, int operand2){
+int Operate::Sub(const int operand1,const int operand2){
     return operand1-operand2;
 }
 
-int Operate::Mul(int operand1, int operand2){
+int Operate::Mul(const int operand1,const int operand2){
     return operand1*operand2;
 }
 
-int Operate::Div(int operand1, int operand2){
+int Operate::Div(const int operand1,const int operand2){
     return operand1/operand2;
 }
 
-int Operate::Mod(int operand1, int operand2){
+int Operate::Mod(const int operand1,const int operand2){
     return operand1%operand2;
 }
 
 
-void Operate::Move(int* reg, int value){
+void Operate::Move(int* reg,const int value){
     *reg = value;
 }
 

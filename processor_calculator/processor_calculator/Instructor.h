@@ -30,11 +30,11 @@ enum OperateCode {
 class Instructor{
 
 private:
-    int     opCode;
-    int     regNumber1;
-    int     regNumber2;
-    int     operand1;
-    int     operand2;
+    int     _opCode;
+    int     _regNumber1;
+    int     _regNumber2;
+    int     _operand1;
+    int     _operand2;
     int (*operatorPtr[NumberOfOper])(int ,int)={
         Operate::Sum,
         Operate::Sub,
@@ -46,14 +46,13 @@ private:
     
 public:
     Instructor();
-    ~Instructor();
+//    ~Instructor();
 
 private:
     void    InterpretOpCode(char* inst_reg);
     void    InterpretOperand(char* inst_reg);
     void    Calculate(int* reg_var);
     void    GetOperand(char** inst_reg,char* operand);
-    
     
 public:
     bool    ExcuteInstruction(char* inst_reg,int* reg_var);

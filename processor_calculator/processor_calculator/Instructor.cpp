@@ -9,25 +9,25 @@
 #include "Instructor.h"
 
 Instructor::Instructor(){
-    opCode      = 0;
-    regNumber1  = -1;
-    regNumber2  = -1;
-    operand1    = -1;
-    operand2    = -1;
+    _opCode      = 0;
+    _regNumber1  = -1;
+    _regNumber2  = -1;
+    _operand1    = -1;
+    _operand2    = -1;
 }
 
-Instructor::~Instructor(){
-    
-}
+//Instructor::~Instructor(){
+//    
+//}
 
 bool Instructor::ExcuteInstruction(char* inst_reg,int* reg_var){
-    opCode      = 0;
-    regNumber1  = -1;
-    regNumber2  = -1;
-    operand1    = -1;
-    operand2    = -1;
+    _opCode      = 0;
+    _regNumber1  = -1;
+    _regNumber2  = -1;
+    _operand1    = -1;
+    _operand2    = -1;
     InterpretOpCode(inst_reg);
-    if(opCode == ERROR){
+    if(_opCode == ERROR){
         return false;
     }
     InterpretOperand(inst_reg);
@@ -39,23 +39,23 @@ bool Instructor::ExcuteInstruction(char* inst_reg,int* reg_var){
 void Instructor::InterpretOpCode(char* inst_reg){
     switch (*inst_reg) {
         case '+':
-            opCode = SUM;
+            _opCode = SUM;
             return;
             
         case '-':
-            opCode = SUB;
+            _opCode = SUB;
             return;
             
         case '*':
-            opCode = MUL;
+            _opCode = MUL;
             return;
             
         case '/':
-            opCode = DIV;
+            _opCode = DIV;
             return;
             
         case '%':
-            opCode = MOD;
+            _opCode = MOD;
             return;
             
         case 'M':
@@ -64,16 +64,16 @@ void Instructor::InterpretOpCode(char* inst_reg){
                 inst_reg++;
             inst_reg++;
             if(*inst_reg == 'R') {
-                opCode = MOVER;
+                _opCode = MOVER;
                 return;
             }
             else {
-                opCode = MOVE;
+                _opCode = MOVE;
                 return;
             }
             
         default:
-            opCode = ERROR;
+            _opCode = ERROR;
             return;
     }
 }
@@ -96,12 +96,12 @@ void Instructor::InterpretOperand(char* inst_reg){
     if(*inst_reg == '0') {
         inst_reg+=2;
         GetOperand(&inst_reg, operand);
-        operand1 = atoi(operand);
+        _operand1 = atoi(operand);
     }
     else {
         inst_reg++;
         GetOperand(&inst_reg, operand);
-        regNumber1 = atoi(operand);
+        _regNumber1 = atoi(operand);
     }
     
     //find operand2
@@ -111,43 +111,43 @@ void Instructor::InterpretOperand(char* inst_reg){
     if(*inst_reg == '0') {
         inst_reg+=2;
         GetOperand(&inst_reg, operand);
-        operand2 = atoi(operand);
+        _operand2 = atoi(operand);
     }
     else {
         inst_reg++;
         GetOperand(&inst_reg, operand);
-        regNumber2 = atoi(operand);
+        _regNumber2 = atoi(operand);
     }
     
 }
 
 void Instructor::Calculate(int* reg_var){
     int opr1, opr2;
-    if(opCode < MOVE){
+    if(_opCode < MOVE){
         //value가 직접 들어온 경우는 regNumber 변수가 -1이 되므로
         //regNumber의 값을 판단하여 operand의 종류를 확인한다.
-        if(regNumber1 == -1){
-            opr1 = operand1;
+        if(_regNumber1 == -1){
+            opr1 = _operand1;
         }
         else {
-            opr1 = reg_var[regNumber1];
+            opr1 = reg_var[_regNumber1];
         }
-        if(regNumber2 == -1){
-            opr2 = operand2;
+        if(_regNumber2 == -1){
+            opr2 = _operand2;
         }
         else{
-            opr2 = reg_var[regNumber2];
+            opr2 = reg_var[_regNumber2];
         }
         
-        reg_var[0] = operatorPtr[opCode](opr1,opr2);
+        reg_var[0] = operatorPtr[_opCode](opr1,opr2);
     }
-    else if( opCode == MOVE){
+    else if( _opCode == MOVE){
         //레지스터에 값 저장인 경우 oprand2에 값이 있을것이므로 해당 값을 regNumber1에 저장
-        reg_var[regNumber1] = operand2;
+        reg_var[_regNumber1] = _operand2;
     }
     else{
         //레지스터에 값 저장인 경우 oprand2에 값이 있을것이므로 해당 값을 regNumber1에 저장 
-        reg_var[regNumber1] = reg_var[regNumber2];
+        reg_var[_regNumber1] = reg_var[_regNumber2];
     }
 }
 

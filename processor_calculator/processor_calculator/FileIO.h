@@ -9,6 +9,12 @@
 #ifndef __processor_calculator__FileIO__
 #define __processor_calculator__FileIO__
 
-#include <stdio.h>
+#include <iostream>
+#include "Queue.h"
+
+class FileIO {
+private:
+    
+};
 
 #endif /* defined(__processor_calculator__FileIO__) */

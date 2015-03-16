@@ -11,6 +11,8 @@
 		5AB67AF51AB427C500C0CCA9 /* FileIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5AB67AF31AB427C500C0CCA9 /* FileIO.cpp */; };
 		5AB67AF91AB429D200C0CCA9 /* Instructor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5AB67AF71AB429D200C0CCA9 /* Instructor.cpp */; };
 		5AB67AFE1AB42A1000C0CCA9 /* Operate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5AB67AFC1AB42A1000C0CCA9 /* Operate.cpp */; };
+		5AB67B041AB5AA1800C0CCA9 /* Queue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5AB67B021AB5AA1800C0CCA9 /* Queue.cpp */; };
+		5AB67B081AB5AB4E00C0CCA9 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5AB67B061AB5AB4E00C0CCA9 /* Node.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +36,10 @@
 		5AB67AF81AB429D200C0CCA9 /* Instructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Instructor.h; sourceTree = "<group>"; };
 		5AB67AFC1AB42A1000C0CCA9 /* Operate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Operate.cpp; sourceTree = "<group>"; };
 		5AB67AFD1AB42A1000C0CCA9 /* Operate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Operate.h; sourceTree = "<group>"; };
+		5AB67B021AB5AA1800C0CCA9 /* Queue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Queue.cpp; sourceTree = "<group>"; };
+		5AB67B031AB5AA1800C0CCA9 /* Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
+		5AB67B061AB5AB4E00C0CCA9 /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
+		5AB67B071AB5AB4E00C0CCA9 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +74,7 @@
 			children = (
 				5AB67AEC1AB423D000C0CCA9 /* main.cpp */,
 				5AB67AF61AB427CF00C0CCA9 /* FileIO */,
+				5AB67B051AB5AA4A00C0CCA9 /* Instruction */,
 				5AB67AFA1AB429DE00C0CCA9 /* Instructor */,
 				5AB67AFB1AB429E600C0CCA9 /* Operate */,
 			);
@@ -99,6 +106,17 @@
 				5AB67AFD1AB42A1000C0CCA9 /* Operate.h */,
 			);
 			name = Operate;
+			sourceTree = "<group>";
+		};
+		5AB67B051AB5AA4A00C0CCA9 /* Instruction */ = {
+			isa = PBXGroup;
+			children = (
+				5AB67B021AB5AA1800C0CCA9 /* Queue.cpp */,
+				5AB67B031AB5AA1800C0CCA9 /* Queue.h */,
+				5AB67B061AB5AB4E00C0CCA9 /* Node.cpp */,
+				5AB67B071AB5AB4E00C0CCA9 /* Node.h */,
+			);
+			name = Instruction;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,7 +178,9 @@
 				5AB67AFE1AB42A1000C0CCA9 /* Operate.cpp in Sources */,
 				5AB67AED1AB423D000C0CCA9 /* main.cpp in Sources */,
 				5AB67AF51AB427C500C0CCA9 /* FileIO.cpp in Sources */,
+				5AB67B081AB5AB4E00C0CCA9 /* Node.cpp in Sources */,
 				5AB67AF91AB429D200C0CCA9 /* Instructor.cpp in Sources */,
+				5AB67B041AB5AA1800C0CCA9 /* Queue.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +294,7 @@
 				5AB67AF21AB423D000C0CCA9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
