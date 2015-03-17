@@ -23,7 +23,8 @@ int main(int argc, const char * argv[]) {
     instQueue = fileManager->ReadInstruction();
     
     while(!instQueue->isEmpty()){
-    instructor->ExcuteInstruction((char*)instQueue->Dequeue(instQueue), reg_var,fileManager);
+    instructor->ExcuteInstruction((char*)instQueue->Dequeue(instQueue),
+                                  reg_var,fileManager);
     }
 //    std::cout << reg_var[0] << std::endl;
     return 0;

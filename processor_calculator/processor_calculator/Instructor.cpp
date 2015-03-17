@@ -20,7 +20,7 @@ Instructor::Instructor(){
 //    
 //}
 
-bool Instructor::ExcuteInstruction(char* inst_reg,int* reg_var,
+bool Instructor::ExcuteInstruction(char* inst_reg, int* reg_var,
                                    FileIO* fileManager){
     _opCode      = 0;
     _regNumber1  = -1;
@@ -103,7 +103,8 @@ void Instructor::InterpretOperand(char* inst_reg){
     if(*inst_reg == '0') {
         inst_reg+=2;
         GetOperand(&inst_reg, operand);
-        _operand1 = atoi(operand);
+//        _operand1 = atoi(operand);
+        std::istringstream(operand) >> std::hex >> _operand1;
     }
     else {
         inst_reg++;
@@ -118,7 +119,8 @@ void Instructor::InterpretOperand(char* inst_reg){
     if(*inst_reg == '0') {
         inst_reg+=2;
         GetOperand(&inst_reg, operand);
-        _operand2 = atoi(operand);
+//        _operand2 = atoi(operand);
+        std::istringstream(operand) >> std::hex >> _operand2;
     }
     else {
         inst_reg++;

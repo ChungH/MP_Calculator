@@ -10,7 +10,7 @@
 #define __processor_calculator__Instructor__
 
 #include <iostream>
-#include <cstdlib>
+#include <sstream>
 #include "Operate.h"
 #include "FileIO.h"
 

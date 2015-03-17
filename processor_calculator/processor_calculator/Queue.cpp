@@ -37,8 +37,10 @@ void* Queue::Dequeue(Queue* queue){
         return 0;
     }
     void* data = queue->_front->GetData();
+    Node* node = queue->_front;
     queue->_front = queue->_front->GetNext();
     queue->_count--;
+    delete node;
     return data;
 }
 
