@@ -35,5 +35,6 @@
 
 #Xcode
 .DS_Store
+*.xcuserstate
 xcuserdata
 project.xcworkspace
