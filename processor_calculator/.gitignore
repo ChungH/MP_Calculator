@@ -27,8 +27,13 @@
 *.out
 *.app
 
-Debug
+# Debug
 *.sdf
 *.opensdf
 *.ipch
 *.v11.suo
+
+#Xcode
+.DS_Store
+xcuserdata
+project.xcworkspace
