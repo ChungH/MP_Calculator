@@ -19,6 +19,7 @@ private:
     
 public:
     FileIO();
+    ~FileIO();
     
 public:
     Queue*  ReadInstruction();

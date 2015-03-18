@@ -19,13 +19,17 @@ int main(int argc, const char * argv[]) {
     FileIO*     fileManager = new FileIO;
     Instructor* instructor = new Instructor;
     Queue* instQueue;
-    int reg_var[10];
+    int reg_var[32];
     instQueue = fileManager->ReadInstruction();
     
     while(!instQueue->isEmpty()){
     instructor->ExcuteInstruction((char*)instQueue->Dequeue(instQueue),
                                   reg_var,fileManager);
-    }
-//    std::cout << reg_var[0] << std::endl;
+    }    
+    
+    delete fileManager;
+    delete instQueue;
+    delete instructor;
+    
     return 0;
 }
