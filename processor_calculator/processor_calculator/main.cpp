@@ -27,8 +27,9 @@ int main(int argc, const char * argv[]) {
                                   reg_var,fileManager);
     }    
     
-    delete fileManager;
+    instQueue->DestroyQueue(instQueue);
     delete instQueue;
+    delete fileManager;
     delete instructor;
     
     return 0;

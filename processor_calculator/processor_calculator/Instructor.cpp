@@ -27,18 +27,18 @@ bool Instructor::ExcuteInstruction(char* inst_reg, int* reg_var,
     _regNumber2  = -1;
     _operand1    = -1;
     _operand2    = -1;
-    InterpretOpCode(inst_reg);
+    DecodeOpCode(inst_reg);
     if(_opCode == ERROR){
         return false;
     }
-    InterpretOperand(inst_reg);
+    DecodeOperand(inst_reg);
     Calculate(reg_var);
     SaveResult(reg_var,fileManager);
     return true;
 }
 
 
-void Instructor::InterpretOpCode(char* inst_reg){
+void Instructor::DecodeOpCode(char* inst_reg){
     switch (*inst_reg) {
         case '+':
             _opCode   = SUM;
@@ -84,6 +84,8 @@ void Instructor::InterpretOpCode(char* inst_reg){
             return;
     }
 }
+
+
 void Instructor::GetOperand(char** inst_reg,char* operand){
     while(**inst_reg != '\0' && **inst_reg != ' '){
         *operand= **inst_reg;
@@ -93,7 +95,9 @@ void Instructor::GetOperand(char** inst_reg,char* operand){
     *(operand) = '\0';
 }
 
-void Instructor::InterpretOperand(char* inst_reg){
+
+
+void Instructor::DecodeOperand(char* inst_reg){
     char operand[10];
     
     //find operand1
@@ -159,6 +163,8 @@ void Instructor::Calculate(int* reg_var){
         reg_var[_regNumber1] = reg_var[_regNumber2];
     }
 }
+
+
 void Instructor::SaveResult(int* reg_var, FileIO* fileManager){
     int regNumber, result, opr1, opr2;
     

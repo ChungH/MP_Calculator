@@ -50,8 +50,8 @@ public:
 //    ~Instructor();
 
 private:
-    void    InterpretOpCode(char* inst_reg);
-    void    InterpretOperand(char* inst_reg);
+    void    DecodeOpCode(char* inst_reg);
+    void    DecodeOperand(char* inst_reg);
     void    Calculate(int* reg_var);
     void    GetOperand(char** inst_reg,char* operand);
     void    SaveResult(int* reg_var,FileIO* fileManager);

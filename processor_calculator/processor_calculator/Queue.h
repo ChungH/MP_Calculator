@@ -16,6 +16,8 @@ private:
     int     _count;
     Node*   _front;
     Node*   _rear;
+public:
+    ~Queue();
     
 public:
     Queue*  CreateQueue();

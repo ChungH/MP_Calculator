@@ -8,6 +8,10 @@
 
 #include "Queue.h"
 
+
+Queue::~Queue(){
+}
+
 Queue* Queue::CreateQueue(){
     Queue* queue = new Queue;
 
