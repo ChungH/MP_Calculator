@@ -8,29 +8,21 @@
 
 #include <iostream>
 #include "Instructor.h"
-#include "Operate.h"
-#include "FileIO.h"
-#include "Queue.h"
 
+
+std::array<unsigned int, 8192> Instructor::_memory;
+std::array<unsigned int, 32>   Instructor::_register;
 
 
 int main(int argc, const char * argv[]) {
+    
+    Instructor* instructor = new Instructor();
+    Instructor::_memory.fill(0);
+    Instructor::_register.fill(0);
+    
+//    instructor->ExcuteInstruction();
 
-    FileIO*     fileManager = new FileIO;
-    Instructor* instructor = new Instructor;
-    Queue* instQueue;
-    int reg_var[32];
-    instQueue = fileManager->ReadInstruction();
-    
-    while(!instQueue->isEmpty()){
-    instructor->ExcuteInstruction((char*)instQueue->Dequeue(instQueue),
-                                  reg_var,fileManager);
-    }    
-    
-    instQueue->DestroyQueue(instQueue);
-    delete instQueue;
-    delete fileManager;
     delete instructor;
-    
+
     return 0;
 }

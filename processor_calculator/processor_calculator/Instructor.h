@@ -5,68 +5,46 @@
 //  Created by LeeChungHee on 2015. 3. 14..
 //  Copyright (c) 2015년 CH. All rights reserved.
 //
-
-#ifndef __processor_calculator__Instructor__
-#define __processor_calculator__Instructor__
+#pragma once
 
 #include <iostream>
 #include <sstream>
-#include "Operate.h"
-#include "FileIO.h"
+#include <array>
+#include "Common.h"
+#include "Instruction.h"
 
-#define NumberOfOper 5
+#define MAX_MEMORY 8192
 
-enum OperateCode {
-    ERROR=-1,
-    SUM,
-    SUB,
-    MUL,
-    DIV,
-    MOD,
-    MOVE,
-    MOVER
-};
-
-class Instructor{
-
-private:
-    char    _operator;
-    int     _opCode;
-    int     _regNumber1;
-    int     _regNumber2;
-    int     _operand1;
-    int     _operand2;
-    int (*operatorPtr[NumberOfOper])(int ,int)={
-        Operate::Sum,
-        Operate::Sub,
-        Operate::Mul,
-        Operate::Div,
-        Operate::Mod
-    };
+class Instructor {
+public:
+    static std::array<unsigned int, 8192>  _memory;
+    static std::array<unsigned int, 32>    _register;
     
+private:
+    unsigned int                    _pc;
+    unsigned int&                   _gp = _register[28];
+    unsigned int&                   _sp = _register[29];
+    unsigned int&                   _fp = _register[30];
+    unsigned int&                   _ra = _register[31];
     
 public:
     Instructor();
-//    ~Instructor();
-
+    
 private:
-    void    DecodeOpCode(char* inst_reg);
-    void    DecodeOperand(char* inst_reg);
-    void    Calculate(int* reg_var);
-    void    GetOperand(char** inst_reg,char* operand);
-    void    SaveResult(int* reg_var,FileIO* fileManager);
+    void                    LoadInstruction();
+    unsigned int            Fetch();
+    Instruction*            Decode(unsigned int const inst);
+    bool                    Excute(Instruction* inst);
     
+    unsigned int            GetExtension(unsigned int sign, unsigned int immediate);
 public:
-    bool    ExcuteInstruction(char* inst_reg,int* reg_var,
-                              FileIO* fileManager);
+    void                    ExcuteInstruction();
     
+    void                    SetDataToMemory(int index, unsigned int val);
+    unsigned int            GetDataFromMemory(int index);
+    
+    GET_SET_FUNCT(unsigned int, ProgramCounter, _pc);
+    GET_SET_FUNCT(unsigned int, StackPointer, _sp);
+    GET_SET_FUNCT(unsigned int, ReturnAddress, _ra);
+
 };
-
-#endif /* defined(__processor_calculator__Instructor__) */
-
-
-
-
-
-
-
