@@ -17,6 +17,14 @@ public:
 };
 
 
+class SetLessThanUnsigned : public R_Instruction {
+public:
+    SetLessThanUnsigned(unsigned int rs, unsigned int rt, unsigned int rd);
+public:
+    virtual bool Excution();
+};
+
+
 class SetLessThanImmediate : public I_Instruction {
 public:
     SetLessThanImmediate(unsigned int rs, unsigned int rt, unsigned int signExtimm);
@@ -28,14 +36,6 @@ public:
 class SetLessThanImmediateUnsigned : public I_Instruction {
 public:
     SetLessThanImmediateUnsigned(unsigned int rs, unsigned int rt, unsigned int immediate);
-public:
-    virtual bool Excution();
-};
-
-
-class SetLessThanUnsigned : public R_Instruction {
-public:
-    SetLessThanUnsigned(unsigned int rs, unsigned int rt, unsigned int rd);
 public:
     virtual bool Excution();
 };

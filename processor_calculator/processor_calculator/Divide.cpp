@@ -9,4 +9,24 @@
 #include "Divide.h"
 #include "Instructor.h"
 
+//추가 구현 필요
 
+//Divide class
+Divide::Divide(unsigned int rs, unsigned int rt) : R_Instruction(rs,rt,0,0,0){
+    
+}
+
+bool Divide::Excution(){
+    
+    return false;
+}
+
+//DivideUnsigned class
+DivideUnsigned::DivideUnsigned(unsigned int rs, unsigned int rt) : R_Instruction(rs,rt,0,0,0){
+    
+}
+
+bool DivideUnsigned::Excution(){
+    
+    return false;
+}

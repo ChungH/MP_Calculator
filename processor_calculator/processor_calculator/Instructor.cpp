@@ -37,7 +37,7 @@ void Instructor::ExcuteInstruction(){
     }
     
     
-    while (_pc != 0xffffffff) {
+    while (Instructor::_pc != 0xffffffff) {
         unsigned int inst = Fetch();
         Instruction* instruction = Decode(inst);
         bool branchChk = Excute(instruction);

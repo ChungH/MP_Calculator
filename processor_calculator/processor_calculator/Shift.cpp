@@ -8,3 +8,26 @@
 
 #include "Shift.h"
 #include "Instructor.h"
+
+//ShiftLeftLogical class
+ShiftLeftLogical::ShiftLeftLogical(unsigned int rt, unsigned int rd, unsigned int shamt) : R_Instruction(0,rt,rd,shamt,0){
+    
+}
+
+bool ShiftLeftLogical::Excution(){
+    unsigned int rtData = Instructor::GetDataFromRegister(_rt);
+    Instructor::SetDataToRegister(_rd, rtData << _shamt);
+    return false;
+}
+
+//ShiftRightLogical class
+
+ShiftRightLogical::ShiftRightLogical(unsigned int rt, unsigned int rd, unsigned int shamt) : R_Instruction(0,rt,rd,shamt,0){
+    
+}
+
+bool ShiftRightLogical::Excution(){
+    unsigned int rtData = Instructor::GetDataFromRegister(_rt);
+    Instructor::SetDataToRegister(_rd, rtData >> _shamt);
+    return false;
+}

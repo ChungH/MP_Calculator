@@ -17,9 +17,9 @@ BranchOnEqual::BranchOnEqual(unsigned int rs, unsigned int rt, unsigned int bran
 
 
 bool BranchOnEqual::Excution(){
-    unsigned int op1 = Instructor::GetDataFromRegister(_rs);
-    unsigned int op2 = Instructor::GetDataFromRegister(_rt);
-    if(op1 == op2){
+    unsigned int rsData = Instructor::GetDataFromRegister(_rs);
+    unsigned int rtData = Instructor::GetDataFromRegister(_rt);
+    if(rsData == rtData){
         Instructor::_pc = Instructor::_pc + 4 + _immediate;
         return true;
     }
@@ -35,11 +35,12 @@ BranchOnNotEqual::BranchOnNotEqual(unsigned int rs, unsigned int rt, unsigned in
 
 bool BranchOnNotEqual::Excution(){
     
-    unsigned int op1 = Instructor::GetDataFromRegister(_rs);
-    unsigned int op2 = Instructor::GetDataFromRegister(_rt);
-    if(op1 != op2){
+    unsigned int rsData = Instructor::GetDataFromRegister(_rs);
+    unsigned int rtData = Instructor::GetDataFromRegister(_rt);
+    if(rsData != rtData){
         Instructor::_pc = Instructor::_pc + 4 + _immediate;
         return true;
     }
     return false;
 }
+

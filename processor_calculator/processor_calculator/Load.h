@@ -39,7 +39,7 @@ public:
 
 class LoadWord : public I_Instruction {
 public:
-    LoadWord(unsigned int rt, unsigned int rs, unsigned int signExtimm);
+    LoadWord(unsigned int rs, unsigned int rt, unsigned int signExtimm);
 public:
     virtual bool Excution();
 };
