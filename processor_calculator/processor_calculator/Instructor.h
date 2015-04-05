@@ -19,9 +19,9 @@ class Instructor {
 public:
     static std::array<unsigned int, 8192>  _memory;
     static std::array<unsigned int, 32>    _register;
+    static unsigned int                    _pc;
     
 private:
-    unsigned int                    _pc;
     unsigned int&                   _gp = _register[28];
     unsigned int&                   _sp = _register[29];
     unsigned int&                   _fp = _register[30];
@@ -40,10 +40,12 @@ private:
 public:
     void                    ExcuteInstruction();
     
-    void                    SetDataToMemory(int index, unsigned int val);
-    unsigned int            GetDataFromMemory(int index);
+    static void             SetDataToMemory(int index, unsigned int val);
+    static unsigned int     GetDataFromMemory(int index);
+    static void             SetDataToRegister(int index, unsigned int val);
+    static unsigned int     GetDataFromRegister(int index);
     
-    GET_SET_FUNCT(unsigned int, ProgramCounter, _pc);
+//    GET_SET_FUNCT(unsigned int, ProgramCounter, _pc);
     GET_SET_FUNCT(unsigned int, StackPointer, _sp);
     GET_SET_FUNCT(unsigned int, ReturnAddress, _ra);
 

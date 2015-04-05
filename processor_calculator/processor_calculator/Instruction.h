@@ -15,14 +15,14 @@ public:
 
 class R_Instruction : public Instruction{
 public:
-    unsigned int    _opcode;
     unsigned int    _rs;
+    unsigned int    _rt;
     unsigned int    _rd;
     unsigned int    _shamt;
     unsigned int    _funct;
     
 public:
-    R_Instruction(unsigned int opcode, unsigned int rs, unsigned int rd,unsigned int shamt, unsigned int funct);
+    R_Instruction(unsigned int rs, unsigned int  rt, unsigned int rd, unsigned int shamt, unsigned int funct);
 public:
     virtual bool Excution() = 0;
     
@@ -30,13 +30,12 @@ public:
 
 class I_Instruction : public Instruction{
 public:
-    unsigned int    _opcode;
     unsigned int    _rs;
     unsigned int    _rt;
     unsigned int    _immediate;
     
 public:
-    I_Instruction(unsigned int opcode, unsigned int rs, unsigned int rt,unsigned int immediate);
+    I_Instruction(unsigned int rs, unsigned int rt,unsigned int immediate);
     
 public:
     virtual bool Excution() = 0;
@@ -45,11 +44,10 @@ public:
 
 class J_Instruction : public Instruction{
 public:
-    unsigned int    _opcode;
     unsigned int    _address;
     
 public:
-    J_Instruction(unsigned int opcode, unsigned int address);
+    J_Instruction(unsigned int address);
     
 public:
     virtual bool Excution() = 0;

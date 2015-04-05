@@ -24,7 +24,6 @@
 
 
 Instructor::Instructor(){
-    setProgramCounter(0);
     setStackPointer(0x8000);
     setReturnAddress(0xffffffff);
     
@@ -132,7 +131,7 @@ Instruction* Instructor::Decode(unsigned int const inst){
     else if(opcode == Opcode::Jump || opcode == Opcode::JumpAndLink){
         //J_Instruction
         unsigned int address = inst & 0x03ffffff;
-        unsigned int pc = getProgramCounter() + 4;
+        unsigned int pc = Instructor::_pc + 4;
         unsigned int jumpAddr = (pc & 0xf0000000) | address << 2;
         
         if(opcode == Opcode::Jump)
@@ -193,6 +192,13 @@ unsigned int Instructor::GetDataFromMemory(int index){
 
 void Instructor::SetDataToMemory(int index, unsigned int val){
     Instructor::_memory[index] = val;
+}
+
+void Instructor::SetDataToRegister(int index, unsigned int val){
+    Instructor::_register[index] = val;
+}
+unsigned int Instructor::GetDataFromRegister(int index){
+    return Instructor::_register[index];
 }
 
 unsigned int Instructor::GetExtension(unsigned int sign, unsigned int immediate){
