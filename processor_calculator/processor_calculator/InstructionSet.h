@@ -9,8 +9,8 @@
 namespace Opcode {
     enum OpCode  : unsigned int {   //I, J Type Operations
         //I Type
-        AddImmediate                    = 0x20,
-        AddImmediateUnsigned            = 0x8,
+        AddImmediate                    = 0x8,
+        AddImmediateUnsigned            = 0x9,
         AndImmediate                    = 0xc,
         BranchOnEqual                   = 0x4,
         BranchOnNotEqual                = 0x5,
@@ -55,6 +55,8 @@ namespace Funct {
         DivideUnsigned                  = 0x1b,
         MoveFromHi                      = 0x10,
         MoveFromLo                      = 0x12,
+        MoveToHi                        = 0x11,
+        MoveToLo                        = 0x13,
         Multiply                        = 0x18,
         MultiplyUnsigned                = 0x19,
         Multiply32Bit                   = 0x02

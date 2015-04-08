@@ -12,6 +12,8 @@
 std::array<unsigned int, 8192> Instructor::_memory;
 std::array<unsigned int, 32>   Instructor::_register;
 unsigned int                   Instructor::_pc;
+unsigned int                   Instructor::_hi;
+unsigned int                   Instructor::_lo;
 
 
 int main(int argc, const char * argv[]) {
@@ -21,7 +23,7 @@ int main(int argc, const char * argv[]) {
     Instructor::_register.fill(0);
     Instructor::_pc = 0;
     
-//    instructor->ExcuteInstruction();
+    instructor->ExcuteInstruction();
 
     delete instructor;
 

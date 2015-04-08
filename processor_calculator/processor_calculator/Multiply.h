@@ -25,7 +25,7 @@ public:
 
 class Multiply32Bit : public R_Instruction {
 public:
-    Multiply32Bit(unsigned int rs, unsigned int rt);
+    Multiply32Bit(unsigned int rs, unsigned int rt, unsigned int rd);
 public:
     virtual bool Excution();
 };

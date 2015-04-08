@@ -19,7 +19,7 @@ LoadByteUnsigned::LoadByteUnsigned(unsigned int rs, unsigned int rt, unsigned in
 bool LoadByteUnsigned::Excution(){
     unsigned int mask = 0x000000ff;
     unsigned int rsData   = Instructor::GetDataFromRegister(_rs);
-    unsigned int memoryIndex = rsData + _immediate;
+    unsigned int memoryIndex = (rsData + _immediate)/4;
     unsigned int memoryData = Instructor::GetDataFromMemory(memoryIndex);
     unsigned int maskedData = mask & memoryData;
     
@@ -36,9 +36,9 @@ LoadHalfwordUnsigned::LoadHalfwordUnsigned(unsigned int rs, unsigned int rt, uns
 bool LoadHalfwordUnsigned::Excution(){
     unsigned int mask = 0x0000ffff;
     unsigned int rsData   = Instructor::GetDataFromRegister(_rs);
-    unsigned int memoryData = Instructor::GetDataFromMemory(rsData);
-    unsigned int resultData = memoryData + _immediate;
-    unsigned int maskedData = mask & resultData;
+    unsigned int memoryIndex = (rsData+_immediate)/4;
+    unsigned int memoryData = Instructor::GetDataFromMemory(memoryIndex);
+    unsigned int maskedData = mask & memoryData;
     
     Instructor::SetDataToRegister(_rt, maskedData);
     return false;
@@ -52,8 +52,8 @@ LoadLinked::LoadLinked(unsigned int rs, unsigned int rt, unsigned int signExtimm
 
 bool LoadLinked::Excution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
-    unsigned int memoryIndex = rsData + _immediate;
-    unsigned int memoryData = Instructor::GetDataFromRegister(memoryIndex);
+    unsigned int memoryIndex = (rsData + _immediate)/4;
+    unsigned int memoryData = Instructor::GetDataFromMemory(memoryIndex);
     Instructor::SetDataToRegister(_rt, memoryData);
     return false;
 }
@@ -77,8 +77,8 @@ LoadWord::LoadWord(unsigned int rs, unsigned int rt, unsigned int signExtimm) : 
 
 bool LoadWord::Excution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
-    unsigned int memoryIndex = rsData + _immediate;
-    unsigned int memoryData = Instructor::GetDataFromRegister(memoryIndex);
+    unsigned int memoryIndex = (rsData + _immediate)/4;
+    unsigned int memoryData = Instructor::GetDataFromMemory(memoryIndex);
     Instructor::SetDataToRegister(_rt, memoryData);
     return false;
 }

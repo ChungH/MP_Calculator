@@ -20,12 +20,14 @@ public:
     static std::array<unsigned int, 8192>  _memory;
     static std::array<unsigned int, 32>    _register;
     static unsigned int                    _pc;
+    static unsigned int                    _hi;
+    static unsigned int                    _lo;
     
 private:
-    unsigned int&                   _gp = _register[28];
-    unsigned int&                   _sp = _register[29];
-    unsigned int&                   _fp = _register[30];
-    unsigned int&                   _ra = _register[31];
+    unsigned int&                   _gp = Instructor::_register[28];
+    unsigned int&                   _sp = Instructor::_register[29];
+    unsigned int&                   _fp = Instructor::_register[30];
+    unsigned int&                   _ra = Instructor::_register[31];
     
 public:
     Instructor();

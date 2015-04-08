@@ -24,19 +24,20 @@
 
 
 Instructor::Instructor(){
-    setStackPointer(0x8000);
-    setReturnAddress(0xffffffff);
-    
+    Instructor::_pc = 0;
 }
 
 void Instructor::ExcuteInstruction(){
     LoadInstruction();
     
+    setStackPointer(0x8000);
+    setReturnAddress(0xffffffff);
+    
     for(auto iter = Instructor::_memory.begin(); iter != Instructor::_memory.end(); iter ++){
         printf("%x\n",*iter);
     }
     
-    
+    int count = 1;
     while (Instructor::_pc != 0xffffffff) {
         unsigned int inst = Fetch();
         Instruction* instruction = Decode(inst);
@@ -44,13 +45,18 @@ void Instructor::ExcuteInstruction(){
         if (!branchChk) {
             _pc += 4;
         }
+        count++;
+        
     }
+    
 }
 unsigned int Instructor::Fetch(){
     return Instructor::_memory[_pc / 4];
 }
 
 bool Instructor::Excute(Instruction* inst){
+    if(inst == NULL)
+        return false;
     bool branchChk = inst->Excution();
     return branchChk;
 }
@@ -58,7 +64,7 @@ bool Instructor::Excute(Instruction* inst){
 
 void Instructor::LoadInstruction(){
     
-    FILE* fp = fopen("./temp.bin", "r");
+    FILE* fp = fopen("./factorial.bin", "r");
     
     int i = 0;
     char tmp[10];
@@ -82,6 +88,8 @@ void Instructor::LoadInstruction(){
 
 Instruction* Instructor::Decode(unsigned int const inst){
     //Decoding Instruction
+    if(inst == 0)
+        return NULL;
     unsigned int opcode = (inst & 0xfc000000) >> 26;
     unsigned int rs     = (inst & 0x03e00000) >> 21;
     unsigned int rt     = (inst & 0x001f0000) >> 16;
@@ -100,7 +108,7 @@ Instruction* Instructor::Decode(unsigned int const inst){
         else if(funct == Funct::JumpRegister)
             return new JumpRegister(rs);
         else if(funct == Funct::Nor)
-            return new Nor(rs, rd, rt);
+            return new Nor(rs, rt, rd);
         else if(funct == Funct::Or)
             return new Or(rs, rt ,rd);
         else if(funct == Funct::SetLessThan)
@@ -112,9 +120,9 @@ Instruction* Instructor::Decode(unsigned int const inst){
         else if(funct == Funct::ShiftRightLogical)
             return new ShiftRightLogical(rt, rd, shamt);
         else if(funct == Funct::Subtract)
-            return new Subtract(rs, rd ,rt);
+            return new Subtract(rs, rt, rd);
         else if(funct == Funct::SubtractUnsigned)
-            return new SubtractUnsigned(rs, rd ,rt);
+            return new SubtractUnsigned(rs, rt, rd);
         else if(funct == Funct::Divide)
             return new Divide(rs, rt);
         else if(funct == Funct::DivideUnsigned)
@@ -123,6 +131,10 @@ Instruction* Instructor::Decode(unsigned int const inst){
             return new MoveFromHi(rd);
         else if(funct == Funct::MoveFromLo)
             return new MoveFromLo(rd);
+        else if(funct == Funct::MoveToHi)
+            return new MoveToHi(rs);
+        else if(funct == Funct::MoveToLo)
+            return new MoveToLo(rs);
         else if(funct == Funct::Multiply)
             return new Multiply(rs, rt);
         else if(funct == Funct::MultiplyUnsigned)
@@ -166,9 +178,9 @@ Instruction* Instructor::Decode(unsigned int const inst){
         else if(opcode == Opcode::LoadUpperImmediate)
             return new LoadUpperImmediate(rt, immediate);
         else if(opcode == Opcode::LoadWord)
-            return new LoadWord(rt, rs, signExtimm);
+            return new LoadWord(rs, rt, signExtimm);
         else if(opcode == Opcode::OrImmediate)
-            return new OrImmediate(rt, rs, zeroExtimm);
+            return new OrImmediate(rs, rt, zeroExtimm);
         else if(opcode == Opcode::SetLessThanImmediate)
             return new SetLessThanImmediate(rs, rt, signExtimm);
         else if(opcode == Opcode::SetLessThanImmediateUnsigned)
@@ -179,7 +191,7 @@ Instruction* Instructor::Decode(unsigned int const inst){
             return new StoreConditional(rs, rt, signExtimm);
         else if(opcode == Opcode::StoreHalfWord)
             return new StoreHalfword(rs, rt, signExtimm);
-        else if(opcode == Opcode::StoreWord)
+        else if(opcode == Opcode::StoreWord || opcode == Opcode::StoreConditional)
             return new StoreWord(rs, rt, signExtimm);
         }
     
