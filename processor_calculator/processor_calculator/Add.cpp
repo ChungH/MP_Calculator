@@ -19,6 +19,11 @@ bool Add::Excution(){
     int rtData = Instructor::GetDataFromRegister(_rt);
     
     Instructor::SetDataToRegister(_rd, rsData + rtData);
+    
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : Add \nR[%d] = R[%d] + R[%d] => R[%d] = %d\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
+    Instructor::AppendLog(logBuf);
+    
     return false;
 }
 
@@ -34,6 +39,12 @@ bool AddUnsigned::Excution(){
     unsigned int rtData = Instructor::GetDataFromRegister(_rt);
     
     Instructor::SetDataToRegister(_rd, rsData + rtData);
+    
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : AddUnsigned \nR[%d] = R[%d] + R[%d] => R[%d] = %d\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
+    Instructor::AppendLog(logBuf);
+    
+    
     return false;
 }
 
@@ -51,6 +62,10 @@ bool AddImmediate::Excution(){
     
     Instructor::SetDataToRegister(_rt, rsData +  _immediate);
     
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : AddImmediate \nR[%d] = R[%d] + %d =>\nR[%d] = %d\n==================================\n",_rt,_rs,_immediate,_rt,Instructor::GetDataFromRegister(_rt));
+    Instructor::AppendLog(logBuf);
+    
     return false;
 }
 
@@ -65,6 +80,10 @@ bool AddImmediateUnsigned::Excution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     
     Instructor::SetDataToRegister(_rt, rsData +  _immediate);
+    
+    char logBuf[200];
+    sprintf(logBuf, "Instruction : AddImmediateUnsigned \nR[%d] = R[%d] + %d =>\nR[%d] = %d\n==================================\n",_rt,_rs,_immediate, _rt,Instructor::GetDataFromRegister(_rt));
+    Instructor::AppendLog(logBuf);
     
     return false;
 }

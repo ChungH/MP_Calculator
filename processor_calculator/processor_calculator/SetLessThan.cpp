@@ -20,7 +20,11 @@ bool SetLessThan::Excution(){
     int rtData = Instructor::GetDataFromRegister(_rt);
     
     Instructor::SetDataToRegister(_rd, (rsData < rtData)? 1 : 0);
-    
+
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : SetLessThan \nR[%d] = (R[%d]<R[%d])? 1:0 => R[%d] = %d\n\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
+    Instructor::AppendLog(logBuf);
+
     return false;
 }
 
@@ -35,6 +39,11 @@ bool SetLessThanUnsigned::Excution(){
     
     Instructor::SetDataToRegister(_rd, (rsData < rtData)? 1 : 0);
     
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : SetLessThanUnsigned \nR[%d] = (R[%d]<R[%d])? 1:0 => R[%d] = %d\n\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
+    Instructor::AppendLog(logBuf);
+    
+    
     return false;
 }
 
@@ -47,6 +56,11 @@ SetLessThanImmediate::SetLessThanImmediate(unsigned int rs, unsigned int rt, uns
 bool SetLessThanImmediate::Excution(){
     int rsData = Instructor::GetDataFromRegister(_rs);
     Instructor::SetDataToRegister(_rt, (rsData < _immediate)? 1 : 0);
+    
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : SetLessThanImmediate \nR[%d] = (R[%d]<%d)? 1:0 => R[%d] = %d\n\n==================================\n",_rt,_rs,_immediate,_rt,Instructor::GetDataFromRegister(_rt));
+    Instructor::AppendLog(logBuf);
+    
     return false;
 }
 
@@ -58,5 +72,10 @@ SetLessThanImmediateUnsigned::SetLessThanImmediateUnsigned(unsigned int rs, unsi
 bool SetLessThanImmediateUnsigned::Excution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     Instructor::SetDataToRegister(_rt, (rsData < _immediate)? 1 : 0);
+    
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : SetLessThanImmediateUnsigned \nR[%d] = (R[%d]<%d)? 1:0 => R[%d] = %d\n\n==================================\n",_rt,_rs,_immediate,_rt,Instructor::GetDataFromRegister(_rt));
+    Instructor::AppendLog(logBuf);
+    
     return false;
 }

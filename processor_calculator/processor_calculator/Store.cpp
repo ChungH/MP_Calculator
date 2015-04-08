@@ -26,6 +26,11 @@ bool StoreByte::Excution(){
     
     Instructor::SetDataToMemory(memoryIndex, resultData);
     
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : StoreByte \nM[R[%d]+%d](7:0) = R[%d](7:0) =>\nM[%d] = %d\n==================================\n",_rs,_immediate,_rt,memoryIndex, resultData);
+    Instructor::AppendLog(logBuf);
+    
+    
     return false;
 }
 
@@ -56,6 +61,11 @@ bool StoreHalfword::Excution(){
     
     Instructor::SetDataToMemory(memoryIndex, resultData);
     
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : StoreHalfWord \nM[R[%d]+%d](15:0) = R[%d](15:0) =>\nM[%d] = %d\n==================================\n",_rs,_immediate,_rt,memoryIndex, resultData);
+    Instructor::AppendLog(logBuf);
+    
+    
     return false;
 }
 
@@ -70,6 +80,10 @@ bool StoreWord::Excution(){
     unsigned int memoryIndex = (rsData+_immediate)/4;
     
     Instructor::SetDataToMemory(memoryIndex, rtData);
+    
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : StoreWord \nM[R[%d]+%d] = R[%d] =>\nM[%d] = %d\n==================================\n",_rs,_immediate,_rt,memoryIndex, rtData);
+    Instructor::AppendLog(logBuf);
     
     return false;
 }

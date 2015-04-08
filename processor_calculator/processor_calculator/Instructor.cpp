@@ -5,7 +5,7 @@
 //  Created by LeeChungHee on 2015. 3. 14..
 //  Copyright (c) 2015년 CH. All rights reserved.
 //
-
+#include <fstream>
 #include "Instructor.h"
 #include "InstructionSet.h"
 #include "Add.h"
@@ -22,7 +22,6 @@
 #include "Multiply.h"
 #include "Move.h"
 
-
 Instructor::Instructor(){
     Instructor::_pc = 0;
 }
@@ -32,13 +31,18 @@ void Instructor::ExcuteInstruction(){
     
     setStackPointer(0x8000);
     setReturnAddress(0xffffffff);
-    
-    for(auto iter = Instructor::_memory.begin(); iter != Instructor::_memory.end(); iter ++){
-        printf("%x\n",*iter);
-    }
-    
+//    
+//    for(auto iter = Instructor::_memory.begin(); iter != Instructor::_memory.end(); iter ++){
+//        printf("%x\n",*iter);
+//    }
+//    
     int count = 1;
     while (Instructor::_pc != 0xffffffff) {
+        //print Cycles
+        char cycleString[30];
+        sprintf(cycleString, "Cycle : %d\nPC : %d \n",count,Instructor::_pc);
+        AppendLog(cycleString);
+        
         unsigned int inst = Fetch();
         Instruction* instruction = Decode(inst);
         bool branchChk = Excute(instruction);
@@ -48,6 +52,10 @@ void Instructor::ExcuteInstruction(){
         count++;
         
     }
+    
+    char logBuf[20];
+    sprintf(logBuf, "Result Value \nR2 : %d",Instructor::_register[2]);
+    Instructor::AppendLog(logBuf);
     
 }
 unsigned int Instructor::Fetch(){
@@ -64,7 +72,7 @@ bool Instructor::Excute(Instruction* inst){
 
 void Instructor::LoadInstruction(){
     
-    FILE* fp = fopen("./factorial.bin", "r");
+    FILE* fp = fopen("./input2.bin", "r");
     
     int i = 0;
     char tmp[10];
@@ -82,7 +90,6 @@ void Instructor::LoadInstruction(){
             count = 0;
             i++;
         }
-   
     }
 }
 
@@ -193,6 +200,8 @@ Instruction* Instructor::Decode(unsigned int const inst){
             return new StoreHalfword(rs, rt, signExtimm);
         else if(opcode == Opcode::StoreWord || opcode == Opcode::StoreConditional)
             return new StoreWord(rs, rt, signExtimm);
+        else if(opcode == Opcode::Multiply32Bit && opcode == Opcode::Multiply32Bit)
+            return new Multiply32Bit(rs,rt,rd);
         }
     
     return NULL;
@@ -224,6 +233,13 @@ unsigned int Instructor::GetExtension(unsigned int sign, unsigned int immediate)
     return ret;
 }
 
+void Instructor::AppendLog(const std::string& log){
+    Instructor::_logBuffer += log;
+}
+void Instructor::PrintLog(const std::string& path){
+    std::ofstream outFp(path);
+    outFp.write(Instructor::_logBuffer.c_str(),Instructor::_logBuffer.size());
+}
 
 
 

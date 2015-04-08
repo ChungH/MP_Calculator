@@ -21,8 +21,16 @@ bool BranchOnEqual::Excution(){
     unsigned int rtData = Instructor::GetDataFromRegister(_rt);
     if(rsData == rtData){
         Instructor::_pc = Instructor::_pc + 4 + _immediate;
+        char logBuf[200];
+        sprintf(logBuf, "Instruction : BranchOnEqual \nR[%d] : %5d R[%d] : %5d\nbranchAddr : %d\nPC: %5d\n==================================\n",_rs,rsData,_rt,rtData,_immediate,Instructor::_pc);
+        Instructor::AppendLog(logBuf);
         return true;
     }
+    
+    char logBuf[200];
+    sprintf(logBuf, "Instruction : BranchOnEqual \nR[%d] : %5d R[%d] : %5d\nbranchAddr : %d\nPC: %5d\n==================================\n",_rs,rsData,_rt,rtData,_immediate,Instructor::_pc);
+    Instructor::AppendLog(logBuf);
+    
     return false;
 }
 
@@ -39,8 +47,18 @@ bool BranchOnNotEqual::Excution(){
     unsigned int rtData = Instructor::GetDataFromRegister(_rt);
     if(rsData != rtData){
         Instructor::_pc = Instructor::_pc + 4 + _immediate;
+        
+        char logBuf[200];
+        sprintf(logBuf, "Instruction : BranchOnNotEqual \nR[%d] : %5d R[%d] : %5d\nbranchAddr : %d\nPC: %5d\n==================================\n",_rs,rsData,_rt,rtData,_immediate,Instructor::_pc);
+        Instructor::AppendLog(logBuf);
+        
         return true;
     }
+    
+    char logBuf[200];
+    sprintf(logBuf, "Instruction : BranchOnNotEqual \nR[%d] : %5d R[%d] : %5d\nbranchAddr : %d\nPC: %5d\n==================================\n",_rs,rsData,_rt,rtData,_immediate,Instructor::_pc);
+    Instructor::AppendLog(logBuf);
+    
     return false;
 }
 

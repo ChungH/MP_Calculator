@@ -16,8 +16,12 @@ And::And(unsigned int rs, unsigned int rt, unsigned int rd) : R_Instruction(rs, 
 bool And::Excution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     unsigned int rtData = Instructor::GetDataFromRegister(_rt);
-    
+
     Instructor::SetDataToRegister(_rd, rsData & rtData);
+    
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : And \nR[%d] = R[%d] & R[%d] => R[%d] = %d\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
+    Instructor::AppendLog(logBuf);
     
     return false;
 }
@@ -31,6 +35,11 @@ bool AndImmediate::Excution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     
     Instructor::SetDataToRegister(_rt, rsData & _immediate);
+    
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : AndImmediate \nR[%d] = R[%d] & %x => R[%d] = %d\n==================================\n",_rt,_rs,_immediate,_rt,Instructor::GetDataFromRegister(_rt));
+    Instructor::AppendLog(logBuf);
+    
     
     return false;
 }

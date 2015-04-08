@@ -22,6 +22,12 @@ bool Nor::Excution(){
     unsigned int resultData = ~(rsData|rtData);
     
     Instructor::SetDataToRegister(_rd, resultData);
+    
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : Nor \nR[%d] = ~(R[%d] | R[%d]) => R[%d] = %8x\n\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
+    Instructor::AppendLog(logBuf);
+
+    
     return false;
 }
 
@@ -38,6 +44,10 @@ bool Or::Excution(){
     unsigned int resultData = rsData|rtData;
     
     Instructor::SetDataToRegister(_rd, resultData);
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : Or \nR[%d] = R[%d] | R[%d] => R[%d] = %8x\n\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
+    Instructor::AppendLog(logBuf);
+    
     return false;
 }
 
@@ -52,6 +62,11 @@ bool OrImmediate::Excution(){
     unsigned int resultData = rsData|_immediate;
     
     Instructor::SetDataToRegister(_rt, resultData);
+    
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : OrImmediate \nR[%d] = R[%d] | %d => R[%d] = %8x\n\n==================================\n",_rt,_rs,_immediate,_rt,Instructor::GetDataFromRegister(_rt));
+    Instructor::AppendLog(logBuf);
+    
     return false;
 }
 

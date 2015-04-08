@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <string.h>
 #include <array>
 #include "Common.h"
 #include "Instruction.h"
@@ -22,6 +23,7 @@ public:
     static unsigned int                    _pc;
     static unsigned int                    _hi;
     static unsigned int                    _lo;
+    static std::string                     _logBuffer;
     
 private:
     unsigned int&                   _gp = Instructor::_register[28];
@@ -46,6 +48,8 @@ public:
     static unsigned int     GetDataFromMemory(int index);
     static void             SetDataToRegister(int index, unsigned int val);
     static unsigned int     GetDataFromRegister(int index);
+    static void             AppendLog(const std::string& log);
+    static void             PrintLog(const std::string& path);
     
 //    GET_SET_FUNCT(unsigned int, ProgramCounter, _pc);
     GET_SET_FUNCT(unsigned int, StackPointer, _sp);

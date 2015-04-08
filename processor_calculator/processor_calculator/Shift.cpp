@@ -19,6 +19,10 @@ bool ShiftLeftLogical::Excution(){
     unsigned int resultData = rtData << _shamt;
     Instructor::SetDataToRegister(_rd, resultData);
     
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : ShiftLeftLogical \nR[%d] = R[%d] << %d => R[%d] = %d\n==================================\n",_rd,_rs,_shamt,_rd,Instructor::GetDataFromRegister(_rd));
+    Instructor::AppendLog(logBuf);
+    
     return false;
 }
 
@@ -32,5 +36,10 @@ bool ShiftRightLogical::Excution(){
     unsigned int rtData = Instructor::GetDataFromRegister(_rt);
     unsigned int resultData = rtData >> _shamt;
     Instructor::SetDataToRegister(_rd, resultData);
+    
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : ShiftRightLogical \nR[%d] = R[%d] >> %d => R[%d] = %d\n==================================\n",_rd,_rs,_shamt,_rd,Instructor::GetDataFromRegister(_rd));
+    Instructor::AppendLog(logBuf);
+    
     return false;
 }
