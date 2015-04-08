@@ -24,7 +24,7 @@ bool Nor::Excution(){
     Instructor::SetDataToRegister(_rd, resultData);
     
     char logBuf[100];
-    sprintf(logBuf, "Instruction : Nor \nR[%d] = ~(R[%d] | R[%d]) => R[%d] = %8x\n\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
+    sprintf(logBuf, "Instruction : Nor \nR[%d] = ~(R[%d] | R[%d]) => R[%d] = %8x\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
     Instructor::AppendLog(logBuf);
 
     
@@ -45,7 +45,7 @@ bool Or::Excution(){
     
     Instructor::SetDataToRegister(_rd, resultData);
     char logBuf[100];
-    sprintf(logBuf, "Instruction : Or \nR[%d] = R[%d] | R[%d] => R[%d] = %8x\n\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
+    sprintf(logBuf, "Instruction : Or \nR[%d] = R[%d] | R[%d] => R[%d] = %8x\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
     Instructor::AppendLog(logBuf);
     
     return false;
@@ -64,7 +64,7 @@ bool OrImmediate::Excution(){
     Instructor::SetDataToRegister(_rt, resultData);
     
     char logBuf[100];
-    sprintf(logBuf, "Instruction : OrImmediate \nR[%d] = R[%d] | %d => R[%d] = %8x\n\n==================================\n",_rt,_rs,_immediate,_rt,Instructor::GetDataFromRegister(_rt));
+    sprintf(logBuf, "Instruction : OrImmediate \nR[%d] = R[%d] | %d => R[%d] = %8x\n==================================\n",_rt,_rs,_immediate,_rt,Instructor::GetDataFromRegister(_rt));
     Instructor::AppendLog(logBuf);
     
     return false;

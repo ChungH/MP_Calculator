@@ -24,7 +24,7 @@ bool Multiply::Excution(){
     Instructor::_lo = resultData & 0x00000000ffffffff;
     
     char logBuf[100];
-    sprintf(logBuf, "Instruction : Multiply \n{Hi,Lo} = R[%d] * R[%d] => Hi = %5d Lo = %5d\n\n==================================\n",_rs,_rt,Instructor::_hi,Instructor::_lo);
+    sprintf(logBuf, "Instruction : Multiply \n{Hi,Lo} = R[%d] * R[%d] => Hi = %5d Lo = %5d\n==================================\n",_rs,_rt,Instructor::_hi,Instructor::_lo);
     Instructor::AppendLog(logBuf);
     
     return false;
@@ -44,7 +44,7 @@ bool MultiplyUnsigned::Excution(){
     Instructor::_lo = resultData & 0x00000000ffffffff;
     
     char logBuf[100];
-    sprintf(logBuf, "Instruction : MultiplyUnsigned \n{Hi,Lo} = R[%d] * R[%d] => Hi = %5d Lo = %5d\n\n==================================\n",_rs,_rt,Instructor::_hi,Instructor::_lo);
+    sprintf(logBuf, "Instruction : MultiplyUnsigned \n{Hi,Lo} = R[%d] * R[%d] => Hi = %5d Lo = %5d\n==================================\n",_rs,_rt,Instructor::_hi,Instructor::_lo);
     Instructor::AppendLog(logBuf);
     
     return false;
@@ -63,7 +63,7 @@ bool Multiply32Bit::Excution(){
     Instructor::SetDataToRegister(_rd, rsData * rtData);
     
     char logBuf[100];
-    sprintf(logBuf, "Instruction : Multiply32Bit \nR[%d] = R[%d] * R[%d] => R[%d] = %5d\n\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
+    sprintf(logBuf, "Instruction : Multiply32Bit \nR[%d] = R[%d] * R[%d] => R[%d] = %5d\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
     Instructor::AppendLog(logBuf);
     
     

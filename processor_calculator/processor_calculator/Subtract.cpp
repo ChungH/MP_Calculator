@@ -21,7 +21,7 @@ bool Subtract::Excution(){
     Instructor::SetDataToRegister(_rt, rsData - rtData);
     
     char logBuf[100];
-    sprintf(logBuf, "Instruction : Subtract \nR[%d] = R[%d] - R[%d] => R[%d] = %d\n\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
+    sprintf(logBuf, "Instruction : Subtract \nR[%d] = R[%d] - R[%d] => R[%d] = %d\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
     Instructor::AppendLog(logBuf);
     
     return false;
@@ -39,7 +39,7 @@ bool SubtractUnsigned::Excution(){
     Instructor::SetDataToRegister(_rt, rsData - rtData);
     
     char logBuf[100];
-    sprintf(logBuf, "Instruction : SubtractUnsigned \nR[%d] = R[%d] - R[%d] => R[%d] = %d\n\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
+    sprintf(logBuf, "Instruction : SubtractUnsigned \nR[%d] = R[%d] - R[%d] => R[%d] = %d\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
     Instructor::AppendLog(logBuf);
     
     
