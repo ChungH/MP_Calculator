@@ -32,7 +32,10 @@ private:
     unsigned int&                   _ra = Instructor::_register[31];
     
 public:
-    Instructor();
+    Instructor(const char* filePath);
+    
+private:
+    const char*                    _filePath;
     
 private:
     void                    LoadInstruction();

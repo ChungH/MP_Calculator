@@ -22,8 +22,9 @@
 #include "Multiply.h"
 #include "Move.h"
 
-Instructor::Instructor(){
+Instructor::Instructor(const char* filePath){
     Instructor::_pc = 0;
+    _filePath = filePath;
 }
 
 void Instructor::ExcuteInstruction(){
@@ -31,11 +32,13 @@ void Instructor::ExcuteInstruction(){
     
     setStackPointer(0x8000);
     setReturnAddress(0xffffffff);
-//    
+    
 //    for(auto iter = Instructor::_memory.begin(); iter != Instructor::_memory.end(); iter ++){
 //        printf("%x\n",*iter);
 //    }
-//    
+
+    
+    
     int count = 1;
     while (Instructor::_pc != 0xffffffff) {
         //print Cycles
@@ -50,7 +53,6 @@ void Instructor::ExcuteInstruction(){
             _pc += 4;
         }
         count++;
-        
     }
     
     char logBuf[20];
@@ -72,7 +74,7 @@ bool Instructor::Excute(Instruction* inst){
 
 void Instructor::LoadInstruction(){
     
-    FILE* fp = fopen("./input2.bin", "r");
+    FILE* fp = fopen(_filePath, "r");
     
     int i = 0;
     char tmp[10];
@@ -151,7 +153,7 @@ Instruction* Instructor::Decode(unsigned int const inst){
         //J_Instruction
         unsigned int address = inst & 0x03ffffff;
         unsigned int pc = Instructor::_pc + 4;
-        unsigned int jumpAddr = (pc & 0xf0000000) | address << 2;
+        unsigned int jumpAddr = (pc & 0xf0000000) | (address << 2);
         
         if(opcode == Opcode::Jump)
             return new Jump(jumpAddr);

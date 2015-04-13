@@ -31,7 +31,13 @@ std::string                    Instructor::_logBuffer;
 
 int main(int argc, const char * argv[]) {
     
-    Instructor* instructor = new Instructor();
+    const char* filePath = argv[1];
+
+    Instructor::AppendLog("Opened File : ");
+    Instructor::AppendLog(filePath);
+    Instructor::AppendLog("\n\n");
+    
+    Instructor* instructor = new Instructor(filePath);
     Instructor::_memory.fill(0);
     Instructor::_register.fill(0);
     Instructor::_pc = 0;
