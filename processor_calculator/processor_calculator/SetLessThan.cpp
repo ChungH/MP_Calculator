@@ -57,7 +57,7 @@ bool SetLessThanImmediate::Excution(){
     int rsData = Instructor::GetDataFromRegister(_rs);
     Instructor::SetDataToRegister(_rt, (rsData < _immediate)? 1 : 0);
     
-    char logBuf[100];
+    char logBuf[200];
     sprintf(logBuf, "Instruction : SetLessThanImmediate \nR[%d] = (R[%d]<%d)? 1:0 => R[%d] = %d\n==================================\n",_rt,_rs,_immediate,_rt,Instructor::GetDataFromRegister(_rt));
     Instructor::AppendLog(logBuf);
     

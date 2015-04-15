@@ -74,6 +74,7 @@ bool Instructor::Excute(Instruction* inst){
 
 void Instructor::LoadInstruction(){
     
+ //   FILE* fp = fopen("/Users/ChungH/Desktop/fib.bin", "r");
     FILE* fp = fopen(_filePath, "r");
     
     int i = 0;
