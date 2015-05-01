@@ -12,28 +12,28 @@ class LoadByteUnsigned : public I_Instruction {
 public:
     LoadByteUnsigned(unsigned int rs, unsigned int rt, unsigned int signExtimm);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 class LoadHalfwordUnsigned : public I_Instruction {
 public:
     LoadHalfwordUnsigned(unsigned int rs, unsigned int rt, unsigned int signExtimm);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 class LoadLinked : public I_Instruction {
 public:
     LoadLinked(unsigned int rs, unsigned int rt, unsigned int signExtimm);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 class LoadUpperImmediate : public I_Instruction {
 public:
     LoadUpperImmediate(unsigned int rt, unsigned int immediate);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 
@@ -41,5 +41,5 @@ class LoadWord : public I_Instruction {
 public:
     LoadWord(unsigned int rs, unsigned int rt, unsigned int signExtimm);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };

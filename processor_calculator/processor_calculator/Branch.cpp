@@ -16,7 +16,7 @@ BranchOnEqual::BranchOnEqual(unsigned int rs, unsigned int rt, unsigned int bran
 }
 
 
-bool BranchOnEqual::Excution(){
+bool BranchOnEqual::Execution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     unsigned int rtData = Instructor::GetDataFromRegister(_rt);
     if(rsData == rtData){
@@ -41,7 +41,7 @@ BranchOnNotEqual::BranchOnNotEqual(unsigned int rs, unsigned int rt, unsigned in
     
 }
 
-bool BranchOnNotEqual::Excution(){
+bool BranchOnNotEqual::Execution(){
     
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     unsigned int rtData = Instructor::GetDataFromRegister(_rt);

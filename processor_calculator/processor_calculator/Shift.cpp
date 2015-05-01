@@ -14,7 +14,7 @@ ShiftLeftLogical::ShiftLeftLogical(unsigned int rt, unsigned int rd, unsigned in
     
 }
 
-bool ShiftLeftLogical::Excution(){
+bool ShiftLeftLogical::Execution(){
     unsigned int rtData = Instructor::GetDataFromRegister(_rt);
     unsigned int resultData = rtData << _shamt;
     Instructor::SetDataToRegister(_rd, resultData);
@@ -32,7 +32,7 @@ ShiftRightLogical::ShiftRightLogical(unsigned int rt, unsigned int rd, unsigned 
     
 }
 
-bool ShiftRightLogical::Excution(){
+bool ShiftRightLogical::Execution(){
     unsigned int rtData = Instructor::GetDataFromRegister(_rt);
     unsigned int resultData = rtData >> _shamt;
     Instructor::SetDataToRegister(_rd, resultData);

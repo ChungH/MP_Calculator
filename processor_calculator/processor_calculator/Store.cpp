@@ -14,7 +14,7 @@ StoreByte::StoreByte(unsigned int rs, unsigned int rt, unsigned int immediate) :
     
 }
 
-bool StoreByte::Excution(){
+bool StoreByte::Execution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     unsigned int rtData = Instructor::GetDataFromRegister(_rt);
     unsigned int memoryIndex = (rsData+_immediate)/4;
@@ -40,7 +40,7 @@ StoreConditional::StoreConditional(unsigned int rs, unsigned int rt, unsigned in
     
 }
 
-bool StoreConditional::Excution(){
+bool StoreConditional::Execution(){
     return false;
 }
 
@@ -49,7 +49,7 @@ StoreHalfword::StoreHalfword(unsigned int rs, unsigned int rt, unsigned int imme
     
 }
 
-bool StoreHalfword::Excution(){
+bool StoreHalfword::Execution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     unsigned int rtData = Instructor::GetDataFromRegister(_rt);
     unsigned int memoryIndex = (rsData+_immediate)/4;
@@ -74,7 +74,7 @@ StoreWord::StoreWord(unsigned int rs, unsigned int rt, unsigned int immediate) :
     
 }
 
-bool StoreWord::Excution(){
+bool StoreWord::Execution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     unsigned int rtData = Instructor::GetDataFromRegister(_rt);
     unsigned int memoryIndex = (rsData+_immediate)/4;

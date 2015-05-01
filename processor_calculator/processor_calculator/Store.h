@@ -12,7 +12,7 @@ class StoreByte : public I_Instruction{
 public:
     StoreByte(unsigned int rs, unsigned int rt, unsigned int immediate);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 
@@ -20,7 +20,7 @@ class StoreConditional : public I_Instruction {
 public:
     StoreConditional(unsigned int rs, unsigned int rt, unsigned int immediate);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 
@@ -28,12 +28,12 @@ class StoreHalfword : public I_Instruction {
 public:
     StoreHalfword(unsigned int rs, unsigned int rt, unsigned int immediate);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 class StoreWord : public I_Instruction {
 public:
     StoreWord(unsigned int rs, unsigned int rt, unsigned int immediate);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };

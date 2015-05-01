@@ -16,7 +16,7 @@ MoveFromHi::MoveFromHi(unsigned int rd) : R_Instruction(0,0,rd,0,0){
     
 }
 
-bool MoveFromHi::Excution(){
+bool MoveFromHi::Execution(){
     Instructor::SetDataToRegister(_rd, Instructor::_hi);
     char logBuf[100];
     sprintf(logBuf, "Instruction : MoveFromHi \nR[%d] = Hi => R[%d] = %5d\n==================================\n",_rd,_rd,Instructor::_hi);
@@ -29,7 +29,7 @@ MoveFromLo::MoveFromLo(unsigned int rd) : R_Instruction(0,0,rd,0,0){
     
 }
 
-bool MoveFromLo::Excution(){
+bool MoveFromLo::Execution(){
     Instructor::SetDataToRegister(_rd, Instructor::_lo);
     char logBuf[100];
     sprintf(logBuf, "Instruction : MoveFromLo \nR[%d] = Lo => R[%d] = %5d\n==================================\n",_rd,_rd,Instructor::_lo);
@@ -42,7 +42,7 @@ MoveToHi::MoveToHi(unsigned int rs) :R_Instruction(rs,0,0,0,0){
     
 }
 
-bool MoveToHi::Excution(){
+bool MoveToHi::Execution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     Instructor::_hi = rsData;
     char logBuf[100];
@@ -58,7 +58,7 @@ MoveToLo::MoveToLo(unsigned int rs) : R_Instruction(rs,0,0,0,0){
 }
 
 
-bool MoveToLo::Excution(){
+bool MoveToLo::Execution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     Instructor::_lo = rsData;
     char logBuf[100];

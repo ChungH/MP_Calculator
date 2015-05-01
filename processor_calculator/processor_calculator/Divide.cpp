@@ -14,7 +14,7 @@ Divide::Divide(unsigned int rs, unsigned int rt) : R_Instruction(rs,rt,0,0,0){
     
 }
 
-bool Divide::Excution(){
+bool Divide::Execution(){
     int rsData = Instructor::GetDataFromRegister(_rs);
     int rtData = Instructor::GetDataFromRegister(_rt);
     Instructor::_lo = rsData/rtData;
@@ -32,7 +32,7 @@ DivideUnsigned::DivideUnsigned(unsigned int rs, unsigned int rt) : R_Instruction
     
 }
 
-bool DivideUnsigned::Excution(){
+bool DivideUnsigned::Execution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     unsigned int rtData = Instructor::GetDataFromRegister(_rt);
     Instructor::_lo = rsData/rtData;

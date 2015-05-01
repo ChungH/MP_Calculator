@@ -14,7 +14,7 @@
 Add::Add(unsigned int rs, unsigned int rt, unsigned int rd) : R_Instruction(rs, rt, rd, 0,0){
 }
 
-bool Add::Excution(){
+bool Add::Execution(){
     int rsData = Instructor::GetDataFromRegister(_rs);
     int rtData = Instructor::GetDataFromRegister(_rt);
     
@@ -34,7 +34,7 @@ AddUnsigned::AddUnsigned(unsigned int rs, unsigned int rt,unsigned int rd) : R_I
     
 }
 
-bool AddUnsigned::Excution(){
+bool AddUnsigned::Execution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     unsigned int rtData = Instructor::GetDataFromRegister(_rt);
     
@@ -56,7 +56,7 @@ AddImmediate::AddImmediate(unsigned int rs, unsigned int rt, unsigned int signEx
 
 }
 
-bool AddImmediate::Excution(){
+bool AddImmediate::Execution(){
     
     int rsData = Instructor::GetDataFromRegister(_rs);
     
@@ -75,7 +75,7 @@ AddImmediateUnsigned::AddImmediateUnsigned(unsigned int rs, unsigned int rt, uns
     
 }
 
-bool AddImmediateUnsigned::Excution(){
+bool AddImmediateUnsigned::Execution(){
     
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     

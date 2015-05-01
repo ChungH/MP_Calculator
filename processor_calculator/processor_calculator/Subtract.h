@@ -12,7 +12,7 @@ class Subtract : public R_Instruction {
 public:
     Subtract(unsigned int rs, unsigned int rt, unsigned int rd);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 
@@ -20,7 +20,7 @@ class SubtractUnsigned : public R_Instruction {
 public:
     SubtractUnsigned(unsigned int rs, unsigned int rt, unsigned int rd);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 

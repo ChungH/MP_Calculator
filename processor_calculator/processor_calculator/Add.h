@@ -13,26 +13,26 @@ public:
     Add(unsigned int rs, unsigned int rt, unsigned int rd);
     
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 class AddUnsigned : public R_Instruction {
 public:
     AddUnsigned(unsigned int rs, unsigned int rt, unsigned int rd);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 class AddImmediate : public I_Instruction {
 public:
     AddImmediate(unsigned int rs, unsigned int rt, unsigned int signExtimm);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 class AddImmediateUnsigned : public I_Instruction {
 public:
     AddImmediateUnsigned(unsigned int rs, unsigned int rt, unsigned int signExtimm);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };

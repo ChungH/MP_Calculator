@@ -16,7 +16,7 @@ LoadByteUnsigned::LoadByteUnsigned(unsigned int rs, unsigned int rt, unsigned in
     
 }
 
-bool LoadByteUnsigned::Excution(){
+bool LoadByteUnsigned::Execution(){
     unsigned int mask = 0x000000ff;
     unsigned int rsData   = Instructor::GetDataFromRegister(_rs);
     unsigned int memoryIndex = (rsData + _immediate)/4;
@@ -39,7 +39,7 @@ LoadHalfwordUnsigned::LoadHalfwordUnsigned(unsigned int rs, unsigned int rt, uns
     
 }
 
-bool LoadHalfwordUnsigned::Excution(){
+bool LoadHalfwordUnsigned::Execution(){
     unsigned int mask = 0x0000ffff;
     unsigned int rsData   = Instructor::GetDataFromRegister(_rs);
     unsigned int memoryIndex = (rsData+_immediate)/4;
@@ -60,7 +60,7 @@ LoadLinked::LoadLinked(unsigned int rs, unsigned int rt, unsigned int signExtimm
     
 }
 
-bool LoadLinked::Excution(){
+bool LoadLinked::Execution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     unsigned int memoryIndex = (rsData + _immediate)/4;
     unsigned int memoryData = Instructor::GetDataFromMemory(memoryIndex);
@@ -79,7 +79,7 @@ LoadUpperImmediate::LoadUpperImmediate(unsigned int rt, unsigned int immediate) 
     
 }
 
-bool LoadUpperImmediate::Excution(){
+bool LoadUpperImmediate::Execution(){
     Instructor::SetDataToRegister(_rt, _immediate << 16);
     char logBuf[100];
     sprintf(logBuf, "Instruction : LoadUpperImmediate \nR[%d] = {%d, 16b'0} =>\nR[%d] = %x\n==================================\n",_rt,_rt,_immediate,Instructor::GetDataFromRegister(_rt));
@@ -93,7 +93,7 @@ LoadWord::LoadWord(unsigned int rs, unsigned int rt, unsigned int signExtimm) : 
     
 }
 
-bool LoadWord::Excution(){
+bool LoadWord::Execution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     unsigned int memoryIndex = (rsData + _immediate)/4;
     unsigned int memoryData = Instructor::GetDataFromMemory(memoryIndex);

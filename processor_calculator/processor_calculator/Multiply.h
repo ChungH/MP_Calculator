@@ -12,7 +12,7 @@ class Multiply : public R_Instruction {
 public:
     Multiply(unsigned int rs, unsigned int rt);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 
@@ -20,12 +20,12 @@ class MultiplyUnsigned : public R_Instruction {
 public:
     MultiplyUnsigned(unsigned int rs, unsigned int rt);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 class Multiply32Bit : public R_Instruction {
 public:
     Multiply32Bit(unsigned int rs, unsigned int rt, unsigned int rd);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };

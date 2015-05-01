@@ -12,19 +12,19 @@ class Jump : public J_Instruction {
 public:
     Jump(unsigned int jumpAddr);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 class JumpAndLink : public J_Instruction {
 public:
     JumpAndLink(unsigned int jumpAddr);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 class JumpRegister : public R_Instruction {
 public:
     JumpRegister(unsigned int rs);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };

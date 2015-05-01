@@ -41,11 +41,11 @@ private:
     void                    LoadInstruction();
     unsigned int            Fetch();
     Instruction*            Decode(unsigned int const inst);
-    bool                    Excute(Instruction* inst);
+    bool                    Execute(Instruction* inst);
     
     unsigned int            GetExtension(unsigned int sign, unsigned int immediate);
 public:
-    void                    ExcuteInstruction();
+    void                    ExecuteInstruction();
     
     static void             SetDataToMemory(int index, unsigned int val);
     static unsigned int     GetDataFromMemory(int index);

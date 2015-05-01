@@ -15,7 +15,7 @@ Jump::Jump(unsigned int jumpAddr) : J_Instruction(jumpAddr){
     
 }
 
-bool Jump::Excution(){
+bool Jump::Execution(){
     Instructor::_pc = _address;
     char logBuf[100];
     sprintf(logBuf, "Instruction : Jump \nPC = JumpAddr => PC : %5d  \n==================================\n",_address);
@@ -29,7 +29,7 @@ JumpAndLink::JumpAndLink(unsigned int jumpAddr) : J_Instruction(jumpAddr){
     
 }
 
-bool JumpAndLink::Excution(){
+bool JumpAndLink::Execution(){
     Instructor::SetDataToRegister(31, Instructor::_pc + 8);
     Instructor::_pc = _address;
     char logBuf[200];
@@ -46,7 +46,7 @@ JumpRegister::JumpRegister(unsigned int rs) : R_Instruction(rs,0,0,0,0){
     
 }
 
-bool JumpRegister::Excution(){
+bool JumpRegister::Execution(){
     Instructor::_pc = Instructor::GetDataFromRegister(_rs);
     char logBuf[100];
     sprintf(logBuf, "Instruction : JumpRegister \nPC = R[%d] => PC : %5d  \n==================================\n",_rs,Instructor::_pc);

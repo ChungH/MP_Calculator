@@ -12,7 +12,7 @@ class MoveFromHi : public R_Instruction {
 public:
     MoveFromHi(unsigned int rd);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 
@@ -20,21 +20,21 @@ class MoveFromLo : public R_Instruction {
 public:
     MoveFromLo(unsigned int rd);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 class MoveToHi : public R_Instruction{
 public:
     MoveToHi(unsigned int rs);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 class MoveToLo : public R_Instruction{
 public:
     MoveToLo(unsigned int rs);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 

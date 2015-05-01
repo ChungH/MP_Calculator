@@ -14,7 +14,7 @@ Subtract::Subtract(unsigned int rs, unsigned int rt, unsigned int rd) : R_Instru
     
 }
 
-bool Subtract::Excution(){
+bool Subtract::Execution(){
     int rsData = Instructor::GetDataFromRegister(_rs);
     int rtData = Instructor::GetDataFromRegister(_rt);
     
@@ -32,7 +32,7 @@ SubtractUnsigned::SubtractUnsigned(unsigned int rs, unsigned int rt, unsigned in
     
 }
 
-bool SubtractUnsigned::Excution(){
+bool SubtractUnsigned::Execution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     unsigned int rtData = Instructor::GetDataFromRegister(_rt);
     

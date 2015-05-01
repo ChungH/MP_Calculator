@@ -9,7 +9,7 @@
 
 class Instruction{
 public:
-    virtual bool Excution() = 0;
+    virtual bool Execution() = 0;
 };
 
 
@@ -24,7 +24,7 @@ public:
 public:
     R_Instruction(unsigned int rs, unsigned int  rt, unsigned int rd, unsigned int shamt, unsigned int funct);
 public:
-    virtual bool Excution() = 0;
+    virtual bool Execution() = 0;
     
 };
 
@@ -38,7 +38,7 @@ public:
     I_Instruction(unsigned int rs, unsigned int rt,unsigned int immediate);
     
 public:
-    virtual bool Excution() = 0;
+    virtual bool Execution() = 0;
     
 };
 
@@ -50,7 +50,7 @@ public:
     J_Instruction(unsigned int address);
     
 public:
-    virtual bool Excution() = 0;
+    virtual bool Execution() = 0;
     
 };
 

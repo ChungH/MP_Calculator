@@ -12,12 +12,12 @@ class And : public R_Instruction {
 public:
     And(unsigned int rs, unsigned int rt, unsigned int rd);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 class AndImmediate : public I_Instruction {
 public:
     AndImmediate(unsigned int rs, unsigned int rt, unsigned int zeroExtimm);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };

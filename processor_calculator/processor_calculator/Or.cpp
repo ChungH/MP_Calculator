@@ -15,7 +15,7 @@ Nor::Nor(unsigned int rs, unsigned int rt, unsigned int rd):R_Instruction(rs,rt,
     
 }
 
-bool Nor::Excution(){
+bool Nor::Execution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     unsigned int rtData = Instructor::GetDataFromRegister(_rt);
     
@@ -37,7 +37,7 @@ Or::Or(unsigned int rs, unsigned int rt, unsigned int rd) : R_Instruction(rs,rt,
     
 }
 
-bool Or::Excution(){
+bool Or::Execution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     unsigned int rtData = Instructor::GetDataFromRegister(_rt);
     
@@ -56,7 +56,7 @@ OrImmediate::OrImmediate(unsigned int rs, unsigned int rt, unsigned int zeroExti
     
 }
 
-bool OrImmediate::Excution(){
+bool OrImmediate::Execution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     
     unsigned int resultData = rsData|_immediate;

@@ -12,14 +12,14 @@ class BranchOnEqual : public I_Instruction {
 public:
     BranchOnEqual(unsigned int rs, unsigned int rt, unsigned int branchAddr);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 class BranchOnNotEqual : public I_Instruction {
 public:
     BranchOnNotEqual(unsigned int rs, unsigned int rt, unsigned int branchAddr);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 

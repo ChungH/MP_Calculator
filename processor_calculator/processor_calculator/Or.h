@@ -12,20 +12,20 @@ class Nor : public R_Instruction {
 public:
     Nor(unsigned int rs, unsigned int rt, unsigned int rd);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 class Or : public R_Instruction {
 public:
     Or(unsigned int rs, unsigned int rt, unsigned int rd);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 class OrImmediate : public I_Instruction {
 public:
     OrImmediate(unsigned int rs, unsigned int rt, unsigned int zeroExtimm);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 

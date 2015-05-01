@@ -12,7 +12,7 @@ class ShiftLeftLogical : public R_Instruction {
 public:
     ShiftLeftLogical(unsigned int rt, unsigned int rd, unsigned int shamt);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 
@@ -20,6 +20,6 @@ class ShiftRightLogical : public R_Instruction {
 public:
     ShiftRightLogical(unsigned int rt, unsigned int rd, unsigned int shamt);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 

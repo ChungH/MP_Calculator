@@ -12,7 +12,7 @@ class Divide : public R_Instruction {
 public:
     Divide(unsigned int rs, unsigned int rt);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };
 
 
@@ -20,5 +20,5 @@ class DivideUnsigned : public R_Instruction {
 public:
     DivideUnsigned(unsigned int rs, unsigned int rt);
 public:
-    virtual bool Excution();
+    virtual bool Execution();
 };

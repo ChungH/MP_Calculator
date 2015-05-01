@@ -15,7 +15,7 @@ SetLessThan::SetLessThan(unsigned int rs, unsigned int rt, unsigned int rd) : R_
     
 }
 
-bool SetLessThan::Excution(){
+bool SetLessThan::Execution(){
     int rsData = Instructor::GetDataFromRegister(_rs);
     int rtData = Instructor::GetDataFromRegister(_rt);
     
@@ -33,7 +33,7 @@ SetLessThanUnsigned::SetLessThanUnsigned(unsigned int rs, unsigned int rt, unsig
     
 }
 
-bool SetLessThanUnsigned::Excution(){
+bool SetLessThanUnsigned::Execution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     unsigned int rtData = Instructor::GetDataFromRegister(_rt);
     
@@ -53,7 +53,7 @@ SetLessThanImmediate::SetLessThanImmediate(unsigned int rs, unsigned int rt, uns
     
 }
 
-bool SetLessThanImmediate::Excution(){
+bool SetLessThanImmediate::Execution(){
     int rsData = Instructor::GetDataFromRegister(_rs);
     Instructor::SetDataToRegister(_rt, (rsData < _immediate)? 1 : 0);
     
@@ -69,7 +69,7 @@ SetLessThanImmediateUnsigned::SetLessThanImmediateUnsigned(unsigned int rs, unsi
     
 }
 
-bool SetLessThanImmediateUnsigned::Excution(){
+bool SetLessThanImmediateUnsigned::Execution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     Instructor::SetDataToRegister(_rt, (rsData < _immediate)? 1 : 0);
     

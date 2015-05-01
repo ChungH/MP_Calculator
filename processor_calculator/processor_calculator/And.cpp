@@ -13,7 +13,7 @@
 And::And(unsigned int rs, unsigned int rt, unsigned int rd) : R_Instruction(rs, rt, rd, 0, 0){
 }
 
-bool And::Excution(){
+bool And::Execution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     unsigned int rtData = Instructor::GetDataFromRegister(_rt);
 
@@ -31,7 +31,7 @@ AndImmediate::AndImmediate(unsigned int rs, unsigned int rt, unsigned int zeroEx
     
 }
 
-bool AndImmediate::Excution(){
+bool AndImmediate::Execution(){
     unsigned int rsData = Instructor::GetDataFromRegister(_rs);
     
     Instructor::SetDataToRegister(_rt, rsData & _immediate);

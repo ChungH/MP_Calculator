@@ -22,12 +22,13 @@
 #include "Multiply.h"
 #include "Move.h"
 
+
 Instructor::Instructor(const char* filePath){
     Instructor::_pc = 0;
     _filePath = filePath;
 }
 
-void Instructor::ExcuteInstruction(){
+void Instructor::ExecuteInstruction(){
     LoadInstruction();
     
     setStackPointer(0x8000);
@@ -45,10 +46,11 @@ void Instructor::ExcuteInstruction(){
         char cycleString[30];
         sprintf(cycleString, "Cycle : %d\nPC : %d \n",count,Instructor::_pc);
         AppendLog(cycleString);
-        
+
         unsigned int inst = Fetch();
         Instruction* instruction = Decode(inst);
-        bool branchChk = Excute(instruction);
+        
+        bool branchChk = Execute(instruction);
         if (!branchChk) {
             _pc += 4;
         }
@@ -64,18 +66,18 @@ unsigned int Instructor::Fetch(){
     return Instructor::_memory[_pc / 4];
 }
 
-bool Instructor::Excute(Instruction* inst){
+bool Instructor::Execute(Instruction* inst){
     if(inst == NULL)
         return false;
-    bool branchChk = inst->Excution();
+    bool branchChk = inst->Execution();
     return branchChk;
 }
 
 
 void Instructor::LoadInstruction(){
     
- //   FILE* fp = fopen("/Users/ChungH/Desktop/fib.bin", "r");
-    FILE* fp = fopen(_filePath, "r");
+    FILE* fp = fopen("/Users/ChungH/Desktop/Mips_Simulator/gcdlcm.bin", "r");
+ //   FILE* fp = fopen(_filePath, "r");
     
     int i = 0;
     char tmp[10];
@@ -105,7 +107,7 @@ Instruction* Instructor::Decode(unsigned int const inst){
     unsigned int rt     = (inst & 0x001f0000) >> 16;
     unsigned int rd     = (inst & 0x0000f800) >> 11;
     unsigned int shamt  = (inst & 0x000007c0) >> 6;
-    unsigned int funct  = (inst & 0x0000002f);
+    unsigned int funct  = (inst & 0x0000003f);
 
     if(opcode == 0){
         //R_Instruction
