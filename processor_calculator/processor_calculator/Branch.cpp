@@ -32,10 +32,10 @@ bool BranchOnEqual::Execution(){
     
     return false;
 }
-void MemoryAccess(){
+void BranchOnEqual::MemoryAccess(){
     
 }
-void WriteBack(){
+void BranchOnEqual::WriteBack(){
     
 }
 
@@ -65,3 +65,9 @@ bool BranchOnNotEqual::Execution(){
     return false;
 }
 
+void BranchOnNotEqual::MemoryAccess(){
+    
+}
+void BranchOnNotEqual::WriteBack(){
+    
+}

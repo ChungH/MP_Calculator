@@ -18,10 +18,7 @@ bool Divide::Execution(){
     _lo = _rsData / _rtData;
     _hi = _rsData % _rtData;
     
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : Divide \nLo = R[%d]/R[%d] => Lo = %5d/%5d\nHi = R[%d]/R[%d] => Lo= %5d/%5d\n==================================\n",_rs,_rt,_rsData,_rtData,_rs,_rt,_rsData,_rtData);
-    Instructor::AppendLog(logBuf);
-    
+ 
     return false;
 }
 
@@ -31,6 +28,11 @@ void Divide::MemoryAccess(){
 void Divide::WriteBack(){
     Instructor::_lo = _lo;
     Instructor::_hi = _hi;
+    
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : Divide \nLo = R[%d]/R[%d] => Lo = %5d/%5d\nHi = R[%d]/R[%d] => Lo= %5d/%5d\n==================================\n",_rs,_rt,_rsData,_rtData,_rs,_rt,_rsData,_rtData);
+    Instructor::AppendLog(logBuf);
+    
     
 }
 
@@ -44,9 +46,7 @@ bool DivideUnsigned::Execution(){
     _lo = _rsData/_rtData;
     _hi = _rsData%_rtData;
     
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : Divide \nLo = R[%d]/R[%d] => Lo = %5d/%5d\nHi = R[%d]/R[%d] => Lo= %5d/%5d\n==================================\n",_rs,_rt,_rsData,_rtData,_rs,_rt,_rsData,_rtData);
-    Instructor::AppendLog(logBuf);
+   
     
     return false;
 }
@@ -57,5 +57,9 @@ void DivideUnsigned::MemoryAccess(){
 void DivideUnsigned::WriteBack(){
     Instructor::_lo = _lo;
     Instructor::_hi = _hi;
+    
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : Divide \nLo = R[%d]/R[%d] => Lo = %5d/%5d\nHi = R[%d]/R[%d] => Lo= %5d/%5d\n==================================\n",_rs,_rt,_rsData,_rtData,_rs,_rt,_rsData,_rtData);
+    Instructor::AppendLog(logBuf);
     
 }
