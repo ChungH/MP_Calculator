@@ -17,9 +17,9 @@ public:
     virtual bool Execution() = 0;
     virtual void MemoryAccess() = 0;
     virtual void WriteBack() = 0;
-    virtual unsigned int getRsNum() = 0;
-    virtual unsigned int getRtNum() = 0;
-    virtual unsigned int getRdNum() = 0;
+//    virtual unsigned int getRsNum() = 0;
+//    virtual unsigned int getRtNum() = 0;
+//    virtual unsigned int getRdNum() = 0;
     
 };
 
@@ -41,9 +41,9 @@ public:
     virtual bool Execution() = 0;
     virtual void MemoryAccess() = 0;
     virtual void WriteBack() = 0;
-    virtual unsigned int getRsNum() = 0;
-    virtual unsigned int getRtNum() = 0;
-    virtual unsigned int getRdNum() = 0;
+//    virtual unsigned int getRsNum() = 0;
+//    virtual unsigned int getRtNum() = 0;
+//    virtual unsigned int getRdNum() = 0;
     
 };
 
@@ -63,9 +63,9 @@ public:
     virtual bool Execution() = 0;
     virtual void MemoryAccess() = 0;
     virtual void WriteBack() = 0;
-    virtual unsigned int getRsNum() = 0;
-    virtual unsigned int getRtNum() = 0;
-    virtual unsigned int getRdNum() = 0;
+//    virtual unsigned int getRsNum() = 0;
+//    virtual unsigned int getRtNum() = 0;
+//    virtual unsigned int getRdNum() = 0;
 };
 
 class J_Instruction : public Instruction{
@@ -79,8 +79,8 @@ public:
     virtual bool Execution() = 0;
     virtual void MemoryAccess() = 0;
     virtual void WriteBack() = 0;
-    virtual unsigned int getRsNum() = 0;
-    virtual unsigned int getRtNum() = 0;
-    virtual unsigned int getRdNum() = 0;
+//    virtual unsigned int getRsNum() = 0;
+//    virtual unsigned int getRtNum() = 0;
+//    virtual unsigned int getRdNum() = 0;
 };
 
