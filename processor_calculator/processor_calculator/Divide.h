@@ -10,7 +10,10 @@
 
 class Divide : public R_Instruction {
 public:
-    Divide(unsigned int rs, unsigned int rt);
+    int _hi;
+    int _lo;
+public:
+    Divide(unsigned int rs, unsigned int rt,unsigned int rsData, unsigned int rtData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();
@@ -20,7 +23,10 @@ public:
 
 class DivideUnsigned : public R_Instruction {
 public:
-    DivideUnsigned(unsigned int rs, unsigned int rt);
+    unsigned int _hi;
+    unsigned int _lo;
+public:
+    DivideUnsigned(unsigned int rs, unsigned int rt, unsigned int rsData, unsigned int rtData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();

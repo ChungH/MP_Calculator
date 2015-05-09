@@ -10,39 +10,44 @@
 #include "Instructor.h"
 
 //Subtract class
-Subtract::Subtract(unsigned int rs, unsigned int rt, unsigned int rd) : R_Instruction(rs,rt,rd,0,0){
+Subtract::Subtract(unsigned int rs, unsigned int rt, unsigned int rd, unsigned int rsData, unsigned int rtData) : R_Instruction(rs,rt,rd,0,0,rsData,rtData){
     
 }
 
 bool Subtract::Execution(){
-    int rsData = Instructor::GetDataFromRegister(_rs);
-    int rtData = Instructor::GetDataFromRegister(_rt);
-    
-    Instructor::SetDataToRegister(_rt, rsData - rtData);
-    
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : Subtract \nR[%d] = R[%d] - R[%d] => R[%d] = %d\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
-    Instructor::AppendLog(logBuf);
-    
+    _rdData = _rsData - _rtData;
+
     return false;
 }
-
+void Subtract::MemoryAccess(){
+    
+}
+void Subtract::WriteBack(){
+    Instructor::SetDataToRegister(_rd, _rdData);
+    
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : Subtract \nR[%d] = R[%d] - R[%d] => R[%d] = %d\n==================================\n",_rd,_rs,_rt,_rd,_rdData);
+    Instructor::AppendLog(logBuf);
+    
+}
 //SubtractUnsigned class
-SubtractUnsigned::SubtractUnsigned(unsigned int rs, unsigned int rt, unsigned int rd) : R_Instruction(rs,rt,rd,0,0){
+SubtractUnsigned::SubtractUnsigned(unsigned int rs, unsigned int rt, unsigned int rd, unsigned int rsData, unsigned int rtData) : R_Instruction(rs,rt,rd,0,0,rsData,rtData){
     
 }
 
 bool SubtractUnsigned::Execution(){
-    unsigned int rsData = Instructor::GetDataFromRegister(_rs);
-    unsigned int rtData = Instructor::GetDataFromRegister(_rt);
-    
-    Instructor::SetDataToRegister(_rt, rsData - rtData);
-    
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : SubtractUnsigned \nR[%d] = R[%d] - R[%d] => R[%d] = %d\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
-    Instructor::AppendLog(logBuf);
-    
+    _rdData = _rsData - _rtData;
     
     return false;
 }
-
+void SubtractUnsigned::MemoryAccess(){
+    
+}
+void SubtractUnsigned::WriteBack(){
+    Instructor::SetDataToRegister(_rd, _rdData);
+    
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : SubtractUnsigned \nR[%d] = R[%d] - R[%d] => R[%d] = %d\n==================================\n",_rd,_rs,_rt,_rd,_rdData);
+    Instructor::AppendLog(logBuf);
+    
+}

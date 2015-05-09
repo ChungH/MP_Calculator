@@ -10,7 +10,7 @@
 
 class And : public R_Instruction {
 public:
-    And(unsigned int rs, unsigned int rt, unsigned int rd);
+    And(unsigned int rs, unsigned int rt, unsigned int rd, unsigned int rsData, unsigned int rtData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();
@@ -19,7 +19,7 @@ public:
 
 class AndImmediate : public I_Instruction {
 public:
-    AndImmediate(unsigned int rs, unsigned int rt, unsigned int zeroExtimm);
+    AndImmediate(unsigned int rs, unsigned int rt, unsigned int zeroExtimm, unsigned int rsData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();

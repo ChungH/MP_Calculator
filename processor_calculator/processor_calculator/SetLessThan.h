@@ -11,7 +11,7 @@
 
 class SetLessThan : public R_Instruction {
 public:
-    SetLessThan(unsigned int rs, unsigned int rt, unsigned int rd);
+    SetLessThan(unsigned int rs, unsigned int rt, unsigned int rd, unsigned int rsData, unsigned int rtData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();
@@ -21,7 +21,7 @@ public:
 
 class SetLessThanUnsigned : public R_Instruction {
 public:
-    SetLessThanUnsigned(unsigned int rs, unsigned int rt, unsigned int rd);
+    SetLessThanUnsigned(unsigned int rs, unsigned int rt, unsigned int rd, unsigned int rsData, unsigned int rtData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();
@@ -31,7 +31,7 @@ public:
 
 class SetLessThanImmediate : public I_Instruction {
 public:
-    SetLessThanImmediate(unsigned int rs, unsigned int rt, unsigned int signExtimm);
+    SetLessThanImmediate(unsigned int rs, unsigned int rt, unsigned int signExtimm, unsigned int rsData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();
@@ -41,7 +41,7 @@ public:
 
 class SetLessThanImmediateUnsigned : public I_Instruction {
 public:
-    SetLessThanImmediateUnsigned(unsigned int rs, unsigned int rt, unsigned int immediate);
+    SetLessThanImmediateUnsigned(unsigned int rs, unsigned int rt, unsigned int immediate, unsigned int rsData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();

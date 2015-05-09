@@ -10,81 +10,104 @@
 #include "Instructor.h"
 
 //StoreByte class
-StoreByte::StoreByte(unsigned int rs, unsigned int rt, unsigned int immediate) : I_Instruction(rs,rt,immediate){
+StoreByte::StoreByte(unsigned int rs, unsigned int rt, unsigned int immediate, unsigned int rsData, unsigned int rtData) : I_Instruction(rs,rt,immediate,rsData,rtData){
     
 }
 
 bool StoreByte::Execution(){
-    unsigned int rsData = Instructor::GetDataFromRegister(_rs);
-    unsigned int rtData = Instructor::GetDataFromRegister(_rt);
-    unsigned int memoryIndex = (rsData+_immediate)/4;
-    unsigned int memoryData = Instructor::GetDataFromMemory(memoryIndex);
-    unsigned int maskedMemoryData = memoryData & 0xffffff00;
-    unsigned int maskedrtData = rtData & 0x000000ff;
-    
-    unsigned int resultData = maskedMemoryData | maskedrtData;
-    
-    Instructor::SetDataToMemory(memoryIndex, resultData);
-    
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : StoreByte \nM[R[%d]+%d](7:0) = R[%d](7:0) =>\nM[%d] = %d\n==================================\n",_rs,_immediate,_rt,memoryIndex, resultData);
-    Instructor::AppendLog(logBuf);
+    _maskedrtData = _rtData & 0x000000ff;
     
     
     return false;
 }
 
+void StoreByte::MemoryAccess(){
+    unsigned int memoryIndex = (_rsData+_immediate)/4;
+    _memoryData = Instructor::GetDataFromMemory(memoryIndex);
+    unsigned int maskedMemoryData = _memoryData & 0xffffff00;
+    
+    _resultData = maskedMemoryData | _maskedrtData;
+    Instructor::SetDataToMemory(memoryIndex, _resultData);
+    
+    char logBuf[100];
+    sprintf(logBuf, "Instruction : StoreByte \nM[R[%d]+%d](7:0) = R[%d](7:0) =>\nM[%d] = %d\n==================================\n",_rs,_immediate,_rt, memoryIndex, _resultData);
+    Instructor::AppendLog(logBuf);
+    
+}
+void StoreByte::WriteBack(){
+    
+    
+}
+
+
 //StoreConditional class
 //추가 구현 필요
-StoreConditional::StoreConditional(unsigned int rs, unsigned int rt, unsigned int immediate) : I_Instruction(rs,rt,immediate){
+StoreConditional::StoreConditional(unsigned int rs, unsigned int rt, unsigned int immediate, unsigned int rsData, unsigned int rtData) : I_Instruction(rs,rt,immediate,rsData,rtData){
     
 }
 
 bool StoreConditional::Execution(){
     return false;
 }
+void StoreConditional::MemoryAccess(){
+    
+}
+void StoreConditional::WriteBack(){
+    
+}
 
 //StoreHalfword class
-StoreHalfword::StoreHalfword(unsigned int rs, unsigned int rt, unsigned int immediate): I_Instruction(rs,rt,immediate){
+StoreHalfword::StoreHalfword(unsigned int rs, unsigned int rt, unsigned int immediate, unsigned int rsData, unsigned int rtData): I_Instruction(rs,rt,immediate,rsData,rtData){
     
 }
 
 bool StoreHalfword::Execution(){
-    unsigned int rsData = Instructor::GetDataFromRegister(_rs);
-    unsigned int rtData = Instructor::GetDataFromRegister(_rt);
-    unsigned int memoryIndex = (rsData+_immediate)/4;
-    unsigned int memoryData = Instructor::GetDataFromMemory(memoryIndex);
-    unsigned int maskedMemoryData = memoryData & 0xffff0000;
-    unsigned int maskedrtData = rtData & 0x0000ffff;
+    _maskedrtData = _rtData & 0x0000ffff;
     
-    unsigned int resultData = maskedMemoryData | maskedrtData;
+
+    return false;
+}
+void StoreHalfword::MemoryAccess(){
+    unsigned int memoryIndex = (_rsData+_immediate)/4;
+    _memoryData = Instructor::GetDataFromMemory(memoryIndex);
+    unsigned int maskedMemoryData = _memoryData & 0xffff0000;
     
-    Instructor::SetDataToMemory(memoryIndex, resultData);
+    _resultData = maskedMemoryData | _maskedrtData;
+    
+    Instructor::SetDataToMemory(memoryIndex, _resultData);
     
     char logBuf[100];
-    sprintf(logBuf, "Instruction : StoreHalfWord \nM[R[%d]+%d](15:0) = R[%d](15:0) =>\nM[%d] = %d\n==================================\n",_rs,_immediate,_rt,memoryIndex, resultData);
+    sprintf(logBuf, "Instruction : StoreHalfWord \nM[R[%d]+%d](15:0) = R[%d](15:0) =>\nM[%d] = %d\n==================================\n",_rs,_immediate,_rt,memoryIndex, _resultData);
     Instructor::AppendLog(logBuf);
     
     
-    return false;
+    
+}
+void StoreHalfword::WriteBack(){
+    
 }
 
 //StoreWord class
-StoreWord::StoreWord(unsigned int rs, unsigned int rt, unsigned int immediate) : I_Instruction(rs, rt, immediate){
+StoreWord::StoreWord(unsigned int rs, unsigned int rt, unsigned int immediate, unsigned int rsData, unsigned int rtData) : I_Instruction(rs, rt, immediate,rsData,rtData){
     
 }
 
 bool StoreWord::Execution(){
-    unsigned int rsData = Instructor::GetDataFromRegister(_rs);
-    unsigned int rtData = Instructor::GetDataFromRegister(_rt);
-    unsigned int memoryIndex = (rsData+_immediate)/4;
+
+    return false;
+}
+void StoreWord::MemoryAccess(){
+    unsigned int memoryIndex = (_rsData+_immediate)/4;
     
-    Instructor::SetDataToMemory(memoryIndex, rtData);
+    Instructor::SetDataToMemory(memoryIndex, _rtData);
     
     char logBuf[100];
-    sprintf(logBuf, "Instruction : StoreWord \nM[R[%d]+%d] = R[%d] =>\nM[%d] = %d\n==================================\n",_rs,_immediate,_rt,memoryIndex, rtData);
+    sprintf(logBuf, "Instruction : StoreWord \nM[R[%d]+%d] = R[%d] =>\nM[%d] = %d\n==================================\n",_rs,_immediate,_rt,memoryIndex, _rtData);
     Instructor::AppendLog(logBuf);
     
-    return false;
+}
+
+void StoreWord::WriteBack(){
+    
 }
 

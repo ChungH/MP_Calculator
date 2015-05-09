@@ -28,7 +28,7 @@ public:
 
 class JumpRegister : public R_Instruction {
 public:
-    JumpRegister(unsigned int rs);
+    JumpRegister(unsigned int rs, unsigned int rsData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();

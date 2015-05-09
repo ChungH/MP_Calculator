@@ -10,7 +10,7 @@
 
 class Nor : public R_Instruction {
 public:
-    Nor(unsigned int rs, unsigned int rt, unsigned int rd);
+    Nor(unsigned int rs, unsigned int rt, unsigned int rd, unsigned int rsData, unsigned int rtData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();
@@ -19,7 +19,7 @@ public:
 
 class Or : public R_Instruction {
 public:
-    Or(unsigned int rs, unsigned int rt, unsigned int rd);
+    Or(unsigned int rs, unsigned int rt, unsigned int rd, unsigned int rsData, unsigned int rtData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();
@@ -28,7 +28,7 @@ public:
 
 class OrImmediate : public I_Instruction {
 public:
-    OrImmediate(unsigned int rs, unsigned int rt, unsigned int zeroExtimm);
+    OrImmediate(unsigned int rs, unsigned int rt, unsigned int zeroExtimm, unsigned int rsData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();

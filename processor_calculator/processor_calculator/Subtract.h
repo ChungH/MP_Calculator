@@ -10,7 +10,7 @@
 
 class Subtract : public R_Instruction {
 public:
-    Subtract(unsigned int rs, unsigned int rt, unsigned int rd);
+    Subtract(unsigned int rs, unsigned int rt, unsigned int rd, unsigned int rsData, unsigned int rtData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();
@@ -20,7 +20,7 @@ public:
 
 class SubtractUnsigned : public R_Instruction {
 public:
-    SubtractUnsigned(unsigned int rs, unsigned int rt, unsigned int rd);
+    SubtractUnsigned(unsigned int rs, unsigned int rt, unsigned int rd, unsigned int rsData, unsigned int rtData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();

@@ -10,36 +10,50 @@
 #include "Instructor.h"
 
 //ShiftLeftLogical class
-ShiftLeftLogical::ShiftLeftLogical(unsigned int rt, unsigned int rd, unsigned int shamt) : R_Instruction(0,rt,rd,shamt,0){
+ShiftLeftLogical::ShiftLeftLogical(unsigned int rt, unsigned int rd, unsigned int shamt, unsigned int rtData) : R_Instruction(0,rt,rd,shamt,0,-1,rtData){
     
 }
 
 bool ShiftLeftLogical::Execution(){
-    unsigned int rtData = Instructor::GetDataFromRegister(_rt);
-    unsigned int resultData = rtData << _shamt;
-    Instructor::SetDataToRegister(_rd, resultData);
+
+    _rdData = _rtData << _shamt;
+
+    return false;
+}
+void ShiftLeftLogical::MemoryAccess(){
     
+}
+void ShiftLeftLogical::WriteBack(){
+    Instructor::SetDataToRegister(_rd, _rdData);
+
     char logBuf[100];
     sprintf(logBuf, "Instruction : ShiftLeftLogical \nR[%d] = R[%d] << %d => R[%d] = %d\n==================================\n",_rd,_rs,_shamt,_rd,Instructor::GetDataFromRegister(_rd));
     Instructor::AppendLog(logBuf);
-    
-    return false;
 }
 
 //ShiftRightLogical class
 
-ShiftRightLogical::ShiftRightLogical(unsigned int rt, unsigned int rd, unsigned int shamt) : R_Instruction(0,rt,rd,shamt,0){
+ShiftRightLogical::ShiftRightLogical(unsigned int rt, unsigned int rd, unsigned int shamt, unsigned int rtData) : R_Instruction(0,rt,rd,shamt,0,-1,rtData){
     
 }
 
 bool ShiftRightLogical::Execution(){
-    unsigned int rtData = Instructor::GetDataFromRegister(_rt);
-    unsigned int resultData = rtData >> _shamt;
-    Instructor::SetDataToRegister(_rd, resultData);
+
+    _rdData = _rtData >> _shamt;
+ 
+    return false;
+}
+
+void ShiftRightLogical::MemoryAccess(){
+    
+}
+
+void ShiftRightLogical::WriteBack(){
+    Instructor::SetDataToRegister(_rd, _rdData);
     
     char logBuf[100];
     sprintf(logBuf, "Instruction : ShiftRightLogical \nR[%d] = R[%d] >> %d => R[%d] = %d\n==================================\n",_rd,_rs,_shamt,_rd,Instructor::GetDataFromRegister(_rd));
     Instructor::AppendLog(logBuf);
-    
-    return false;
 }
+
+

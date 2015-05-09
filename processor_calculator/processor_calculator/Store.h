@@ -10,7 +10,11 @@
 
 class StoreByte : public I_Instruction{
 public:
-    StoreByte(unsigned int rs, unsigned int rt, unsigned int immediate);
+    unsigned int _memoryData;
+    unsigned int _maskedrtData;
+    unsigned int _resultData;
+public:
+    StoreByte(unsigned int rs, unsigned int rt, unsigned int immediate, unsigned int rsData, unsigned int rtData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();
@@ -20,7 +24,11 @@ public:
 
 class StoreConditional : public I_Instruction {
 public:
-    StoreConditional(unsigned int rs, unsigned int rt, unsigned int immediate);
+    unsigned int _memoryData;
+    unsigned int _maskedrtData;
+    unsigned int _resultData;
+public:
+    StoreConditional(unsigned int rs, unsigned int rt, unsigned int immediate, unsigned int rsData, unsigned int rtData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();
@@ -30,7 +38,11 @@ public:
 
 class StoreHalfword : public I_Instruction {
 public:
-    StoreHalfword(unsigned int rs, unsigned int rt, unsigned int immediate);
+    unsigned int _memoryData;
+    unsigned int _maskedrtData;
+    unsigned int _resultData;
+public:
+    StoreHalfword(unsigned int rs, unsigned int rt, unsigned int immediate, unsigned int rsData, unsigned int rtData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();
@@ -39,7 +51,7 @@ public:
 
 class StoreWord : public I_Instruction {
 public:
-    StoreWord(unsigned int rs, unsigned int rt, unsigned int immediate);
+    StoreWord(unsigned int rs, unsigned int rt, unsigned int immediate, unsigned int rsData, unsigned int rtData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();

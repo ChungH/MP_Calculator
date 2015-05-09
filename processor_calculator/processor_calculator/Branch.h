@@ -10,7 +10,9 @@
 
 class BranchOnEqual : public I_Instruction {
 public:
-    BranchOnEqual(unsigned int rs, unsigned int rt, unsigned int branchAddr);
+    bool _branchChk;
+public:
+    BranchOnEqual(unsigned int rs, unsigned int rt, unsigned int branchAddr, unsigned int rsData, unsigned int rtData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();
@@ -19,7 +21,9 @@ public:
 
 class BranchOnNotEqual : public I_Instruction {
 public:
-    BranchOnNotEqual(unsigned int rs, unsigned int rt, unsigned int branchAddr);
+    bool _branchChk;
+public:
+    BranchOnNotEqual(unsigned int rs, unsigned int rt, unsigned int branchAddr, unsigned int rsData, unsigned int rtData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();

@@ -10,7 +10,9 @@
 
 class Multiply : public R_Instruction {
 public:
-    Multiply(unsigned int rs, unsigned int rt);
+    long long _resultData;
+public:
+    Multiply(unsigned int rs, unsigned int rt, unsigned int rsData, unsigned int rtData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();
@@ -20,7 +22,9 @@ public:
 
 class MultiplyUnsigned : public R_Instruction {
 public:
-    MultiplyUnsigned(unsigned int rs, unsigned int rt);
+    unsigned long long _resultData;
+public:
+    MultiplyUnsigned(unsigned int rs, unsigned int rt, unsigned int rsData, unsigned int rtData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();
@@ -29,7 +33,7 @@ public:
 
 class Multiply32Bit : public R_Instruction {
 public:
-    Multiply32Bit(unsigned int rs, unsigned int rt, unsigned int rd);
+    Multiply32Bit(unsigned int rs, unsigned int rt, unsigned int rd, unsigned int rsData, unsigned int rtData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();

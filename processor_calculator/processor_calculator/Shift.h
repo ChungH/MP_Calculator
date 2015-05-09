@@ -10,7 +10,7 @@
 
 class ShiftLeftLogical : public R_Instruction {
 public:
-    ShiftLeftLogical(unsigned int rt, unsigned int rd, unsigned int shamt);
+    ShiftLeftLogical(unsigned int rt, unsigned int rd, unsigned int shamt, unsigned int rtData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();
@@ -20,7 +20,7 @@ public:
 
 class ShiftRightLogical : public R_Instruction {
 public:
-    ShiftRightLogical(unsigned int rt, unsigned int rd, unsigned int shamt);
+    ShiftRightLogical(unsigned int rt, unsigned int rd, unsigned int shamt, unsigned int rtData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();

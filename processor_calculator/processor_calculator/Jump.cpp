@@ -23,6 +23,12 @@ bool Jump::Execution(){
     return true;
 }
 
+void Jump::MemoryAccess(){
+    
+}
+void Jump::WriteBack(){
+}
+
 
 //JumpAndLink class
 JumpAndLink::JumpAndLink(unsigned int jumpAddr) : J_Instruction(jumpAddr){
@@ -38,19 +44,29 @@ bool JumpAndLink::Execution(){
     return true;
 }
 
-
+void JumpAndLink::MemoryAccess(){
+    
+}
+void JumpAndLink::WriteBack(){
+}
 
 //JumpRegister class
 
-JumpRegister::JumpRegister(unsigned int rs) : R_Instruction(rs,0,0,0,0){
+JumpRegister::JumpRegister(unsigned int rs, unsigned int rsData) : R_Instruction(rs,0,0,0,0,rsData,-1){
     
 }
 
 bool JumpRegister::Execution(){
-    Instructor::_pc = Instructor::GetDataFromRegister(_rs);
+    Instructor::_pc = _rsData;
     char logBuf[100];
     sprintf(logBuf, "Instruction : JumpRegister \nPC = R[%d] => PC : %5d  \n==================================\n",_rs,Instructor::_pc);
     Instructor::AppendLog(logBuf);
     return true;
 }
 
+void JumpRegister::MemoryAccess(){
+    
+}
+void JumpRegister::WriteBack(){
+
+}

@@ -10,7 +10,10 @@
 
 class LoadByteUnsigned : public I_Instruction {
 public:
-    LoadByteUnsigned(unsigned int rs, unsigned int rt, unsigned int signExtimm);
+    unsigned int _memoryData;
+    unsigned int _maskedData;
+public:
+    LoadByteUnsigned(unsigned int rs, unsigned int rt, unsigned int signExtimm, unsigned int rsData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();
@@ -18,8 +21,12 @@ public:
 };
 
 class LoadHalfwordUnsigned : public I_Instruction {
+    
 public:
-    LoadHalfwordUnsigned(unsigned int rs, unsigned int rt, unsigned int signExtimm);
+    unsigned int _memoryData;
+    unsigned int _maskedData;
+public:
+    LoadHalfwordUnsigned(unsigned int rs, unsigned int rt, unsigned int signExtimm, unsigned int rsData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();
@@ -28,7 +35,10 @@ public:
 
 class LoadLinked : public I_Instruction {
 public:
-    LoadLinked(unsigned int rs, unsigned int rt, unsigned int signExtimm);
+    unsigned int _memoryData;
+    unsigned int _maskedData;
+public:
+    LoadLinked(unsigned int rs, unsigned int rt, unsigned int signExtimm, unsigned int rsData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();
@@ -36,6 +46,8 @@ public:
 };
 
 class LoadUpperImmediate : public I_Instruction {
+public:
+    unsigned int _maskedData;
 public:
     LoadUpperImmediate(unsigned int rt, unsigned int immediate);
 public:
@@ -47,7 +59,10 @@ public:
 
 class LoadWord : public I_Instruction {
 public:
-    LoadWord(unsigned int rs, unsigned int rt, unsigned int signExtimm);
+    unsigned int _memoryData;
+    unsigned int _maskedData;
+public:
+    LoadWord(unsigned int rs, unsigned int rt, unsigned int signExtimm, unsigned int rsData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();

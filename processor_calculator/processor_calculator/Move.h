@@ -29,7 +29,7 @@ public:
 
 class MoveToHi : public R_Instruction{
 public:
-    MoveToHi(unsigned int rs);
+    MoveToHi(unsigned int rs, unsigned int rsData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();
@@ -38,7 +38,7 @@ public:
 
 class MoveToLo : public R_Instruction{
 public:
-    MoveToLo(unsigned int rs);
+    MoveToLo(unsigned int rs, unsigned int rsData);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();

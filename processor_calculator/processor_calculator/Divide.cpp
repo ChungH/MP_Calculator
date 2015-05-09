@@ -10,37 +10,52 @@
 #include "Instructor.h"
 
 //Divide class
-Divide::Divide(unsigned int rs, unsigned int rt) : R_Instruction(rs,rt,0,0,0){
+Divide::Divide(unsigned int rs, unsigned int rt,unsigned int rsData, unsigned int rtData) : R_Instruction(rs,rt,0,0,0,rsData,rtData){
     
 }
 
 bool Divide::Execution(){
-    int rsData = Instructor::GetDataFromRegister(_rs);
-    int rtData = Instructor::GetDataFromRegister(_rt);
-    Instructor::_lo = rsData/rtData;
-    Instructor::_hi = rsData%rtData;
+    _lo = _rsData / _rtData;
+    _hi = _rsData % _rtData;
     
     char logBuf[100];
-    sprintf(logBuf, "Instruction : Divide \nLo = R[%d]/R[%d] => Lo = %5d/%5d\nHi = R[%d]/R[%d] => Lo= %5d/%5d\n==================================\n",_rs,_rt,rsData,rtData,_rs,_rt,rsData,rtData);
+    sprintf(logBuf, "Instruction : Divide \nLo = R[%d]/R[%d] => Lo = %5d/%5d\nHi = R[%d]/R[%d] => Lo= %5d/%5d\n==================================\n",_rs,_rt,_rsData,_rtData,_rs,_rt,_rsData,_rtData);
     Instructor::AppendLog(logBuf);
     
     return false;
 }
 
+void Divide::MemoryAccess(){
+    
+}
+void Divide::WriteBack(){
+    Instructor::_lo = _lo;
+    Instructor::_hi = _hi;
+    
+}
+
+
 //DivideUnsigned class
-DivideUnsigned::DivideUnsigned(unsigned int rs, unsigned int rt) : R_Instruction(rs,rt,0,0,0){
+DivideUnsigned::DivideUnsigned(unsigned int rs, unsigned int rt,unsigned int rsData, unsigned int rtData) : R_Instruction(rs,rt,0,0,0,rsData,rtData){
     
 }
 
 bool DivideUnsigned::Execution(){
-    unsigned int rsData = Instructor::GetDataFromRegister(_rs);
-    unsigned int rtData = Instructor::GetDataFromRegister(_rt);
-    Instructor::_lo = rsData/rtData;
-    Instructor::_hi = rsData%rtData;
+    _lo = _rsData/_rtData;
+    _hi = _rsData%_rtData;
     
     char logBuf[100];
-    sprintf(logBuf, "Instruction : Divide \nLo = R[%d]/R[%d] => Lo = %5d/%5d\nHi = R[%d]/R[%d] => Lo= %5d/%5d\n==================================\n",_rs,_rt,rsData,rtData,_rs,_rt,rsData,rtData);
+    sprintf(logBuf, "Instruction : Divide \nLo = R[%d]/R[%d] => Lo = %5d/%5d\nHi = R[%d]/R[%d] => Lo= %5d/%5d\n==================================\n",_rs,_rt,_rsData,_rtData,_rs,_rt,_rsData,_rtData);
     Instructor::AppendLog(logBuf);
     
     return false;
+}
+
+void DivideUnsigned::MemoryAccess(){
+    
+}
+void DivideUnsigned::WriteBack(){
+    Instructor::_lo = _lo;
+    Instructor::_hi = _hi;
+    
 }
