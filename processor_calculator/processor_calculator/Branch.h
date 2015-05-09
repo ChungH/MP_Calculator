@@ -13,6 +13,8 @@ public:
     BranchOnEqual(unsigned int rs, unsigned int rt, unsigned int branchAddr);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 class BranchOnNotEqual : public I_Instruction {
@@ -20,6 +22,8 @@ public:
     BranchOnNotEqual(unsigned int rs, unsigned int rt, unsigned int branchAddr);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 

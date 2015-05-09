@@ -13,6 +13,8 @@ public:
     And(unsigned int rs, unsigned int rt, unsigned int rd);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 class AndImmediate : public I_Instruction {
@@ -20,4 +22,6 @@ public:
     AndImmediate(unsigned int rs, unsigned int rt, unsigned int zeroExtimm);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };

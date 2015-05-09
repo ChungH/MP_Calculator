@@ -13,6 +13,8 @@ public:
     MoveFromHi(unsigned int rd);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 
@@ -21,6 +23,8 @@ public:
     MoveFromLo(unsigned int rd);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 class MoveToHi : public R_Instruction{
@@ -28,6 +32,8 @@ public:
     MoveToHi(unsigned int rs);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 class MoveToLo : public R_Instruction{
@@ -35,6 +41,8 @@ public:
     MoveToLo(unsigned int rs);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 

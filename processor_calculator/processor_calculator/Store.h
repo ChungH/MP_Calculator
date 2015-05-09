@@ -13,6 +13,8 @@ public:
     StoreByte(unsigned int rs, unsigned int rt, unsigned int immediate);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 
@@ -21,6 +23,8 @@ public:
     StoreConditional(unsigned int rs, unsigned int rt, unsigned int immediate);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 
@@ -29,6 +33,8 @@ public:
     StoreHalfword(unsigned int rs, unsigned int rt, unsigned int immediate);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 class StoreWord : public I_Instruction {
@@ -36,4 +42,6 @@ public:
     StoreWord(unsigned int rs, unsigned int rt, unsigned int immediate);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };

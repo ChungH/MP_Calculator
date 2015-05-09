@@ -26,16 +26,25 @@ public:
     static std::string                     _logBuffer;
     
 private:
-    unsigned int&                   _gp = Instructor::_register[28];
-    unsigned int&                   _sp = Instructor::_register[29];
-    unsigned int&                   _fp = Instructor::_register[30];
-    unsigned int&                   _ra = Instructor::_register[31];
+    unsigned int&                          _gp = Instructor::_register[28];
+    unsigned int&                          _sp = Instructor::_register[29];
+    unsigned int&                          _fp = Instructor::_register[30];
+    unsigned int&                          _ra = Instructor::_register[31];
     
 public:
     Instructor(const char* filePath);
     
 private:
-    const char*                    _filePath;
+    const char*             _filePath;
+    
+public:
+    Instruction*            _EXEInst;
+    Instruction*            _MEMInst;
+    Instruction*            _WBInst;
+    Instruction*            _DecodeInst;
+    unsigned int            _inst;
+    
+    
     
 private:
     void                    LoadInstruction();

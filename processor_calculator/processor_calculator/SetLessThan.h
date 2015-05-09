@@ -14,6 +14,8 @@ public:
     SetLessThan(unsigned int rs, unsigned int rt, unsigned int rd);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 
@@ -22,6 +24,8 @@ public:
     SetLessThanUnsigned(unsigned int rs, unsigned int rt, unsigned int rd);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 
@@ -30,6 +34,8 @@ public:
     SetLessThanImmediate(unsigned int rs, unsigned int rt, unsigned int signExtimm);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 
@@ -38,5 +44,7 @@ public:
     SetLessThanImmediateUnsigned(unsigned int rs, unsigned int rt, unsigned int immediate);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 

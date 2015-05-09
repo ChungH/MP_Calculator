@@ -7,16 +7,19 @@
 //
 
 #include "Instruction.h"
-
-R_Instruction::R_Instruction(unsigned int rs, unsigned int rt, unsigned int rd, unsigned int shamt, unsigned int funct) : Instruction(), _rs(rs), _rt(rt), _rd(rd), _shamt(shamt), _funct(funct){
+Instruction::Instruction(int instType) : _instType(instType){
     
 }
 
-I_Instruction::I_Instruction(unsigned int rs, unsigned int rt, unsigned int immediate) : Instruction(), _rs(rs), _rt(rt), _immediate(immediate){
+R_Instruction::R_Instruction(unsigned int rs, unsigned int rt, unsigned int rd, unsigned int shamt, unsigned int funct, unsigned int rsData, unsigned int rtData) : Instruction(Instructiontype::R_Type), _shamt(shamt), _funct(funct), _rsData(rsData), _rtData(rtData),_rdData(-1){
     
 }
 
-J_Instruction::J_Instruction(unsigned int address): Instruction(), _address(address){
+I_Instruction::I_Instruction(unsigned int rs, unsigned int rt, unsigned int immediate, unsigned int rsData, unsigned int rtData) : Instruction(Instructiontype::I_Type), _immediate(immediate), _rsData(rsData), _rtData(rtData){
+    
+}
+
+J_Instruction::J_Instruction(unsigned int address): Instruction(Instructiontype::J_Type), _address(address){
     
 }
 

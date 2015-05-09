@@ -13,6 +13,8 @@ public:
     Nor(unsigned int rs, unsigned int rt, unsigned int rd);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 class Or : public R_Instruction {
@@ -20,6 +22,8 @@ public:
     Or(unsigned int rs, unsigned int rt, unsigned int rd);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 class OrImmediate : public I_Instruction {
@@ -27,5 +31,7 @@ public:
     OrImmediate(unsigned int rs, unsigned int rt, unsigned int zeroExtimm);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 

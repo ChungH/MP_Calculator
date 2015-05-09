@@ -6,6 +6,14 @@
 //
 #pragma once
 
+namespace Instructiontype {
+    enum InstructionType : int {
+        R_Type,
+        I_Type,
+        J_Type
+    };
+}
+
 namespace Opcode {
     enum OpCode  : unsigned int {   //I, J Type Operations
         //I Type
@@ -62,3 +70,6 @@ namespace Funct {
         Multiply32Bit                   = 0x02
     };
 }
+
+
+

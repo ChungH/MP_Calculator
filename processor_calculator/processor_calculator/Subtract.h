@@ -13,6 +13,8 @@ public:
     Subtract(unsigned int rs, unsigned int rt, unsigned int rd);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 
@@ -21,6 +23,8 @@ public:
     SubtractUnsigned(unsigned int rs, unsigned int rt, unsigned int rd);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 

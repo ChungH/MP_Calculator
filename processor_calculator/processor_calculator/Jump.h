@@ -13,6 +13,8 @@ public:
     Jump(unsigned int jumpAddr);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 class JumpAndLink : public J_Instruction {
@@ -20,6 +22,8 @@ public:
     JumpAndLink(unsigned int jumpAddr);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 class JumpRegister : public R_Instruction {
@@ -27,4 +31,6 @@ public:
     JumpRegister(unsigned int rs);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };

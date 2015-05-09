@@ -38,8 +38,6 @@ void Instructor::ExecuteInstruction(){
 //    for(auto iter = Instructor::_memory.begin(); iter != Instructor::_memory.end(); iter ++){
 //        printf("%x\n",*iter);
 //    }
-
-    
     
     int count = 1;
     while (Instructor::_pc != 0xffffffff) {
@@ -47,11 +45,27 @@ void Instructor::ExecuteInstruction(){
         char cycleString[30];
         sprintf(cycleString, "Cycle : %d\nPC : %d \n",count,Instructor::_pc);
         AppendLog(cycleString);
-
-        unsigned int inst = Fetch();
-        Instruction* instruction = Decode(inst);
         
-        bool branchChk = Execute(instruction);
+        bool branchChk;
+        
+        //WriteBack
+        _WBInst->WriteBack();
+        _WBInst = _MEMInst;
+
+        //MemoryAccess
+        _MEMInst->MemoryAccess();
+        _MEMInst = _EXEInst;
+        
+        //Execute
+        branchChk  = _EXEInst->Execution();
+        _EXEInst = _DecodeInst;
+        
+        //Decode
+        _DecodeInst= Decode(_inst);
+        
+        //Fetch
+        _inst = Fetch();
+        
         if (!branchChk) {
             _pc += 4;
         }
@@ -103,55 +117,61 @@ Instruction* Instructor::Decode(unsigned int const inst){
     //Decoding Instruction
     if(inst == 0)
         return NULL;
+    Instruction* instruction;
     unsigned int opcode = (inst & 0xfc000000) >> 26;
     unsigned int rs     = (inst & 0x03e00000) >> 21;
     unsigned int rt     = (inst & 0x001f0000) >> 16;
     unsigned int rd     = (inst & 0x0000f800) >> 11;
     unsigned int shamt  = (inst & 0x000007c0) >> 6;
     unsigned int funct  = (inst & 0x0000003f);
+    
+    
+    unsigned int rsData = Instructor::GetDataFromRegister(rs);
+    unsigned int rtData = Instructor::GetDataFromRegister(rt);
+    unsigned int rdData = Instructor::GetDataFromRegister(rd);
 
     if(opcode == 0){
         //R_Instruction
         if(funct == Funct::Add)
-            return new Add(rs, rt, rd);
+            instruction = new Add(rs, rt, rd);
         else if(funct == Funct::AddUnsigned)
-            return new AddUnsigned(rs, rt, rd);
+            instruction = new AddUnsigned(rs, rt, rd);
         else if(funct == Funct::And)
-            return new And(rs, rt, rd);
+            instruction = new And(rs, rt, rd);
         else if(funct == Funct::JumpRegister)
-            return new JumpRegister(rs);
+            instruction = new JumpRegister(rs);
         else if(funct == Funct::Nor)
-            return new Nor(rs, rt, rd);
+            instruction = new Nor(rs, rt, rd);
         else if(funct == Funct::Or)
-            return new Or(rs, rt ,rd);
+            instruction = new Or(rs, rt ,rd);
         else if(funct == Funct::SetLessThan)
-            return new SetLessThan(rs, rt ,rd);
+            instruction = new SetLessThan(rs, rt ,rd);
         else if(funct == Funct::SetLessThanUnsigned)
-            return new SetLessThanUnsigned(rs, rt ,rd);
+            instruction = new SetLessThanUnsigned(rs, rt ,rd);
         else if(funct == Funct::ShiftLeftLogical)
-            return new ShiftLeftLogical(rt, rd, shamt);
+            instruction = new ShiftLeftLogical(rt, rd, shamt);
         else if(funct == Funct::ShiftRightLogical)
-            return new ShiftRightLogical(rt, rd, shamt);
+            instruction = new ShiftRightLogical(rt, rd, shamt);
         else if(funct == Funct::Subtract)
-            return new Subtract(rs, rt, rd);
+            instruction = new Subtract(rs, rt, rd);
         else if(funct == Funct::SubtractUnsigned)
-            return new SubtractUnsigned(rs, rt, rd);
+            instruction = new SubtractUnsigned(rs, rt, rd);
         else if(funct == Funct::Divide)
-            return new Divide(rs, rt);
+            instruction = new Divide(rs, rt);
         else if(funct == Funct::DivideUnsigned)
-            return new DivideUnsigned(rs, rt);
+            instruction = new DivideUnsigned(rs, rt);
         else if(funct == Funct::MoveFromHi)
-            return new MoveFromHi(rd);
+            instruction = new MoveFromHi(rd);
         else if(funct == Funct::MoveFromLo)
-            return new MoveFromLo(rd);
+            instruction = new MoveFromLo(rd);
         else if(funct == Funct::MoveToHi)
-            return new MoveToHi(rs);
+            instruction = new MoveToHi(rs);
         else if(funct == Funct::MoveToLo)
-            return new MoveToLo(rs);
+            instruction = new MoveToLo(rs);
         else if(funct == Funct::Multiply)
-            return new Multiply(rs, rt);
+            instruction = new Multiply(rs, rt);
         else if(funct == Funct::MultiplyUnsigned)
-            return new MultiplyUnsigned(rs, rt);
+            instruction = new MultiplyUnsigned(rs, rt);
     }
     else if(opcode == Opcode::Jump || opcode == Opcode::JumpAndLink){
         //J_Instruction
@@ -160,9 +180,9 @@ Instruction* Instructor::Decode(unsigned int const inst){
         unsigned int jumpAddr = (pc & 0xf0000000) | (address << 2);
         
         if(opcode == Opcode::Jump)
-            return new Jump(jumpAddr);
+            instruction = new Jump(jumpAddr);
         else if(opcode == Opcode::JumpAndLink)
-            return new JumpAndLink(jumpAddr);
+            instruction = new JumpAndLink(jumpAddr);
     }
     else {
         //I_Instruction + Extra R_Instruction
@@ -173,44 +193,44 @@ Instruction* Instructor::Decode(unsigned int const inst){
         unsigned int branchAddr = GetExtension(sign, immediate) << 2;
         
         if(opcode == Opcode::AddImmediate)
-            return new AddImmediate(rs, rt, signExtimm);
+            instruction = new AddImmediate(rs, rt, signExtimm);
         else if(opcode == Opcode::AddImmediateUnsigned)
-            return new AddImmediateUnsigned(rs, rt, signExtimm);
+            instruction = new AddImmediateUnsigned(rs, rt, signExtimm);
         else if(opcode == Opcode::AndImmediate)
-            return new AndImmediate(rs, rt, zeroExtimm);
+            instruction = new AndImmediate(rs, rt, zeroExtimm);
         else if(opcode == Opcode::BranchOnEqual)
-            return new BranchOnEqual(rs, rt, branchAddr);
+            instruction = new BranchOnEqual(rs, rt, branchAddr);
         else if(opcode == Opcode::BranchOnNotEqual)
-            return new BranchOnNotEqual(rs, rt, branchAddr);
+            instruction = new BranchOnNotEqual(rs, rt, branchAddr);
         else if(opcode == Opcode::LoadByteUnsigned)
-            return new LoadByteUnsigned(rs, rt, signExtimm);
+            instruction = new LoadByteUnsigned(rs, rt, signExtimm);
         else if(opcode == Opcode::LoadHalfwordUnsigned)
-            return new LoadHalfwordUnsigned(rs, rt, signExtimm);
+            instruction = new LoadHalfwordUnsigned(rs, rt, signExtimm);
         else if(opcode == Opcode::LoadLinked)
-            return new LoadLinked(rs, rt, signExtimm);
+            instruction = new LoadLinked(rs, rt, signExtimm);
         else if(opcode == Opcode::LoadUpperImmediate)
-            return new LoadUpperImmediate(rt, immediate);
+            instruction = new LoadUpperImmediate(rt, immediate);
         else if(opcode == Opcode::LoadWord)
-            return new LoadWord(rs, rt, signExtimm);
+            instruction = new LoadWord(rs, rt, signExtimm);
         else if(opcode == Opcode::OrImmediate)
-            return new OrImmediate(rs, rt, zeroExtimm);
+            instruction = new OrImmediate(rs, rt, zeroExtimm);
         else if(opcode == Opcode::SetLessThanImmediate)
-            return new SetLessThanImmediate(rs, rt, signExtimm);
+            instruction = new SetLessThanImmediate(rs, rt, signExtimm);
         else if(opcode == Opcode::SetLessThanImmediateUnsigned)
-            return new SetLessThanImmediateUnsigned(rs, rt, signExtimm);
+            instruction = new SetLessThanImmediateUnsigned(rs, rt, signExtimm);
         else if(opcode == Opcode::StoreByte)
-            return new StoreByte(rs, rt, signExtimm);
+            instruction = new StoreByte(rs, rt, signExtimm);
         else if(opcode == Opcode::StoreConditional)
-            return new StoreConditional(rs, rt, signExtimm);
+            instruction = new StoreConditional(rs, rt, signExtimm);
         else if(opcode == Opcode::StoreHalfWord)
-            return new StoreHalfword(rs, rt, signExtimm);
+            instruction = new StoreHalfword(rs, rt, signExtimm);
         else if(opcode == Opcode::StoreWord || opcode == Opcode::StoreConditional)
-            return new StoreWord(rs, rt, signExtimm);
+            instruction = new StoreWord(rs, rt, signExtimm);
         else if(opcode == Opcode::Multiply32Bit && opcode == Opcode::Multiply32Bit)
-            return new Multiply32Bit(rs,rt,rd);
+            instruction = new Multiply32Bit(rs,rt,rd);
         }
     
-    return NULL;
+    return instruction;
 }
 
 unsigned int Instructor::GetDataFromMemory(int index){

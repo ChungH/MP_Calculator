@@ -11,14 +11,12 @@
 
 
 //Add class
-Add::Add(unsigned int rs, unsigned int rt, unsigned int rd) : R_Instruction(rs, rt, rd, 0,0){
+Add::Add(unsigned int rs, unsigned int rt, unsigned int rd, unsigned int rsData, unsigned int rtData) : R_Instruction(rs,rt,rd,0,0,rsData,rtData){
+    
 }
 
 bool Add::Execution(){
-    int rsData = Instructor::GetDataFromRegister(_rs);
-    int rtData = Instructor::GetDataFromRegister(_rt);
-    
-    Instructor::SetDataToRegister(_rd, rsData + rtData);
+    _rdData = _rsData + _rtData;
     
     char logBuf[100];
     sprintf(logBuf, "Instruction : Add \nR[%d] = R[%d] + R[%d] => R[%d] = %d\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
@@ -26,19 +24,22 @@ bool Add::Execution(){
     
     return false;
 }
+void Add::MemoryAccess(){
 
+}
+void Add::WriteBack(){
+    Instructor::SetDataToRegister(_rd, _rdData);
+}
 
 //AddUnsigned class
 
-AddUnsigned::AddUnsigned(unsigned int rs, unsigned int rt,unsigned int rd) : R_Instruction(rs,rt,rd,0,0){
+AddUnsigned::AddUnsigned(unsigned int rs, unsigned int rt,unsigned int rd, unsigned int rsData, unsigned int rtData) : R_Instruction(rs,rt,rd,0,0,rsData,rtData){
     
 }
 
 bool AddUnsigned::Execution(){
-    unsigned int rsData = Instructor::GetDataFromRegister(_rs);
-    unsigned int rtData = Instructor::GetDataFromRegister(_rt);
     
-    Instructor::SetDataToRegister(_rd, rsData + rtData);
+    _rdData = _rsData + _rtData;
     
     char logBuf[100];
     sprintf(logBuf, "Instruction : AddUnsigned \nR[%d] = R[%d] + R[%d] => R[%d] = %d\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
@@ -48,11 +49,17 @@ bool AddUnsigned::Execution(){
     return false;
 }
 
+void AddUnsigned::MemoryAccess(){
+    
+}
+void AddUnsigned::WriteBack(){
+        Instructor::SetDataToRegister(_rd, _rdData);
+}
 
 
 //AddImmediate class
 
-AddImmediate::AddImmediate(unsigned int rs, unsigned int rt, unsigned int signExtimm): I_Instruction(rs, rt, signExtimm){
+AddImmediate::AddImmediate(unsigned int rs, unsigned int rt, unsigned int signExtimm, unsigned int rsData): I_Instruction(rs, rt, signExtimm, rsData, -1){
 
 }
 
@@ -69,9 +76,16 @@ bool AddImmediate::Execution(){
     return false;
 }
 
+void AddImmediate::MemoryAccess(){
+    
+}
+void AddImmediate::WriteBack(){
+    
+}
+
 //AddImmediateUnsigned class
 
-AddImmediateUnsigned::AddImmediateUnsigned(unsigned int rs, unsigned int rt, unsigned int signExtimm) : I_Instruction(rs, rt,signExtimm){
+AddImmediateUnsigned::AddImmediateUnsigned(unsigned int rs, unsigned int rt, unsigned int signExtimm, unsigned int rsData) : I_Instruction(rs, rt,signExtimm, rsData, -1){
     
 }
 
@@ -88,7 +102,12 @@ bool AddImmediateUnsigned::Execution(){
     return false;
 }
 
-
+void AddImmediateUnsigned::MemoryAccess(){
+    
+}
+void AddImmediateUnsigned::WriteBack(){
+    
+}
 
 
 

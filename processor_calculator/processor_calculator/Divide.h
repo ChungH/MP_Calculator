@@ -13,6 +13,8 @@ public:
     Divide(unsigned int rs, unsigned int rt);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 
@@ -21,4 +23,6 @@ public:
     DivideUnsigned(unsigned int rs, unsigned int rt);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };

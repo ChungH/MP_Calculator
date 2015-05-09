@@ -13,6 +13,8 @@ public:
     Multiply(unsigned int rs, unsigned int rt);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 
@@ -21,6 +23,8 @@ public:
     MultiplyUnsigned(unsigned int rs, unsigned int rt);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 class Multiply32Bit : public R_Instruction {
@@ -28,4 +32,6 @@ public:
     Multiply32Bit(unsigned int rs, unsigned int rt, unsigned int rd);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };

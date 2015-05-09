@@ -13,6 +13,8 @@ public:
     ShiftLeftLogical(unsigned int rt, unsigned int rd, unsigned int shamt);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
 
@@ -21,5 +23,7 @@ public:
     ShiftRightLogical(unsigned int rt, unsigned int rd, unsigned int shamt);
 public:
     virtual bool Execution();
+    virtual void MemoryAccess();
+    virtual void WriteBack();
 };
 
