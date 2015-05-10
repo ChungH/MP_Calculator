@@ -44,15 +44,23 @@ public:
     Instruction*            _DecodeInst;
     unsigned int            _inst;
     
-    
+private:
+    bool                    _MEM_rs;
+    bool                    _MEM_rt;
+    bool                    _WB_rs;
+    bool                    _WB_rt;
+
     
 private:
     void                    LoadInstruction();
     unsigned int            Fetch();
     Instruction*            Decode(unsigned int const inst);
-    bool                    Execute(Instruction* inst);
     
     unsigned int            GetExtension(unsigned int sign, unsigned int immediate);
+    
+    void                    DataForwarding();
+    void                    DependencyChk();
+    
 public:
     void                    ExecuteInstruction();
     

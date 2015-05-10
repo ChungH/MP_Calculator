@@ -49,10 +49,11 @@ void LoadHalfwordUnsigned::MemoryAccess(){
     unsigned int memoryIndex = (_rsData+_immediate)/4;
     _memoryData = Instructor::GetDataFromMemory(memoryIndex);
     _maskedData = mask & _memoryData;
+    _rtData = _maskedData;
     
 }
 void LoadHalfwordUnsigned::WriteBack(){
-     Instructor::SetDataToRegister(_rt, _maskedData);
+     Instructor::SetDataToRegister(_rt, _rtData);
     char logBuf[100];
     sprintf(logBuf, "Instruction : LoadHalfwordUnsigned \nR[%d] = {16b'0, M[R[%d] + %d](15:0) =>\nR[%d] = %d\n==================================\n",_rt,_rs,_immediate,_rt,_memoryData);
     Instructor::AppendLog(logBuf);
@@ -70,10 +71,11 @@ bool LoadLinked::Execution(){
 void LoadLinked::MemoryAccess(){
     unsigned int memoryIndex = (_rsData + _immediate)/4;
     _memoryData = Instructor::GetDataFromMemory(memoryIndex);
+    _rtData = _memoryData;
     
 }
 void LoadLinked::WriteBack(){
-     Instructor::SetDataToRegister(_rt, _memoryData);
+     Instructor::SetDataToRegister(_rt, _rtData);
     char logBuf[100];
     sprintf(logBuf, "Instruction : LoadLinked \nR[%d] = {M[R[%d] + %d] =>\nR[%d] = %d\n==================================\n",_rt,_rs,_immediate,_rt,_memoryData);
     Instructor::AppendLog(logBuf);
@@ -88,6 +90,7 @@ LoadUpperImmediate::LoadUpperImmediate(unsigned int rt, unsigned int immediate) 
 bool LoadUpperImmediate::Execution(){
     
     _maskedData = _immediate << 16;
+    _rtData = _maskedData;
 
     return false;
 }
@@ -95,7 +98,7 @@ void LoadUpperImmediate::MemoryAccess(){
     
 }
 void LoadUpperImmediate::WriteBack(){
-    Instructor::SetDataToRegister(_rt, _maskedData);
+    Instructor::SetDataToRegister(_rt, _rtData);
     
     char logBuf[100];
     sprintf(logBuf, "Instruction : LoadUpperImmediate \nR[%d] = {%d, 16b'0} =>\nR[%d] = %x\n==================================\n",_rt,_rt,_immediate,Instructor::GetDataFromRegister(_rt));
@@ -114,9 +117,10 @@ bool LoadWord::Execution(){
 void LoadWord::MemoryAccess(){
     unsigned int memoryIndex = (_rsData + _immediate)/4;
     _memoryData = Instructor::GetDataFromMemory(memoryIndex);
+    _rtData = _memoryData;
 }
 void LoadWord::WriteBack(){
-    Instructor::SetDataToRegister(_rt, _memoryData);
+    Instructor::SetDataToRegister(_rt, _rtData);
     
     char logBuf[100];
     sprintf(logBuf, "Instruction : LoadWord \nR[%d] = {M[R[%d] + %d] =>\nR[%d] = %d\n==================================\n",_rt,_rs,_immediate,_rt,_memoryData);

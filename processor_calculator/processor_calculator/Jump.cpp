@@ -12,7 +12,7 @@
 //Jump class
 
 Jump::Jump(unsigned int jumpAddr) : J_Instruction(jumpAddr){
-    
+    _writeChk = false;
 }
 
 bool Jump::Execution(){
@@ -32,7 +32,7 @@ void Jump::WriteBack(){
 
 //JumpAndLink class
 JumpAndLink::JumpAndLink(unsigned int jumpAddr) : J_Instruction(jumpAddr){
-    
+    _writeChk = false;
 }
 
 bool JumpAndLink::Execution(){
@@ -53,7 +53,7 @@ void JumpAndLink::WriteBack(){
 //JumpRegister class
 
 JumpRegister::JumpRegister(unsigned int rs, unsigned int rsData) : R_Instruction(rs,0,0,0,0,rsData,-1){
-    
+    _writeChk = false;
 }
 
 bool JumpRegister::Execution(){

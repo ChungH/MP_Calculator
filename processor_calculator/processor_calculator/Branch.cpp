@@ -12,7 +12,7 @@
 //BranchOnEqual class
 
 BranchOnEqual::BranchOnEqual(unsigned int rs, unsigned int rt, unsigned int branchAddr, unsigned int rsData, unsigned int rtData) :I_Instruction(rs, rt, branchAddr,rsData,rtData){
-
+    _writeChk = false;
 }
 
 bool BranchOnEqual::Execution(){
@@ -42,6 +42,7 @@ void BranchOnEqual::WriteBack(){
 //BranchOnNotEqual class
 
 BranchOnNotEqual::BranchOnNotEqual(unsigned int rs, unsigned int rt, unsigned int branchAddr, unsigned int rsData, unsigned int rtData) : I_Instruction(rs, rt, branchAddr, rsData, rtData){
+    _writeChk = false;
     
 }
 

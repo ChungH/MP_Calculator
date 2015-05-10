@@ -11,7 +11,7 @@
 
 //StoreByte class
 StoreByte::StoreByte(unsigned int rs, unsigned int rt, unsigned int immediate, unsigned int rsData, unsigned int rtData) : I_Instruction(rs,rt,immediate,rsData,rtData){
-    
+    _writeChk = false;
 }
 
 bool StoreByte::Execution(){
@@ -43,7 +43,7 @@ void StoreByte::WriteBack(){
 //StoreConditional class
 //추가 구현 필요
 StoreConditional::StoreConditional(unsigned int rs, unsigned int rt, unsigned int immediate, unsigned int rsData, unsigned int rtData) : I_Instruction(rs,rt,immediate,rsData,rtData){
-    
+    _writeChk = false;
 }
 
 bool StoreConditional::Execution(){
@@ -58,7 +58,7 @@ void StoreConditional::WriteBack(){
 
 //StoreHalfword class
 StoreHalfword::StoreHalfword(unsigned int rs, unsigned int rt, unsigned int immediate, unsigned int rsData, unsigned int rtData): I_Instruction(rs,rt,immediate,rsData,rtData){
-    
+    _writeChk = false;
 }
 
 bool StoreHalfword::Execution(){
@@ -89,7 +89,7 @@ void StoreHalfword::WriteBack(){
 
 //StoreWord class
 StoreWord::StoreWord(unsigned int rs, unsigned int rt, unsigned int immediate, unsigned int rsData, unsigned int rtData) : I_Instruction(rs, rt, immediate,rsData,rtData){
-    
+    _writeChk = false;
 }
 
 bool StoreWord::Execution(){

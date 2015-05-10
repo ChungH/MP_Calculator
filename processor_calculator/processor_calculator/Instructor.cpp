@@ -35,9 +35,12 @@ void Instructor::ExecuteInstruction(){
     setStackPointer(0x8000);
     setReturnAddress(0xffffffff);
     
-//    for(auto iter = Instructor::_memory.begin(); iter != Instructor::_memory.end(); iter ++){
-//        printf("%x\n",*iter);
-//    }
+    for(auto iter = Instructor::_memory.begin(); iter != Instructor::_memory.end(); iter ++){
+        printf("%x\n",*iter);
+    }
+    _WBInst = _MEMInst = _EXEInst = NULL;
+    
+    
     
     int count = 1;
     while (Instructor::_pc != 0xffffffff) {
@@ -49,15 +52,27 @@ void Instructor::ExecuteInstruction(){
         bool branchChk;
         
         //WriteBack
-        _WBInst->WriteBack();
-        _WBInst = _MEMInst;
+        if(_WBInst != NULL)
+            _WBInst->WriteBack();
+
 
         //MemoryAccess
-        _MEMInst->MemoryAccess();
-        _MEMInst = _EXEInst;
+        if(_MEMInst != NULL)
+            _MEMInst->MemoryAccess();
+
         
         //Execute
-        branchChk  = _EXEInst->Execution();
+        if(_EXEInst != NULL){
+            DataForwarding();
+            branchChk = _EXEInst->Execution();
+        }
+        else
+            branchChk = false;
+        
+        //Instruction Switching
+        delete _WBInst;
+        _WBInst = _MEMInst;
+        _MEMInst = _EXEInst;
         _EXEInst = _DecodeInst;
         
         //Decode
@@ -78,20 +93,14 @@ void Instructor::ExecuteInstruction(){
     
 }
 unsigned int Instructor::Fetch(){
+    if(Instructor::_pc == 0xffffffff)
+        return 0;
     return Instructor::_memory[_pc / 4];
 }
 
-bool Instructor::Execute(Instruction* inst){
-    if(inst == NULL)
-        return false;
-    bool branchChk = inst->Execution();
-    return branchChk;
-}
-
-
 void Instructor::LoadInstruction(){
     
-    FILE* fp = fopen("/Users/ChungH/Desktop/Mips_Simulator/gcdlcm.bin", "r");
+    FILE* fp = fopen("/Users/ChungH/Desktop/add.bin", "r");
  //   FILE* fp = fopen(_filePath, "r");
     
     int i = 0;
@@ -266,5 +275,91 @@ void Instructor::PrintLog(const std::string& path){
     outFp.write(Instructor::_logBuffer.c_str(),Instructor::_logBuffer.size());
 }
 
+void Instructor::DataForwarding(){
+    if(_EXEInst -> _instType == Instructiontype::J_Type)
+        return;
+    //init
+    _MEM_rs = _MEM_rt = _WB_rs = _WB_rt = false;
+    
+    //Dependency Check
+    DependencyChk();
+    
+    //Data Forwarding
+    //rs Forwarding
+    if(_MEM_rs && _WB_rs){
+        if(_MEMInst->_instType ==Instructiontype::R_Type)
+            _EXEInst->_rsData = _MEMInst->_rdData;
+        else
+            _EXEInst->_rsData = _MEMInst->_rtData;
+    }
+    else if(_MEM_rs && !_WB_rs){
+        if(_MEMInst->_instType ==Instructiontype::R_Type)
+            _EXEInst->_rsData = _MEMInst->_rdData;
+        else
+            _EXEInst->_rsData = _MEMInst->_rtData;
+    }
+    else if(!_MEM_rs && _WB_rs){
+        if(_WBInst->_instType ==Instructiontype::R_Type)
+            _EXEInst->_rsData = _WBInst->_rdData;
+        else
+            _EXEInst->_rsData = _WBInst->_rtData;
+    }
+    
+    //rt Forwarding
+    if(_MEM_rt && _WB_rt){
+        if(_MEMInst->_instType ==Instructiontype::R_Type)
+            _EXEInst->_rtData = _MEMInst->_rdData;
+        else
+            _EXEInst->_rtData = _MEMInst->_rtData;
+    }
+    else if(_MEM_rt && !_WB_rt){
+        if(_MEMInst->_instType ==Instructiontype::R_Type)
+            _EXEInst->_rtData = _MEMInst->_rdData;
+        else
+            _EXEInst->_rtData = _MEMInst->_rtData;
+    }
+    else if(!_MEM_rt && _WB_rt){
+        if(_WBInst->_instType ==Instructiontype::R_Type)
+            _EXEInst->_rtData = _WBInst->_rdData;
+        else
+            _EXEInst->_rtData = _WBInst->_rtData;
+    }
+    
+    
+    
 
+    
+}
+
+void Instructor::DependencyChk(){
+    //EXE - MEM dependency
+    if(_MEMInst != NULL){
+        //rs - MEM dependency
+        if(_MEMInst->_writeChk  && _MEMInst->_instType == Instructiontype::R_Type && _MEMInst->_rd == _EXEInst->_rs)
+            _MEM_rs = true;
+        else if(_MEMInst->_writeChk  && _MEMInst->_instType == Instructiontype::I_Type && _MEMInst->_rt == _EXEInst->_rs)
+            _MEM_rs = true;
+        
+        //rt - MEM dependency
+        if(_MEMInst->_writeChk  && _MEMInst->_instType == Instructiontype::R_Type && _MEMInst->_rd == _EXEInst->_rt)
+            _MEM_rt = true;
+        else if(_MEMInst->_writeChk  &&_MEMInst->_instType == Instructiontype::I_Type && _MEMInst->_rt == _EXEInst->_rt)
+            _MEM_rt = true;
+    }
+    
+    //EXE - WB dependency
+    if(_WBInst != NULL) {
+        //rs - WB dependency
+        if(_WBInst->_writeChk  && _WBInst->_instType == Instructiontype::R_Type && _WBInst->_rd == _EXEInst->_rs)
+            _WB_rs = true;
+        else if(_WBInst->_writeChk  && _WBInst->_instType == Instructiontype::I_Type && _WBInst->_rt == _EXEInst->_rs)
+            _WB_rs = true;
+        
+        //rt - WB dependency
+        if(_WBInst->_writeChk  && _WBInst->_instType == Instructiontype::R_Type && _WBInst->_rd == _EXEInst->_rt)
+            _WB_rt = true;
+        else if(_WBInst->_writeChk  && _WBInst->_instType == Instructiontype::I_Type && _WBInst->_rt == _EXEInst->_rt)
+            _WB_rt = true;
+    }
+}
 
