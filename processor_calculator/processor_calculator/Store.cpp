@@ -63,7 +63,6 @@ StoreHalfword::StoreHalfword(unsigned int rs, unsigned int rt, unsigned int imme
 
 bool StoreHalfword::Execution(){
     _maskedrtData = _rtData & 0x0000ffff;
-    
 
     return false;
 }
@@ -93,7 +92,6 @@ StoreWord::StoreWord(unsigned int rs, unsigned int rt, unsigned int immediate, u
 }
 
 bool StoreWord::Execution(){
-
     return false;
 }
 void StoreWord::MemoryAccess(){

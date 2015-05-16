@@ -18,7 +18,7 @@ I_Instruction::I_Instruction(unsigned int rs, unsigned int rt, unsigned int imme
     
 }
 
-J_Instruction::J_Instruction(unsigned int address): Instruction(Instructiontype::J_Type,-1,-1,-1,-1,-1), _address(address){
+J_Instruction::J_Instruction(unsigned int address): Instruction(Instructiontype::J_Type,-1,-1,-1,address,-1), _address(address){
     
 }
 

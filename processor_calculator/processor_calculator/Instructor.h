@@ -14,16 +14,17 @@
 #include "Common.h"
 #include "Instruction.h"
 
-#define MAX_MEMORY 8192
+#define MAX_MEMORY 16384
 
 class Instructor {
 public:
-    static std::array<unsigned int, 8192>  _memory;
+    static std::array<unsigned int, MAX_MEMORY>  _memory;
     static std::array<unsigned int, 32>    _register;
     static unsigned int                    _pc;
     static unsigned int                    _hi;
     static unsigned int                    _lo;
     static std::string                     _logBuffer;
+    static int                             _lastBranch;
     
 private:
     unsigned int&                          _gp = Instructor::_register[28];
@@ -41,15 +42,22 @@ public:
     Instruction*            _EXEInst;
     Instruction*            _MEMInst;
     Instruction*            _WBInst;
-    Instruction*            _DecodeInst;
-    unsigned int            _inst;
+    Instruction*            _DECInst;
+    unsigned int            _decodeInst;
+    unsigned int            _fetchInst;
+    
     
 private:
     bool                    _MEM_rs;
     bool                    _MEM_rt;
     bool                    _WB_rs;
     bool                    _WB_rt;
+   
+    bool                    _branchChk;
+    bool                    _jumpChk;
 
+
+    
     
 private:
     void                    LoadInstruction();

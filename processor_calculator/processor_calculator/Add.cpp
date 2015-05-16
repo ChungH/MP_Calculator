@@ -43,8 +43,6 @@ bool AddUnsigned::Execution(){
     
     _rdData = _rsData + _rtData;
     
-   
-    
     return false;
 }
 

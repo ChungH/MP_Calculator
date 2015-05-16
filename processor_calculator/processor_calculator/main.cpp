@@ -10,12 +10,13 @@
 #include "Instructor.h"
 
 
-std::array<unsigned int, 8192> Instructor::_memory;
+std::array<unsigned int, MAX_MEMORY> Instructor::_memory;
 std::array<unsigned int, 32>   Instructor::_register;
 unsigned int                   Instructor::_pc;
 unsigned int                   Instructor::_hi;
 unsigned int                   Instructor::_lo;
 std::string                    Instructor::_logBuffer;
+int                            Instructor::_lastBranch;
 
 //bool isLittleEndian()
 //{

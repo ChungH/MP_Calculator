@@ -19,7 +19,9 @@ public:
 
 class JumpAndLink : public J_Instruction {
 public:
-    JumpAndLink(unsigned int jumpAddr);
+    unsigned int _pc;
+public:
+    JumpAndLink(unsigned int jumpAddr,unsigned int pc);
 public:
     virtual bool Execution();
     virtual void MemoryAccess();

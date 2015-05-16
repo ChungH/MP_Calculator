@@ -61,7 +61,6 @@ void LoadHalfwordUnsigned::WriteBack(){
 //LoadLinked class
 
 LoadLinked::LoadLinked(unsigned int rs, unsigned int rt, unsigned int signExtimm,unsigned int rsData) : I_Instruction(rs, rt, signExtimm,rsData,-1){
-    
 }
 
 bool LoadLinked::Execution(){
@@ -84,7 +83,6 @@ void LoadLinked::WriteBack(){
 
 //LoadUpperImmediate class
 LoadUpperImmediate::LoadUpperImmediate(unsigned int rt, unsigned int immediate) : I_Instruction(0,rt,immediate,-1,-1){
-    
 }
 
 bool LoadUpperImmediate::Execution(){
@@ -107,7 +105,6 @@ void LoadUpperImmediate::WriteBack(){
 //LoadWord class
 
 LoadWord::LoadWord(unsigned int rs, unsigned int rt, unsigned int signExtimm,unsigned int rsData) : I_Instruction(rs,rt,signExtimm,rsData,-1){
-    
 }
 
 bool LoadWord::Execution(){

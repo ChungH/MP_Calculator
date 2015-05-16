@@ -29,9 +29,6 @@ public:
     virtual bool Execution() = 0;
     virtual void MemoryAccess() = 0;
     virtual void WriteBack() = 0;
-//    virtual unsigned int getRsNum() = 0;
-//    virtual unsigned int getRtNum() = 0;
-//    virtual unsigned int getRdNum() = 0;
     
 };
 
