@@ -40,6 +40,7 @@ bool JumpAndLink::Execution(){
     char logBuf[200];
     sprintf(logBuf, "Instruction : JumpAndLink \nR[31] = PC+4 -> R[31] = %5d\nPC = JumpAddr => PC = %5d\n==================================\n",Instructor::_pc - 4, _address);
     Instructor::AppendLog(logBuf);
+    _rdData = _pc + 8;
     return false;
 }
 
@@ -47,7 +48,8 @@ void JumpAndLink::MemoryAccess(){
     
 }
 void JumpAndLink::WriteBack(){
-    Instructor::SetDataToRegister(_rd, _pc + 8);
+
+    Instructor::SetDataToRegister(_rd, _rdData);
 }
 
 //JumpRegister class

@@ -40,6 +40,7 @@ void Instructor::ExecuteInstruction(){
         printf("%x\n",*iter);
     }
     _WBInst = _MEMInst = _EXEInst = NULL;
+    _fetchInst = 0;
     
     int count = 1;
     while (Instructor::_pc != 0xffffffff || _WBInst != NULL || _MEMInst != NULL || _EXEInst != NULL) {
@@ -73,26 +74,21 @@ void Instructor::ExecuteInstruction(){
         
         if(_branchChk){
             _DECInst = NULL;
-            _decodeInst = 0;
             _fetchInst = 0;
         }
         
         //Decode
-        _DECInst = Decode(_decodeInst);
+        _DECInst = Decode(_fetchInst);
+        
+        //Fetch
+        _fetchInst = Fetch();
         
         //Instruction Switching
         delete _WBInst;
         _WBInst = _MEMInst;
         _MEMInst = _EXEInst;
         _EXEInst = _DECInst;
-        _decodeInst = _fetchInst;
         
-        //Fetch
-        _fetchInst = Fetch();
-        
-//        if (!_jumpChk) {
-//            _pc += 4;
-//        }
         if(_pc != 0xffffffff)
            _pc += 4;
 
@@ -147,6 +143,7 @@ Instruction* Instructor::Decode(unsigned int const inst){
     unsigned int rd     = (inst & 0x0000f800) >> 11;
     unsigned int shamt  = (inst & 0x000007c0) >> 6;
     unsigned int funct  = (inst & 0x0000003f);
+    unsigned int pc = Instructor::_pc - 4;
     
     
     unsigned int rsData = Instructor::GetDataFromRegister(rs);
@@ -201,18 +198,17 @@ Instruction* Instructor::Decode(unsigned int const inst){
     else if(opcode == Opcode::Jump || opcode == Opcode::JumpAndLink){
         //J_Instruction
         unsigned int address = inst & 0x03ffffff;
-        unsigned int pc = Instructor::_pc - 4;
         unsigned int jumpAddr = (pc & 0xf0000000) | (address << 2);
         
         if(opcode == Opcode::Jump){
             instruction = new Jump(jumpAddr);
             Instructor::_pc = jumpAddr;
-            _fetchInst = 0;
+//            _fetchInst = 0;
             _jumpChk = true;
 
         }
         else if(opcode == Opcode::JumpAndLink){
-            instruction = new JumpAndLink(jumpAddr,Instructor::_pc - 8);
+            instruction = new JumpAndLink(jumpAddr, pc);
             Instructor::_pc = jumpAddr;
             _jumpChk = true;
         }
@@ -233,23 +229,23 @@ Instruction* Instructor::Decode(unsigned int const inst){
             instruction = new AndImmediate(rs, rt, zeroExtimm,rsData);
         else if(opcode == Opcode::BranchOnEqual){
             if(Instructor::_lastBranch <= 1){
-                instruction = new BranchOnEqual(rs, rt, branchAddr, rsData, rtData,Instructor::_pc-8);
-                Instructor::_pc = Instructor::_pc - 4 + branchAddr;
+                instruction = new BranchOnEqual(rs, rt, branchAddr, rsData, rtData, pc);
+                Instructor::_pc = pc + 4 + branchAddr;
                 _jumpChk = true;
             }
             else{
-                instruction = new BranchOnEqual(rs, rt, branchAddr, rsData, rtData,Instructor::_pc-8);
+                instruction = new BranchOnEqual(rs, rt, branchAddr, rsData, rtData, pc);
                 _jumpChk = false;
             }
         }
         else if(opcode == Opcode::BranchOnNotEqual){
             if(Instructor::_lastBranch <= 1){
-                instruction = new BranchOnNotEqual(rs, rt, branchAddr, rsData, rtData,Instructor::_pc-8);
-                Instructor::_pc = Instructor::_pc - 4 + branchAddr;
+                instruction = new BranchOnNotEqual(rs, rt, branchAddr, rsData, rtData, pc);
+                Instructor::_pc = pc + 4 + branchAddr;
                 _jumpChk = true;
             }
             else{
-                instruction = new BranchOnNotEqual(rs, rt, branchAddr, rsData, rtData,Instructor::_pc-8);
+                instruction = new BranchOnNotEqual(rs, rt, branchAddr, rsData, rtData, pc);
                 _jumpChk = false;
             }
         }
@@ -329,19 +325,19 @@ void Instructor::DataForwarding(){
     //Data Forwarding
     //rs Forwarding
     if(_MEM_rs && _WB_rs){
-        if(_MEMInst->_instType ==Instructiontype::R_Type)
+        if(_MEMInst->_instType ==Instructiontype::R_Type || _MEMInst->_instType == Instructiontype::J_Type)
             _EXEInst->_rsData = _MEMInst->_rdData;
         else
             _EXEInst->_rsData = _MEMInst->_rtData;
     }
     else if(_MEM_rs && !_WB_rs){
-        if(_MEMInst->_instType ==Instructiontype::R_Type)
+        if(_MEMInst->_instType ==Instructiontype::R_Type || _MEMInst->_instType == Instructiontype::J_Type)
             _EXEInst->_rsData = _MEMInst->_rdData;
         else
             _EXEInst->_rsData = _MEMInst->_rtData;
     }
     else if(!_MEM_rs && _WB_rs){
-        if(_WBInst->_instType ==Instructiontype::R_Type)
+        if(_WBInst->_instType ==Instructiontype::R_Type|| _WBInst->_instType == Instructiontype::J_Type)
             _EXEInst->_rsData = _WBInst->_rdData;
         else
             _EXEInst->_rsData = _WBInst->_rtData;
@@ -349,19 +345,19 @@ void Instructor::DataForwarding(){
     
     //rt Forwarding
     if(_MEM_rt && _WB_rt){
-        if(_MEMInst->_instType ==Instructiontype::R_Type)
+        if(_MEMInst->_instType ==Instructiontype::R_Type || _MEMInst->_instType == Instructiontype::J_Type)
             _EXEInst->_rtData = _MEMInst->_rdData;
         else
             _EXEInst->_rtData = _MEMInst->_rtData;
     }
     else if(_MEM_rt && !_WB_rt){
-        if(_MEMInst->_instType ==Instructiontype::R_Type)
+        if(_MEMInst->_instType ==Instructiontype::R_Type || _MEMInst->_instType == Instructiontype::J_Type)
             _EXEInst->_rtData = _MEMInst->_rdData;
         else
             _EXEInst->_rtData = _MEMInst->_rtData;
     }
     else if(!_MEM_rt && _WB_rt){
-        if(_WBInst->_instType ==Instructiontype::R_Type)
+        if(_WBInst->_instType ==Instructiontype::R_Type || _WBInst->_instType == Instructiontype::J_Type)
             _EXEInst->_rtData = _WBInst->_rdData;
         else
             _EXEInst->_rtData = _WBInst->_rtData;

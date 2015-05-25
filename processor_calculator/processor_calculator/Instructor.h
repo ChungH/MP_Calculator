@@ -43,7 +43,6 @@ public:
     Instruction*            _MEMInst;
     Instruction*            _WBInst;
     Instruction*            _DECInst;
-    unsigned int            _decodeInst;
     unsigned int            _fetchInst;
     
     
