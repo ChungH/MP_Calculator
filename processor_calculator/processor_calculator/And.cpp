@@ -16,20 +16,16 @@ And::And(unsigned int rs, unsigned int rt, unsigned int rd, unsigned int rsData,
 bool And::Execution(){
 
     _rdData = _rsData & _rtData;
-    
-
-    
+    Instructor::AppendLog("AND,");
     return false;
 }
 void And::MemoryAccess(){
-    
+    Instructor::AppendLog("AND,");
 }
 void And::WriteBack(){
     Instructor::SetDataToRegister(_rd, _rdData);
     
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : And \nR[%d] = R[%d] & R[%d] => R[%d] = %d\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
-    Instructor::AppendLog(logBuf);
+    Instructor::AppendLog("AND,");
 }
 
 //AndImmediate class
@@ -40,19 +36,17 @@ AndImmediate::AndImmediate(unsigned int rs, unsigned int rt, unsigned int zeroEx
 bool AndImmediate::Execution(){
 
     _rtData = _rsData & _immediate;
-    
+    Instructor::AppendLog("ANDI,");
     return false;
 }
 
 void AndImmediate::MemoryAccess(){
-    
+    Instructor::AppendLog("ANDI,");
 }
 void AndImmediate::WriteBack(){
     Instructor::SetDataToRegister(_rt, _rtData);
     
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : AndImmediate \nR[%d] = R[%d] & %x => R[%d] = %d\n==================================\n",_rt,_rs,_immediate,_rt,Instructor::GetDataFromRegister(_rt));
-    Instructor::AppendLog(logBuf);
+    Instructor::AppendLog("ANDI,");
     
 }
 

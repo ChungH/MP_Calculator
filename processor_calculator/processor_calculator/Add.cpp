@@ -17,19 +17,18 @@ Add::Add(unsigned int rs, unsigned int rt, unsigned int rd, unsigned int rsData,
 
 bool Add::Execution(){
     _rdData = _rsData + _rtData;
+    
+    Instructor::AppendLog("Add,");
  
     return false;
 }
 void Add::MemoryAccess(){
-
+    Instructor::AppendLog("Add,");
 }
 void Add::WriteBack(){
     Instructor::SetDataToRegister(_rd, _rdData);
     
-    
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : Add \nR[%d] = R[%d] + R[%d] => R[%d] = %d\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
-    Instructor::AppendLog(logBuf);
+    Instructor::AppendLog("Add,");
     
 }
 
@@ -42,20 +41,17 @@ AddUnsigned::AddUnsigned(unsigned int rs, unsigned int rt,unsigned int rd, unsig
 bool AddUnsigned::Execution(){
     
     _rdData = _rsData + _rtData;
-    
+    Instructor::AppendLog("ADDU,");
     return false;
 }
 
 void AddUnsigned::MemoryAccess(){
-    
+    Instructor::AppendLog("ADDU,");
 }
 void AddUnsigned::WriteBack(){
     Instructor::SetDataToRegister(_rd, _rdData);
     
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : AddUnsigned \nR[%d] = R[%d] + R[%d] => R[%d] = %d\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
-    Instructor::AppendLog(logBuf);
-    
+    Instructor::AppendLog("ADDU,");
 }
 
 
@@ -68,20 +64,17 @@ AddImmediate::AddImmediate(unsigned int rs, unsigned int rt, unsigned int signEx
 bool AddImmediate::Execution(){
 
     _rtData = _rsData +  _immediate;
-
+    Instructor::AppendLog("ADDI,");
     return false;
 }
 
 void AddImmediate::MemoryAccess(){
-    
+    Instructor::AppendLog("ADDI,");
 }
 void AddImmediate::WriteBack(){
     Instructor::SetDataToRegister(_rt, _rtData);
     
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : AddImmediate \nR[%d] = R[%d] + %d =>\nR[%d] = %d\n==================================\n",_rt,_rs,_immediate,_rt,Instructor::GetDataFromRegister(_rt));
-    Instructor::AppendLog(logBuf);
-    
+    Instructor::AppendLog("ADDI,");
 }
 
 //AddImmediateUnsigned class
@@ -93,19 +86,17 @@ AddImmediateUnsigned::AddImmediateUnsigned(unsigned int rs, unsigned int rt, uns
 bool AddImmediateUnsigned::Execution(){
     
     _rtData = _rsData +  _immediate;
- 
+    Instructor::AppendLog("ADDIU,");
     return false;
 }
 
 void AddImmediateUnsigned::MemoryAccess(){
-    
+    Instructor::AppendLog("ADDIU,");
 }
 void AddImmediateUnsigned::WriteBack(){
     Instructor::SetDataToRegister(_rt, _rtData);
     
-    char logBuf[200];
-    sprintf(logBuf, "Instruction : AddImmediateUnsigned \nR[%d] = R[%d] + %d =>\nR[%d] = %d\n==================================\n",_rt,_rs,_immediate, _rt,Instructor::GetDataFromRegister(_rt));
-    Instructor::AppendLog(logBuf);
+    Instructor::AppendLog("ADDIU,");
     
 }
 

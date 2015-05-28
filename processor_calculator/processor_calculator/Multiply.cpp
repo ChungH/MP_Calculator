@@ -17,26 +17,19 @@ Multiply::Multiply(unsigned int rs, unsigned int rt, unsigned int rsData, unsign
 }
 
 bool Multiply::Execution(){
-
     _resultData = _rsData * _rtData;
-
+    Instructor::AppendLog("MULT,");
     return false;
 }
 
 void Multiply::MemoryAccess(){
-    
+    Instructor::AppendLog("MULT,");
 }
 void Multiply::WriteBack(){
     Instructor::_hi = _resultData & 0xffffffff00000000 >> 32;
     Instructor::_lo = _resultData & 0x00000000ffffffff;
     
-    
-    
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : Multiply \n{Hi,Lo} = R[%d] * R[%d] => Hi = %5d Lo = %5d\n==================================\n",_rs,_rt,Instructor::_hi,Instructor::_lo);
-    Instructor::AppendLog(logBuf);
-    
-    
+    Instructor::AppendLog("MULT,");
 }
 
 //MultiplyUnsigned class
@@ -47,20 +40,19 @@ MultiplyUnsigned::MultiplyUnsigned(unsigned int rs, unsigned int rt, unsigned in
 bool MultiplyUnsigned::Execution(){
     _resultData = _rsData * _rtData;
 
-    
+    Instructor::AppendLog("MULTU,");
     return false;
 }
 
 void MultiplyUnsigned::MemoryAccess(){
+    Instructor::AppendLog("MULTU,");
     
 }
 void MultiplyUnsigned::WriteBack(){
     Instructor::_hi = _resultData & 0xffffffff00000000 >> 32;
     Instructor::_lo = _resultData & 0x00000000ffffffff;
     
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : MultiplyUnsigned \n{Hi,Lo} = R[%d] * R[%d] => Hi = %5d Lo = %5d\n==================================\n",_rs,_rt,Instructor::_hi,Instructor::_lo);
-    Instructor::AppendLog(logBuf);
+    Instructor::AppendLog("MULTU,");
 }
 
 
@@ -73,22 +65,18 @@ Multiply32Bit::Multiply32Bit(unsigned int rs, unsigned int rt, unsigned int rd, 
 bool Multiply32Bit::Execution(){
     
     _rdData = _rsData * _rtData;
-    
+    Instructor::AppendLog("MULT32,");
     return false;
 }
 
 void Multiply32Bit::MemoryAccess(){
-    
+    Instructor::AppendLog("MULT32,");
 }
 void Multiply32Bit::WriteBack(){
     
     Instructor::SetDataToRegister(_rd, _rdData);
     
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : Multiply32Bit \nR[%d] = R[%d] * R[%d] => R[%d] = %5d\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
-    Instructor::AppendLog(logBuf);
-    
-
+    Instructor::AppendLog("MULT32,");
 }
 
 

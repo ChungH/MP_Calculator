@@ -16,16 +16,15 @@ Jump::Jump(unsigned int jumpAddr) : J_Instruction(jumpAddr){
 }
 
 bool Jump::Execution(){
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : Jump \nPC = JumpAddr => PC : %5d  \n==================================\n",_address);
-    Instructor::AppendLog(logBuf);
+    Instructor::AppendLog("J,");
     return false;
 }
 
 void Jump::MemoryAccess(){
-    
+    Instructor::AppendLog("J,");
 }
 void Jump::WriteBack(){
+    Instructor::AppendLog("J,");
 }
 
 
@@ -37,19 +36,18 @@ JumpAndLink::JumpAndLink(unsigned int jumpAddr,unsigned int pc) : J_Instruction(
 }
 
 bool JumpAndLink::Execution(){
-    char logBuf[200];
-    sprintf(logBuf, "Instruction : JumpAndLink \nR[31] = PC+4 -> R[31] = %5d\nPC = JumpAddr => PC = %5d\n==================================\n",Instructor::_pc - 4, _address);
-    Instructor::AppendLog(logBuf);
+    Instructor::AppendLog("JAL,");
     _rdData = _pc + 8;
     return false;
 }
 
 void JumpAndLink::MemoryAccess(){
-    
+    Instructor::AppendLog("JAL,");
 }
 void JumpAndLink::WriteBack(){
-
     Instructor::SetDataToRegister(_rd, _rdData);
+    
+    Instructor::AppendLog("JAL,");
 }
 
 //JumpRegister class
@@ -59,15 +57,13 @@ JumpRegister::JumpRegister(unsigned int rs, unsigned int rsData) : R_Instruction
 }
 
 bool JumpRegister::Execution(){
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : JumpRegister \nPC = R[%d] => PC : %5d  \n==================================\n",_rs,Instructor::_pc);
-    Instructor::AppendLog(logBuf);
+    Instructor::AppendLog("JR,");
     return false;
 }
 
 void JumpRegister::MemoryAccess(){
-    
+    Instructor::AppendLog("JR,");
 }
 void JumpRegister::WriteBack(){
-
+    Instructor::AppendLog("JR,");
 }

@@ -15,20 +15,18 @@ ShiftLeftLogical::ShiftLeftLogical(unsigned int rt, unsigned int rd, unsigned in
 }
 
 bool ShiftLeftLogical::Execution(){
-
     _rdData = _rtData << _shamt;
 
+    Instructor::AppendLog("SLL,");
     return false;
 }
 void ShiftLeftLogical::MemoryAccess(){
-    
+    Instructor::AppendLog("SLL,");
 }
 void ShiftLeftLogical::WriteBack(){
     Instructor::SetDataToRegister(_rd, _rdData);
 
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : ShiftLeftLogical \nR[%d] = R[%d] << %d => R[%d] = %d\n==================================\n",_rd,_rs,_shamt,_rd,Instructor::GetDataFromRegister(_rd));
-    Instructor::AppendLog(logBuf);
+   Instructor::AppendLog("SLL,");
 }
 
 //ShiftRightLogical class
@@ -38,22 +36,20 @@ ShiftRightLogical::ShiftRightLogical(unsigned int rt, unsigned int rd, unsigned 
 }
 
 bool ShiftRightLogical::Execution(){
-
     _rdData = _rtData >> _shamt;
  
+    Instructor::AppendLog("SRL,");
     return false;
 }
 
 void ShiftRightLogical::MemoryAccess(){
-    
+    Instructor::AppendLog("SRL,");
 }
 
 void ShiftRightLogical::WriteBack(){
     Instructor::SetDataToRegister(_rd, _rdData);
     
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : ShiftRightLogical \nR[%d] = R[%d] >> %d => R[%d] = %d\n==================================\n",_rd,_rs,_shamt,_rd,Instructor::GetDataFromRegister(_rd));
-    Instructor::AppendLog(logBuf);
+    Instructor::AppendLog("SRL,");
 }
 
 

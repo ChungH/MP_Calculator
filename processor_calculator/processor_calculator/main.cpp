@@ -17,7 +17,8 @@ unsigned int                   Instructor::_hi;
 unsigned int                   Instructor::_lo;
 std::string                    Instructor::_logBuffer;
 int                            Instructor::_lastBranch;
-
+int                            Instructor::hit;
+int                            Instructor::miss;
 //bool isLittleEndian()
 //{
 //    union{
@@ -33,10 +34,6 @@ int                            Instructor::_lastBranch;
 int main(int argc, const char * argv[]) {
     
     const char* filePath = argv[1];
-
-    Instructor::AppendLog("Opened File : ");
-//    Instructor::AppendLog(filePath);
-    Instructor::AppendLog("\n\n");
     
     Instructor* instructor = new Instructor(filePath);
     Instructor::_memory.fill(0);
@@ -44,7 +41,11 @@ int main(int argc, const char * argv[]) {
     Instructor::_pc = 0;
     instructor->ExecuteInstruction();
     
-    Instructor::PrintLog("./outputLog.txt");
+    char resultString[20];
+    sprintf(resultString, "Result,%d",Instructor::_register[2]);
+    Instructor::AppendLog(resultString);
+    
+    Instructor::PrintLog("./PipelineLog.txt");
     delete instructor;
 
     return 0;

@@ -18,16 +18,14 @@ BranchOnEqual::BranchOnEqual(unsigned int rs, unsigned int rt, unsigned int bran
 bool BranchOnEqual::Execution(){
 
     //Instructor::_pc = Instructor::_pc + 4 + _immediate;
+    Instructor::AppendLog("BEQ,");
     
     if(_rsData == _rtData){
-        char logBuf[200];
-        sprintf(logBuf, "Instruction : BranchOnEqual \nR[%d] : %5d R[%d] : %5d\nbranchAddr : %d\nPC: %5d\n==================================\n",_rs,_rsData,_rt,_rtData,_immediate,Instructor::_pc);
-        Instructor::AppendLog(logBuf);
-        
         if(Instructor::_lastBranch <= 1){
             Instructor::_lastBranch--;
             if(Instructor::_lastBranch == -1)
                 Instructor::_lastBranch = 0;
+            Instructor::hit++;
             return false;
         }
         else{
@@ -36,33 +34,32 @@ bool BranchOnEqual::Execution(){
             Instructor::_lastBranch--;
             if(Instructor::_lastBranch == -1)
                 Instructor::_lastBranch = 0;
+            Instructor::miss++;
             return true;
         }
     }
-    
-    char logBuf[200];
-    sprintf(logBuf, "Instruction : BranchOnEqual \nR[%d] : %5d R[%d] : %5d\nbranchAddr : %d\nPC: %5d\n==================================\n",_rs,_rsData,_rt,_rtData,_immediate,Instructor::_pc);
-    Instructor::AppendLog(logBuf);
     
     if(Instructor::_lastBranch <= 1){
         Instructor::_lastBranch++;
         if(Instructor::_lastBranch == 4)
             Instructor::_lastBranch = 3;
         Instructor::_pc = _prevPC + 4;
+        Instructor::miss++;
         return true;
     }
     else{
         Instructor::_lastBranch++;
         if(Instructor::_lastBranch == 4)
             Instructor::_lastBranch = 3;
+        Instructor::hit++;
         return false;
     }
 }
 void BranchOnEqual::MemoryAccess(){
-    
+    Instructor::AppendLog("BEQ,");
 }
 void BranchOnEqual::WriteBack(){
-    
+    Instructor::AppendLog("BEQ,");
 }
 
 
@@ -79,17 +76,13 @@ BranchOnNotEqual::BranchOnNotEqual(unsigned int rs, unsigned int rt, unsigned in
 }
 
 bool BranchOnNotEqual::Execution(){
-    
+    Instructor::AppendLog("BNE,");
     if(_rsData != _rtData){
-        
-        char logBuf[200];
-        sprintf(logBuf, "Instruction : BranchOnNotEqual \nR[%d] : %5d R[%d] : %5d\nbranchAddr : %d\nPC: %5d\n==================================\n",_rs,_rsData,_rt,_rtData,_immediate,Instructor::_pc);
-        Instructor::AppendLog(logBuf);
-        
         if(Instructor::_lastBranch <= 1){
             Instructor::_lastBranch--;
             if(Instructor::_lastBranch == -1)
                 Instructor::_lastBranch = 0;
+            Instructor::hit++;
             return false;
         }
         else{
@@ -97,32 +90,30 @@ bool BranchOnNotEqual::Execution(){
             Instructor::_lastBranch--;
             if(Instructor::_lastBranch == -1)
                 Instructor::_lastBranch = 0;
+            Instructor::miss++;
             return true;
         }
     }
-    
-    char logBuf[200];
-    sprintf(logBuf, "Instruction : BranchOnNotEqual \nR[%d] : %5d R[%d] : %5d\nbranchAddr : %d\nPC: %5d\n==================================\n",_rs,_rsData,_rt,_rtData,_immediate,Instructor::_pc);
-    Instructor::AppendLog(logBuf);
-    
     if(Instructor::_lastBranch <= 1){
         Instructor::_lastBranch++;
         if(Instructor::_lastBranch == 4)
             Instructor::_lastBranch = 3;
         Instructor::_pc = _prevPC + 4;
+        Instructor::miss++;
         return true;
     }
     else{
         Instructor::_lastBranch++;
         if(Instructor::_lastBranch == 4)
             Instructor::_lastBranch = 3;
+        Instructor::hit++;
         return false;
     }
 }
 
 void BranchOnNotEqual::MemoryAccess(){
-    
+    Instructor::AppendLog("BNE,");
 }
 void BranchOnNotEqual::WriteBack(){
-    
+    Instructor::AppendLog("BNE,");
 }

@@ -25,6 +25,8 @@ public:
     static unsigned int                    _lo;
     static std::string                     _logBuffer;
     static int                             _lastBranch;
+    static int hit;
+    static int miss;
     
 private:
     unsigned int&                          _gp = Instructor::_register[28];
@@ -67,7 +69,7 @@ private:
     
     void                    DataForwarding();
     void                    DependencyChk();
-    
+    void                    DecodeInstName(unsigned int inst);
 public:
     void                    ExecuteInstruction();
     

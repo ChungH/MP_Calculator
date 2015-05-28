@@ -17,6 +17,7 @@ LoadByteUnsigned::LoadByteUnsigned(unsigned int rs, unsigned int rt, unsigned in
 }
 
 bool LoadByteUnsigned::Execution(){
+    Instructor::AppendLog("LBU,");
     return false;
 }
 void LoadByteUnsigned::MemoryAccess(){
@@ -24,14 +25,13 @@ void LoadByteUnsigned::MemoryAccess(){
     unsigned int memoryIndex = (_rsData + _immediate)/4;
     _memoryData = Instructor::GetDataFromMemory(memoryIndex);
     _maskedData = mask & _memoryData;
+    
+    Instructor::AppendLog("LBU,");
 }
 void LoadByteUnsigned::WriteBack(){
     Instructor::SetDataToRegister(_rt, _maskedData);
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : LoadByteUnsigned \nR[%d] = {24b'0, M[R[%d] + %d](7:0) =>\nR[%d] = {24b'0, %d}\n==================================\n",_rt,_rs,_immediate,_rt,_memoryData);
-    Instructor::AppendLog(logBuf);
     
-    
+    Instructor::AppendLog("LBU,");
 }
 
 //LoadHalfwordUnsigned class
@@ -41,7 +41,7 @@ LoadHalfwordUnsigned::LoadHalfwordUnsigned(unsigned int rs, unsigned int rt, uns
 }
 
 bool LoadHalfwordUnsigned::Execution(){
-
+    Instructor::AppendLog("LHU,");
     return false;
 }
 void LoadHalfwordUnsigned::MemoryAccess(){
@@ -51,12 +51,13 @@ void LoadHalfwordUnsigned::MemoryAccess(){
     _maskedData = mask & _memoryData;
     _rtData = _maskedData;
     
+    Instructor::AppendLog("LHU,");
+    
 }
 void LoadHalfwordUnsigned::WriteBack(){
-     Instructor::SetDataToRegister(_rt, _rtData);
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : LoadHalfwordUnsigned \nR[%d] = {16b'0, M[R[%d] + %d](15:0) =>\nR[%d] = %d\n==================================\n",_rt,_rs,_immediate,_rt,_memoryData);
-    Instructor::AppendLog(logBuf);
+    Instructor::SetDataToRegister(_rt, _rtData);
+    
+    Instructor::AppendLog("LHU,");
 }
 //LoadLinked class
 
@@ -64,7 +65,7 @@ LoadLinked::LoadLinked(unsigned int rs, unsigned int rt, unsigned int signExtimm
 }
 
 bool LoadLinked::Execution(){
-
+    Instructor::AppendLog("LL,");
     return false;
 }
 void LoadLinked::MemoryAccess(){
@@ -72,12 +73,13 @@ void LoadLinked::MemoryAccess(){
     _memoryData = Instructor::GetDataFromMemory(memoryIndex);
     _rtData = _memoryData;
     
+    Instructor::AppendLog("LL,");
+    
 }
 void LoadLinked::WriteBack(){
-     Instructor::SetDataToRegister(_rt, _rtData);
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : LoadLinked \nR[%d] = {M[R[%d] + %d] =>\nR[%d] = %d\n==================================\n",_rt,_rs,_immediate,_rt,_memoryData);
-    Instructor::AppendLog(logBuf);
+    Instructor::SetDataToRegister(_rt, _rtData);
+    
+    Instructor::AppendLog("LL,");
     
 }
 
@@ -89,18 +91,17 @@ bool LoadUpperImmediate::Execution(){
     
     _maskedData = _immediate << 16;
     _rtData = _maskedData;
-
+    
+    Instructor::AppendLog("LUI,");
     return false;
 }
 void LoadUpperImmediate::MemoryAccess(){
-    
+    Instructor::AppendLog("LUI,");
 }
 void LoadUpperImmediate::WriteBack(){
     Instructor::SetDataToRegister(_rt, _rtData);
     
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : LoadUpperImmediate \nR[%d] = {%d, 16b'0} =>\nR[%d] = %x\n==================================\n",_rt,_rt,_immediate,Instructor::GetDataFromRegister(_rt));
-    Instructor::AppendLog(logBuf);
+    Instructor::AppendLog("LUI,");
 }
 //LoadWord class
 
@@ -108,21 +109,20 @@ LoadWord::LoadWord(unsigned int rs, unsigned int rt, unsigned int signExtimm,uns
 }
 
 bool LoadWord::Execution(){
-
+    Instructor::AppendLog("LW,");
     return false;
 }
 void LoadWord::MemoryAccess(){
     unsigned int memoryIndex = (_rsData + _immediate)/4;
     _memoryData = Instructor::GetDataFromMemory(memoryIndex);
     _rtData = _memoryData;
+    
+    Instructor::AppendLog("LW,");
 }
 void LoadWord::WriteBack(){
     Instructor::SetDataToRegister(_rt, _rtData);
     
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : LoadWord \nR[%d] = {M[R[%d] + %d] =>\nR[%d] = %d\n==================================\n",_rt,_rs,_immediate,_rt,_memoryData);
-    Instructor::AppendLog(logBuf);
-    
+    Instructor::AppendLog("LW,");
 }
 
 

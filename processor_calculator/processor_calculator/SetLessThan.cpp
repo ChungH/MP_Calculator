@@ -18,21 +18,18 @@ SetLessThan::SetLessThan(unsigned int rs, unsigned int rt, unsigned int rd, unsi
 bool SetLessThan::Execution(){
     
     _rdData = (_rsData < _rtData)? 1 : 0;
-
+    Instructor::AppendLog("SLT,");
     return false;
 }
 
 void SetLessThan::MemoryAccess(){
-    
+    Instructor::AppendLog("SLT,");
 }
 
 void SetLessThan::WriteBack(){
     Instructor::SetDataToRegister(_rd, _rdData);
     
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : SetLessThan \nR[%d] = (R[%d]<R[%d])? 1:0 => R[%d] = %d\n\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
-    Instructor::AppendLog(logBuf);
-
+    Instructor::AppendLog("SLT,");
 }
 
 
@@ -43,21 +40,18 @@ SetLessThanUnsigned::SetLessThanUnsigned(unsigned int rs, unsigned int rt, unsig
 
 bool SetLessThanUnsigned::Execution(){
     _rdData = (_rsData < _rtData)? 1 : 0;
- 
+    Instructor::AppendLog("SLTU,");
     return false;
 }
 
 void SetLessThanUnsigned::MemoryAccess(){
-    
+    Instructor::AppendLog("SLTU,");
 }
 
 void SetLessThanUnsigned::WriteBack(){
     Instructor::SetDataToRegister(_rd, _rdData);
     
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : SetLessThanUnsigned \nR[%d] = (R[%d]<R[%d])? 1:0 => R[%d] = %d\n==================================\n",_rd,_rs,_rt,_rd,Instructor::GetDataFromRegister(_rd));
-    Instructor::AppendLog(logBuf);
-    
+    Instructor::AppendLog("SLTU,");
 }
 
 
@@ -68,20 +62,17 @@ SetLessThanImmediate::SetLessThanImmediate(unsigned int rs, unsigned int rt, uns
 
 bool SetLessThanImmediate::Execution(){
     _rtData = (_rsData < _immediate)? 1 : 0;
-  
+    Instructor::AppendLog("SLTI,");
     return false;
 }
 
 void SetLessThanImmediate::MemoryAccess(){
-    
+    Instructor::AppendLog("SLTI,");
 }
 void SetLessThanImmediate::WriteBack(){
     Instructor::SetDataToRegister(_rt, _rtData);
     
-    char logBuf[200];
-    sprintf(logBuf, "Instruction : SetLessThanImmediate \nR[%d] = (R[%d]<%d)? 1:0 => R[%d] = %d\n==================================\n",_rt,_rs,_immediate,_rt,Instructor::GetDataFromRegister(_rt));
-    Instructor::AppendLog(logBuf);
-    
+    Instructor::AppendLog("SLTI,");
 }
 
 
@@ -93,18 +84,17 @@ SetLessThanImmediateUnsigned::SetLessThanImmediateUnsigned(unsigned int rs, unsi
 bool SetLessThanImmediateUnsigned::Execution(){
     _rtData = (_rsData < _immediate)? 1 : 0;
 
+    Instructor::AppendLog("SLTIU,");
     return false;
 }
 
 void SetLessThanImmediateUnsigned::MemoryAccess(){
-    
+    Instructor::AppendLog("SLTIU,");
 }
 
 void SetLessThanImmediateUnsigned::WriteBack(){
     Instructor::SetDataToRegister(_rt, _rtData);
     
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : SetLessThanImmediateUnsigned \nR[%d] = (R[%d]<%d)? 1:0 => R[%d] = %d\n==================================\n",_rt,_rs,_immediate,_rt,Instructor::GetDataFromRegister(_rt));
-    Instructor::AppendLog(logBuf);
+    Instructor::AppendLog("SLTIU,");
     
 }

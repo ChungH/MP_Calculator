@@ -17,7 +17,7 @@ StoreByte::StoreByte(unsigned int rs, unsigned int rt, unsigned int immediate, u
 bool StoreByte::Execution(){
     _maskedrtData = _rtData & 0x000000ff;
     
-    
+    Instructor::AppendLog("SB,");
     return false;
 }
 
@@ -29,14 +29,10 @@ void StoreByte::MemoryAccess(){
     _resultData = maskedMemoryData | _maskedrtData;
     Instructor::SetDataToMemory(memoryIndex, _resultData);
     
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : StoreByte \nM[R[%d]+%d](7:0) = R[%d](7:0) =>\nM[%d] = %d\n==================================\n",_rs,_immediate,_rt, memoryIndex, _resultData);
-    Instructor::AppendLog(logBuf);
-    
+    Instructor::AppendLog("SB,");
 }
 void StoreByte::WriteBack(){
-    
-    
+    Instructor::AppendLog("SB,");
 }
 
 
@@ -47,13 +43,14 @@ StoreConditional::StoreConditional(unsigned int rs, unsigned int rt, unsigned in
 }
 
 bool StoreConditional::Execution(){
+    Instructor::AppendLog("SC,");
     return false;
 }
 void StoreConditional::MemoryAccess(){
-    
+    Instructor::AppendLog("SC,");
 }
 void StoreConditional::WriteBack(){
-    
+    Instructor::AppendLog("SC,");
 }
 
 //StoreHalfword class
@@ -63,7 +60,7 @@ StoreHalfword::StoreHalfword(unsigned int rs, unsigned int rt, unsigned int imme
 
 bool StoreHalfword::Execution(){
     _maskedrtData = _rtData & 0x0000ffff;
-
+    Instructor::AppendLog("SH,");
     return false;
 }
 void StoreHalfword::MemoryAccess(){
@@ -75,15 +72,12 @@ void StoreHalfword::MemoryAccess(){
     
     Instructor::SetDataToMemory(memoryIndex, _resultData);
     
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : StoreHalfWord \nM[R[%d]+%d](15:0) = R[%d](15:0) =>\nM[%d] = %d\n==================================\n",_rs,_immediate,_rt,memoryIndex, _resultData);
-    Instructor::AppendLog(logBuf);
-    
+    Instructor::AppendLog("SH,");
     
     
 }
 void StoreHalfword::WriteBack(){
-    
+    Instructor::AppendLog("SH,");
 }
 
 //StoreWord class
@@ -92,6 +86,7 @@ StoreWord::StoreWord(unsigned int rs, unsigned int rt, unsigned int immediate, u
 }
 
 bool StoreWord::Execution(){
+    Instructor::AppendLog("SW,");
     return false;
 }
 void StoreWord::MemoryAccess(){
@@ -99,13 +94,11 @@ void StoreWord::MemoryAccess(){
     
     Instructor::SetDataToMemory(memoryIndex, _rtData);
     
-    char logBuf[100];
-    sprintf(logBuf, "Instruction : StoreWord \nM[R[%d]+%d] = R[%d] =>\nM[%d] = %d\n==================================\n",_rs,_immediate,_rt,memoryIndex, _rtData);
-    Instructor::AppendLog(logBuf);
+    Instructor::AppendLog("SW,");
     
 }
 
 void StoreWord::WriteBack(){
-    
+    Instructor::AppendLog("SW,");
 }
 
