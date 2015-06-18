@@ -46,7 +46,7 @@ void Instructor::ExecuteInstruction(){
     _fetchInst = 0;
     
     int count = 1;
-    _memory[65532] = 100;
+
     while (Instructor::_pc != 0xffffffff || _WBInst != NULL || _MEMInst != NULL || _EXEInst != NULL) {
         //print Cycles
         char cycleString[30];
