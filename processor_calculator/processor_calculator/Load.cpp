@@ -23,6 +23,7 @@ bool LoadByteUnsigned::Execution(){
 void LoadByteUnsigned::MemoryAccess(){
     unsigned int mask = 0x000000ff;
     unsigned int memoryIndex = (_rsData + _immediate)/4;
+//    unsigned int memoryIndex = (_rsData + _immediate);
     _memoryData = Instructor::GetDataFromMemory(memoryIndex);
     _maskedData = mask & _memoryData;
     
@@ -47,6 +48,7 @@ bool LoadHalfwordUnsigned::Execution(){
 void LoadHalfwordUnsigned::MemoryAccess(){
     unsigned int mask = 0x0000ffff;
     unsigned int memoryIndex = (_rsData+_immediate)/4;
+//    unsigned int memoryIndex = (_rsData + _immediate);
     _memoryData = Instructor::GetDataFromMemory(memoryIndex);
     _maskedData = mask & _memoryData;
     _rtData = _maskedData;
@@ -70,6 +72,7 @@ bool LoadLinked::Execution(){
 }
 void LoadLinked::MemoryAccess(){
     unsigned int memoryIndex = (_rsData + _immediate)/4;
+//    unsigned int memoryIndex = (_rsData + _immediate);
     _memoryData = Instructor::GetDataFromMemory(memoryIndex);
     _rtData = _memoryData;
     
@@ -113,8 +116,11 @@ bool LoadWord::Execution(){
     return false;
 }
 void LoadWord::MemoryAccess(){
+
     unsigned int memoryIndex = (_rsData + _immediate)/4;
     _memoryData = Instructor::GetDataFromMemory(memoryIndex);
+//    unsigned int memoryIndex = (_rsData + _immediate);
+//     _memoryData = Instructor::GetDataFromCache(memoryIndex);
     _rtData = _memoryData;
     
     Instructor::AppendLog("LW,");

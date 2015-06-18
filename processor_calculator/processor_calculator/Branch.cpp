@@ -25,7 +25,7 @@ bool BranchOnEqual::Execution(){
             Instructor::_lastBranch--;
             if(Instructor::_lastBranch == -1)
                 Instructor::_lastBranch = 0;
-            Instructor::hit++;
+                Instructor::_predictionHit++;
             return false;
         }
         else{
@@ -34,7 +34,7 @@ bool BranchOnEqual::Execution(){
             Instructor::_lastBranch--;
             if(Instructor::_lastBranch == -1)
                 Instructor::_lastBranch = 0;
-            Instructor::miss++;
+                Instructor::_predictionMiss++;
             return true;
         }
     }
@@ -44,14 +44,14 @@ bool BranchOnEqual::Execution(){
         if(Instructor::_lastBranch == 4)
             Instructor::_lastBranch = 3;
         Instructor::_pc = _prevPC + 4;
-        Instructor::miss++;
+        Instructor::_predictionMiss++;
         return true;
     }
     else{
         Instructor::_lastBranch++;
         if(Instructor::_lastBranch == 4)
             Instructor::_lastBranch = 3;
-        Instructor::hit++;
+            Instructor::_predictionHit++;
         return false;
     }
 }
@@ -82,7 +82,7 @@ bool BranchOnNotEqual::Execution(){
             Instructor::_lastBranch--;
             if(Instructor::_lastBranch == -1)
                 Instructor::_lastBranch = 0;
-            Instructor::hit++;
+            Instructor::_predictionHit++;
             return false;
         }
         else{
@@ -90,7 +90,7 @@ bool BranchOnNotEqual::Execution(){
             Instructor::_lastBranch--;
             if(Instructor::_lastBranch == -1)
                 Instructor::_lastBranch = 0;
-            Instructor::miss++;
+            Instructor::_predictionMiss++;
             return true;
         }
     }
@@ -99,14 +99,14 @@ bool BranchOnNotEqual::Execution(){
         if(Instructor::_lastBranch == 4)
             Instructor::_lastBranch = 3;
         Instructor::_pc = _prevPC + 4;
-        Instructor::miss++;
+        Instructor::_predictionMiss++;
         return true;
     }
     else{
         Instructor::_lastBranch++;
         if(Instructor::_lastBranch == 4)
             Instructor::_lastBranch = 3;
-        Instructor::hit++;
+            Instructor::_predictionHit++;
         return false;
     }
 }

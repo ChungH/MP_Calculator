@@ -26,16 +26,17 @@
 
 Instructor::Instructor(const char* filePath){
     Instructor::_pc = 0;
-    _filePath = filePath;
+    Instructor::_filePath = filePath;
     Instructor::_lastBranch = 1;
-    hit = 0;
-    miss = 0;
+    Instructor::_predictionHit = 0;
+    Instructor::_predictionMiss= 0;
+    Instructor::_cache = Cache();
 }
 
 void Instructor::ExecuteInstruction(){
     LoadInstruction();
     
-    setStackPointer(0x10000);
+    setStackPointer(0x40000);
     setReturnAddress(0xffffffff);
     
     for(auto iter = Instructor::_memory.begin(); iter != Instructor::_memory.end(); iter ++){
@@ -51,8 +52,6 @@ void Instructor::ExecuteInstruction(){
         char cycleString[30];
         sprintf(cycleString, "%d,",count);
         AppendLog(cycleString);
-        
-        
         
         
         _branchChk = false;
@@ -114,9 +113,8 @@ void Instructor::ExecuteInstruction(){
         
         Instructor::AppendLog("\n");
         count++;
-
-        
     }
+    
 }
 unsigned int Instructor::Fetch(){
     if(Instructor::_pc == 0xffffffff){
@@ -124,15 +122,57 @@ unsigned int Instructor::Fetch(){
         Instructor::AppendLog("0,");
         return 0;
     }
-    unsigned int inst = Instructor::_memory[_pc / 4];
+    unsigned int inst = Instructor::GetDataFromCache(Instructor::_pc);
     DecodeInstName(inst);
     return inst;
 }
 
+
+/*void Instructor::LoadInstruction()
+ {
+    std::string path = "/Users/ChungH/Desktop/Mips_Simulator/input4/input4/input4.bin";
+	std::ifstream file(path, std::ios::in | std::ios::binary | std::ios::ate);
+
+     long long length = file.tellg();
+	file.seekg(0, file.beg);
+ 
+	unsigned char* buffer = new unsigned char[length];
+	{
+        file.read((char*)buffer, length);
+        std::copy((unsigned int*)buffer, (unsigned int*)&buffer[length], _memory.begin());
+	}
+	delete buffer;
+ 
+ file.close();
+ 
+	auto IsLittleEndian = []()
+	{
+ union{
+ int a;
+ char b;
+ }Test;
+ 
+ Test.a = 1;
+ return Test.b;
+	};
+	auto LittleEndianToBigEndian = [](unsigned int x)
+	{
+ return x = ( x >> 24 ) | (( x << 8) & 0x00ff0000 )| ((x >> 8) & 0x0000ff00) | ( x << 24);
+	};
+ 
+	if(IsLittleEndian())
+	{
+ 
+ for(int i=0; i<length / 4; ++i)
+     _memory[i] = LittleEndianToBigEndian(_memory[i]);
+	}
+ }
+*/
+
 void Instructor::LoadInstruction(){
     
-    FILE* fp = fopen("/Users/ChungH/Desktop/Mips_Simulator/fib.bin", "r");
- //   FILE* fp = fopen(_filePath, "r");
+    FILE* fp = fopen("/Users/ChungH/Desktop/Mips_Simulator/Sample/sum_4/sum.bin", "r");
+    //위의 경로를 변경하시면 됩니다.
     
     int i = 0;
     char tmp[10];
@@ -146,7 +186,7 @@ void Instructor::LoadInstruction(){
         if(count == 8){
             tmp[count] = '\0';
             std::istringstream(tmp) >> std::hex >> Instructor::_memory[i];
-         //   printf("%x\n",Instructor::_memory[i]);
+            printf("%x\n",Instructor::_memory[i]);
             count = 0;
             i++;
         }
@@ -653,3 +693,108 @@ void Instructor::DecodeInstName(unsigned int inst){
     }
     
 }
+
+unsigned int Instructor::GetDataFromCache(unsigned int pc){
+    unsigned int tag;
+    unsigned int line;
+    unsigned int offset;
+    unsigned int isHit = 0;
+    unsigned int inst;
+    
+    
+    tag     = pc & Instructor::_cache._tagMask;
+    line    = (pc & Instructor::_cache._lineMask) >> 6;
+    offset  = pc & offsetMask;
+    
+    unsigned int set;
+    for(set = 0; set < Sets; set++){
+        isHit = _cache.HitMissCheck(set, tag, line);
+        if(isHit)
+            break;
+    }
+    
+    if(isHit){
+        inst = _cache.GetData(set, line, offset/4);
+    }
+    else{
+        set = _cache.LRU(line);
+        ReplaceDatainCache(pc, set, line, offset, tag);
+        inst = _cache.GetData(set, line, offset/4);
+    }
+    
+    return inst;
+    
+}
+
+unsigned int Instructor::GetDataFromCache(unsigned int pc, unsigned int offset){
+    unsigned int tag;
+    unsigned int line;
+    unsigned int data;
+    bool isHit = false;
+    
+    tag     = pc & Instructor::_cache._tagMask;
+    line    = (pc & Instructor::_cache._lineMask) >> 6;
+    
+    unsigned int set;
+    for(set = 0; set < Sets; set++){
+        isHit = _cache.HitMissCheck(set, tag, line);
+        if(isHit)
+            break;
+    }
+    
+    if(isHit){
+        data = _cache.GetData(set, line, offset);
+    }
+    else{
+        set = _cache.LRU(line);
+        ReplaceDatainCache(pc, set, line, offset, tag);
+        data = _cache.GetData(set, line, offset);
+    }
+    
+    return data;
+}
+
+
+void Instructor::SetDataToCache(unsigned int pc, unsigned int data){
+    unsigned int tag;
+    unsigned int line;
+    unsigned int offset;
+    unsigned int isHit = 0;
+    
+    tag     = Instructor::_pc & Instructor::_cache._tagMask;
+    line    = (Instructor::_pc & Instructor::_cache._lineMask) >> 6;
+    offset  = (Instructor::_pc & offsetMask);
+    
+    int set;
+    for(set = 0; set < Sets; set++){
+        isHit = _cache.HitMissCheck(set, tag, line);
+        if(isHit)
+            break;
+    }
+    
+    if(isHit){
+        _cache.WriteData(set, line, offset/4, data);
+    }
+    else{
+        set = _cache.LRU(line);
+        ReplaceDatainCache(pc, set, line, offset, tag);
+        _cache.WriteData(set, line, offset/4, data);
+    }
+    
+    return;
+}
+
+void Instructor::ReplaceDatainCache(unsigned int pc, unsigned int set, unsigned int line, unsigned int offset ,unsigned int tag){
+    unsigned int tempPC = pc & ~(offset);
+    if (_cache._set[set]._line[line]._cacheInfo._dirty) {
+        
+    }
+    
+    _cache.InsertTag(set, tag, line);
+    for(int i = 0; i < 16; i++, tempPC+=4)
+        _cache.InsertData(set, line, i, Instructor::_memory[tempPC/4]);
+    
+}
+
+
+

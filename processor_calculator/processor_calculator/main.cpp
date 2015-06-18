@@ -10,15 +10,19 @@
 #include "Instructor.h"
 
 
-std::array<unsigned int, MAX_MEMORY> Instructor::_memory;
-std::array<unsigned int, 32>   Instructor::_register;
-unsigned int                   Instructor::_pc;
-unsigned int                   Instructor::_hi;
-unsigned int                   Instructor::_lo;
-std::string                    Instructor::_logBuffer;
-int                            Instructor::_lastBranch;
-int                            Instructor::hit;
-int                            Instructor::miss;
+std::array<unsigned int, MAX_MEMORY>    Instructor::_memory;
+std::array<unsigned int, 32>            Instructor::_register;
+Cache                                   Instructor::_cache;
+unsigned int                            Instructor::_pc;
+unsigned int                            Instructor::_hi;
+unsigned int                            Instructor::_lo;
+std::string                             Instructor::_logBuffer;
+int                                     Instructor::_lastBranch;
+int                                     Instructor::_predictionHit;
+int                                     Instructor::_predictionMiss;
+int                                     Instructor::_cacheHit;
+int                                     Instructor::_cacheMiss;
+
 //bool isLittleEndian()
 //{
 //    union{
@@ -40,6 +44,8 @@ int main(int argc, const char * argv[]) {
     Instructor::_register.fill(0);
     Instructor::_pc = 0;
     instructor->ExecuteInstruction();
+    
+    
     
     char resultString[20];
     sprintf(resultString, "Result,%d",Instructor::_register[2]);

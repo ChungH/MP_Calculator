@@ -13,20 +13,26 @@
 #include <array>
 #include "Common.h"
 #include "Instruction.h"
+#include "Cache.h"
 
-#define MAX_MEMORY 16384
+#define MAX_MEMORY 65536
 
 class Instructor {
 public:
-    static std::array<unsigned int, MAX_MEMORY>  _memory;
-    static std::array<unsigned int, 32>    _register;
-    static unsigned int                    _pc;
-    static unsigned int                    _hi;
-    static unsigned int                    _lo;
-    static std::string                     _logBuffer;
-    static int                             _lastBranch;
-    static int hit;
-    static int miss;
+    static std::array<unsigned int, MAX_MEMORY> _memory;
+    static std::array<unsigned int, 32>         _register;
+    static Cache                                _cache;
+    static unsigned int                         _pc;
+    static unsigned int                         _hi;
+    static unsigned int                         _lo;
+    static std::string                          _logBuffer;
+    static int                                  _lastBranch;
+    static int                                  _predictionHit;
+    static int                                  _predictionMiss;
+    static int                                  _cacheHit;
+    static int                                  _cacheMiss;
+    
+    
     
 private:
     unsigned int&                          _gp = Instructor::_register[28];
@@ -70,8 +76,18 @@ private:
     void                    DataForwarding();
     void                    DependencyChk();
     void                    DecodeInstName(unsigned int inst);
+    
 public:
+    //Cache Function
+    static unsigned int     GetDataFromCache(unsigned int pc);
+    static unsigned int     GetDataFromCache(unsigned int pc, unsigned int offset);
+    static void             SetDataToCache(unsigned int pc, unsigned int data);
+    static void             ReplaceDatainCache(unsigned int pc, unsigned int set, unsigned int line, unsigned int offset, unsigned int tag);
+    
+public:
+    
     void                    ExecuteInstruction();
+public:
     
     static void             SetDataToMemory(int index, unsigned int val);
     static unsigned int     GetDataFromMemory(int index);
