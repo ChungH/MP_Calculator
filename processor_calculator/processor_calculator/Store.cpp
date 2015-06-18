@@ -22,12 +22,13 @@ bool StoreByte::Execution(){
 }
 
 void StoreByte::MemoryAccess(){
-    unsigned int memoryIndex = (_rsData+_immediate)/4;
-    _memoryData = Instructor::GetDataFromMemory(memoryIndex);
+    unsigned int memoryIndex = (_rsData+_immediate);
+    _memoryData = Instructor::GetDataFromCache(memoryIndex);
     unsigned int maskedMemoryData = _memoryData & 0xffffff00;
     
     _resultData = maskedMemoryData | _maskedrtData;
-    Instructor::SetDataToMemory(memoryIndex, _resultData);
+    Instructor::SetDataToCache(memoryIndex, _resultData);
+    Instructor::SetDataToMemory(memoryIndex/4, _resultData);
     
     Instructor::AppendLog("SB,");
 }
@@ -64,13 +65,14 @@ bool StoreHalfword::Execution(){
     return false;
 }
 void StoreHalfword::MemoryAccess(){
-    unsigned int memoryIndex = (_rsData+_immediate)/4;
-    _memoryData = Instructor::GetDataFromMemory(memoryIndex);
+    unsigned int memoryIndex = (_rsData+_immediate);
+    _memoryData = Instructor::GetDataFromCache(memoryIndex);
     unsigned int maskedMemoryData = _memoryData & 0xffff0000;
     
     _resultData = maskedMemoryData | _maskedrtData;
-    
-    Instructor::SetDataToMemory(memoryIndex, _resultData);
+
+    Instructor::SetDataToCache(memoryIndex, _resultData);
+    Instructor::SetDataToMemory(memoryIndex/4, _resultData);
     
     Instructor::AppendLog("SH,");
     
@@ -90,9 +92,9 @@ bool StoreWord::Execution(){
     return false;
 }
 void StoreWord::MemoryAccess(){
-    unsigned int memoryIndex = (_rsData+_immediate)/4;
-    
-    Instructor::SetDataToMemory(memoryIndex, _rtData);
+    unsigned int memoryIndex = (_rsData+_immediate);
+    Instructor::SetDataToCache(memoryIndex, _rtData);
+    Instructor::SetDataToMemory(memoryIndex/4, _rtData);
     
     Instructor::AppendLog("SW,");
     

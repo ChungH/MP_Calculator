@@ -46,7 +46,7 @@ void Instructor::ExecuteInstruction(){
     _fetchInst = 0;
     
     int count = 1;
-
+    _memory[65532] = 100;
     while (Instructor::_pc != 0xffffffff || _WBInst != NULL || _MEMInst != NULL || _EXEInst != NULL) {
         //print Cycles
         char cycleString[30];
@@ -171,7 +171,7 @@ unsigned int Instructor::Fetch(){
 
 void Instructor::LoadInstruction(){
     
-    FILE* fp = fopen("/Users/ChungH/Desktop/Mips_Simulator/Sample/sum_4/sum.bin", "r");
+    FILE* fp = fopen("/Users/ChungH/Desktop/Mips_Simulator/Sample/10fac.bin", "r");
     //위의 경로를 변경하시면 됩니다.
     
     int i = 0;
@@ -761,9 +761,9 @@ void Instructor::SetDataToCache(unsigned int pc, unsigned int data){
     unsigned int offset;
     unsigned int isHit = 0;
     
-    tag     = Instructor::_pc & Instructor::_cache._tagMask;
-    line    = (Instructor::_pc & Instructor::_cache._lineMask) >> 6;
-    offset  = (Instructor::_pc & offsetMask);
+    tag     = pc & Instructor::_cache._tagMask;
+    line    = (pc & Instructor::_cache._lineMask) >> 6;
+    offset  = pc & offsetMask;
     
     int set;
     for(set = 0; set < Sets; set++){
@@ -786,9 +786,6 @@ void Instructor::SetDataToCache(unsigned int pc, unsigned int data){
 
 void Instructor::ReplaceDatainCache(unsigned int pc, unsigned int set, unsigned int line, unsigned int offset ,unsigned int tag){
     unsigned int tempPC = pc & ~(offset);
-    if (_cache._set[set]._line[line]._cacheInfo._dirty) {
-        
-    }
     
     _cache.InsertTag(set, tag, line);
     for(int i = 0; i < 16; i++, tempPC+=4)
